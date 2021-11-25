@@ -1,0 +1,35 @@
+﻿body {
+    background: rgb(204, 204, 204);
+}
+
+@media print {
+    @page {
+        margin-left: 11px;
+        box-shadow: 0;
+        margin-right: 100px;
+        size: landscape;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 88%;
+}
+
+    table th {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+    }
+
+th,
+td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 2px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}

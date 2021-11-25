@@ -1,0 +1,187 @@
+﻿@{
+    List<md_Planilha.mdJaneiro> mdjaneiro = ViewBag.planilhaGeral;
+    List<md_Planilha.mdJaneiro> valorTotal = ViewBag.valorTotal;
+    List<md_Planilha.mdJaneiro> FaturamentoResult = ViewBag.FaturamentoResult;
+    ViewBag.Title = "Planilha";
+    var a = 0;
+    Layout = "~/Views/Shared/_RenderImpressao.cshtml";
+}
+
+<body style="margin-top:-50px;">
+    <div class="container">
+        <div>
+            <center><h2>Planilha</h2></center>
+        </div>
+
+        <table border="2">
+            <tr>
+
+                <th style="text-align:center;" colspan="2">Categoria</th>
+                <th style="text-align:center;" colspan="2">Janeiro</th>
+                <th style="text-align:center;" colspan="2">Fevereiro</th>
+                <th style="text-align:center;" colspan="2">Março</th>
+                <th style="text-align:center;" colspan="2">Abril</th>
+                <th style="text-align:center;" colspan="2">Maio</th>
+                <th style="text-align:center;" colspan="2">Junho</th>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td style="border-right-color:black;"></td>
+                <td>Proposta</td>
+                <td style="border-right-color:black;">Realizado</td>
+                <td>Proposta</td>
+                <td style="border-right-color:black;">Realizado</td>
+                <td>Proposta</td>
+                <td style="border-right-color:black;">Realizado</td>
+                <td>Proposta</td>
+                <td style="border-right-color:black;">Realizado</td>
+                <td>Proposta</td>
+                <td style="border-right-color:black;">Realizado</td>
+                <td>Proposta</td>
+                <td style="border-right-color:black;">Realizado</td>
+            </tr>
+            @foreach (var p in mdjaneiro)
+            {
+                a += 1;
+                <tr>
+                    <td>@a</td>
+                    <td>@p.Categoria</td>
+                    <td>@p.JanProposta.ToString("#,##0.00")</td>
+                    <td>@p.JanRealizado.ToString("#,##0.00")</td>
+                    <td>@p.FevProposta.ToString("#,##0.00")</td>
+                    <td>@p.FevRealizado.ToString("#,##0.00")</td>
+                    <td>@p.MarProposta.ToString("#,##0.00")</td>
+                    <td>@p.MarRealizado.ToString("#,##0.00")</td>
+                    <td>@p.AbrProposta.ToString("#,##0.00")</td>
+                    <td>@p.AbrRealizado.ToString("#,##0.00")</td>
+                    <td>@p.MaiProposta.ToString("#,##0.00")</td>
+                    <td>@p.MaiRealizado.ToString("#,##0.00")</td>
+                    <td>@p.JunProposta.ToString("#,##0.00")</td>
+                    <td>@p.JunRealizado.ToString("#,##0.00")</td>
+
+                </tr>
+            }
+            <tfoot style="border: solid; border-width:1.5px;">
+                @foreach (var t in valorTotal)
+                {
+                    <tr>
+                        <td></td>
+                        <td>Total</td>
+                        <td>@t.TotalPropJaneiro.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiJaneiro.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropFevereiro.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiFevereiro.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropMarco.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiMarco.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropAbril.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiAbril.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropMaio.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiMaio.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropJunho.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiJunho.ToString("#,##0.00")</td>
+                    </tr>
+                }
+            </tfoot>
+        </table>
+        <br />
+        
+        @*Inicio da segunda parte da tabela*@
+        <table border="2">
+            <tr>
+                <th colspan="2">Categoria</th>
+                <th colspan="2">Julho</th>
+                <th colspan="2">Agosto</th>
+                <th colspan="2">Setembro</th>
+                <th colspan="2">Outubro</th>
+                <th colspan="2">Novembro</th>
+                <th colspan="2">Dezembro</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+            </tr>
+            @foreach (var p in mdjaneiro)
+            {
+                a += 1;
+                <tr>
+                    <td>@a</td>
+                    <td>@p.Categoria</td>
+                    <td>@p.JulProposta.ToString("#,##0.00")</td>
+                    <td>@p.JulRealizado.ToString("#,##0.00")</td>
+                    <td>@p.AgoProposta.ToString("#,##0.00")</td>
+                    <td>@p.AgoRealizado.ToString("#,##0.00")</td>
+                    <td>@p.SetProposta.ToString("#,##0.00")</td>
+                    <td>@p.SetRealizado.ToString("#,##0.00")</td>
+                    <td>@p.OutProposta.ToString("#,##0.00")</td>
+                    <td>@p.OutRealizado.ToString("#,##0.00")</td>
+                    <td>@p.NovProposta.ToString("#,##0.00")</td>
+                    <td>@p.NovRealizado.ToString("#,##0.00")</td>
+                    <td>@p.DezProposta.ToString("#,##0.00")</td>
+                    <td>@p.DezRealizado.ToString("#,##0.00")</td>
+                </tr>
+            }
+            <tfoot style="border: solid; border-width:1.5px;">
+                @foreach (var t in valorTotal)
+                {
+                    <tr>
+                        <td></td>
+                        <td style="font-size:15px; border-right-color:black; ">Total</td>
+                        <td>@t.TotalPropJulho.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiJulho.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropAgosto.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiAgosto.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropSetembro.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiSetembro.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropOutubro.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiOutubro.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropNovembro.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiNovembro.ToString("#,##0.00")</td>
+                        <td>@t.TotalPropDezembro.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealiDezembro.ToString("#,##0.00")</td>
+                    </tr>
+                }
+            </tfoot>
+        </table>
+        <br />
+
+        <table border="2" style="float: left; width:400px">
+            <thead>
+                <tr>
+                    <th colspan="3">Resultado</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Proposta Total</td>
+                    <td>Realizado Total</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var fatR in FaturamentoResult)
+                {
+                    <tr>
+                        <td>@fatR.Categoria</td>
+                        <td>@fatR.FaturamentoPropResult.ToString("#,##0.00")</td>
+                        <td>@fatR.FaturamentoRealiResult.ToString("#,##0.00")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <br />
+    </div>
+</body>
+

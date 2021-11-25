@@ -1,0 +1,41 @@
+﻿@{
+    List<md_Planilha.mdJaneiro> mdJaneiro = ViewBag.planilhaJaneiro;
+    ViewBag.Title = ViewBag.Mes;
+}
+
+@if (TempData["sucesso"] != null)
+{
+    <div class="alert alert-success">@TempData["sucesso"]</div>
+}
+@if (TempData["erro"] != null)
+{
+    <div class="alert alert-danger">@TempData["erro"]</div>
+}
+
+<div class="jumbotron">
+    <h2>@ViewBag.Mes.Replace("c", "ç") @ViewBag.Ano</h2>
+    <br />
+
+        <table class="table">
+            <tr>
+                <td>#</td>
+                <td>Categoria</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td></td>
+
+            </tr>
+            @foreach (var p in mdJaneiro)
+            {
+                <tr>
+                    <td>@p.Codigo</td>
+                    <td>@p.Categoria</td>
+                    <td>@p.Proposta.ToString("#,##0.00")</td>
+                    <td>@p.Realizado.ToString("#,##0.00")</td>
+
+                    <td><div><a href="/janeiro/@p.Codigo/adicionar" class="btn btn-primary">Alterar</a></div></td>
+                </tr>
+            }
+        </table>
+</div>
+
