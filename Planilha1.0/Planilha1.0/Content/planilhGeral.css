@@ -1,8 +1,54 @@
 ﻿body {
+    margin-right: 60px;
+    padding-right: 10px;
     background: rgb(204, 204, 204);
 }
 
- table 
- {
-     color: red;
- }
+table {
+    color: black;
+    margin: 0px;
+    border: solid;
+    overflow: hidden;
+    border-collapse: separate;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    flex-shrink: 0;
+}
+
+table th {
+    text-align: center;
+    font-size: 18px;
+    background-color: #1e9c4e;
+    border: solid black 1px;
+    border-top: hidden;
+}
+
+        table tr 
+        {
+            border-color: gainsboro;
+        }
+
+        table td 
+        {
+            padding: 8px;
+            font-size: 15px;
+            border: solid black 1px;
+            text-align: center;
+        }
+
+.total {
+    font-size: 18px;
+    background-color: #1e9c4e;
+    text-align: center;
+}
+
+
+
+
+div.box {
+    display: flex;
+    justify-content: center;
+    display: inline-block;
+}
+

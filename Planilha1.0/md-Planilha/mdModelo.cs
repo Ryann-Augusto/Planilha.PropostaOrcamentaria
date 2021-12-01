@@ -23,6 +23,7 @@ namespace md_Planilha
         private decimal _realiResultado;
         private bool _mensagem;
 
+        //Tabela Proposta/Realizado
         private decimal _janProposta;
         private decimal _janRealizado;
         private decimal _fevProposta;
@@ -48,6 +49,7 @@ namespace md_Planilha
         private decimal _dezProposta;
         private decimal _dezRealizado;
 
+        //Tabela Total
         private decimal _totalPropJaneiro;
         private decimal _totalRealiJaneiro;
         private decimal _totalPropFevereiro;
@@ -76,6 +78,10 @@ namespace md_Planilha
         //Tabela Resultado
         private decimal _faturamentoPropResult;
         private decimal _faturamentoRealiResult;
+
+        private decimal _sobreFaturamento;
+        private decimal _sobreFuncionario;
+        
 
         public int Codigo
         {
@@ -304,7 +310,7 @@ namespace md_Planilha
         //Inicia as variáveis do TOTAL
         public decimal TotalPropJaneiro
         {
-            get { return _totalPropJaneiro; }
+            get { return _totalPropJaneiro ; }
             set { _totalPropJaneiro = value; }
         }
 
@@ -457,6 +463,20 @@ namespace md_Planilha
         {
             get { return _faturamentoRealiResult; }
             set { _faturamentoRealiResult = value; }
+        }
+
+
+        //Início do Sobre
+        public decimal SobreFaturamento
+        {
+            get { return _sobreFaturamento; }
+            set { _sobreFaturamento = value; }
+        }
+
+        public decimal SobreFuncionario
+        {
+            get { return _sobreFuncionario; }
+            set { _sobreFuncionario = value; }
         }
     }
 }

@@ -59,6 +59,8 @@ namespace Dal_Planilha
             MySqlCommand Out = new MySqlCommand("INSERT INTO tbl_Outubro(pl_ano, pl_categoria, pl_proposta, pl_realizado) VALUES (@Ano, 'Faturamento', 0, 0), (@Ano, 'Funcionários', 0, 0), (@Ano, 'Energéticos', 0, 0), (@Ano, 'Materia Prm/ Embgem', 0, 0), (@Ano, 'Transporte', 0, 0), (@Ano, 'Impostos', 0, 0), (@Ano, 'Investimentos', 0, 0), (@Ano, 'Bancarias/Financ', 0, 0), (@Ano, 'Vendas', 0, 0), (@Ano, 'Administrativo', 0, 0)");
             MySqlCommand Nov = new MySqlCommand("INSERT INTO tbl_Novembro(pl_ano, pl_categoria, pl_proposta, pl_realizado) VALUES (@Ano, 'Faturamento', 0, 0), (@Ano, 'Funcionários', 0, 0), (@Ano, 'Energéticos', 0, 0), (@Ano, 'Materia Prm/ Embgem', 0, 0), (@Ano, 'Transporte', 0, 0), (@Ano, 'Impostos', 0, 0), (@Ano, 'Investimentos', 0, 0), (@Ano, 'Bancarias/Financ', 0, 0), (@Ano, 'Vendas', 0, 0), (@Ano, 'Administrativo', 0, 0)");
             MySqlCommand Dez = new MySqlCommand("INSERT INTO tbl_Dezembro(pl_ano, pl_categoria, pl_proposta, pl_realizado) VALUES (@Ano, 'Faturamento', 0, 0), (@Ano, 'Funcionários', 0, 0), (@Ano, 'Energéticos', 0, 0), (@Ano, 'Materia Prm/ Embgem', 0, 0), (@Ano, 'Transporte', 0, 0), (@Ano, 'Impostos', 0, 0), (@Ano, 'Investimentos', 0, 0), (@Ano, 'Bancarias/Financ', 0, 0), (@Ano, 'Vendas', 0, 0), (@Ano, 'Administrativo', 0, 0)");
+            MySqlCommand Res = new MySqlCommand("INSERT INTO tbl_resultado(pl_ano, pl_categoria, pl_propResultado, pl_realiResultado) VALUES (@Ano, 'Faturamento', 0, 0), (@Ano, 'Funcionários', 0, 0), (@Ano, 'Energéticos', 0, 0), (@Ano, 'Materia Prm/ Embgem', 0, 0), (@Ano, 'Transporte', 0, 0), (@Ano, 'Impostos', 0, 0), (@Ano, 'Investimentos', 0, 0), (@Ano, 'Bancarias/Financ', 0, 0), (@Ano, 'Vendas', 0, 0), (@Ano, 'Administrativo', 0, 0)");
+
             Jan.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
             Fev.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
             Mar.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
@@ -71,6 +73,8 @@ namespace Dal_Planilha
             Out.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
             Nov.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
             Dez.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Res.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+
             using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
             {
                 Jan.Connection = conn;
@@ -85,6 +89,7 @@ namespace Dal_Planilha
                 Out.Connection = conn;
                 Nov.Connection = conn;
                 Dez.Connection = conn;
+                Res.Connection = conn;
                 conn.Open();
                 Jan.ExecuteNonQuery();
                 Fev.ExecuteNonQuery();
@@ -98,6 +103,7 @@ namespace Dal_Planilha
                 Out.ExecuteNonQuery();
                 Nov.ExecuteNonQuery();
                 Dez.ExecuteNonQuery();
+                Res.ExecuteNonQuery();
                 conn.Close();
             }
         }
@@ -162,7 +168,7 @@ namespace Dal_Planilha
                 "ON otb.pl_categoria = nov.pl_categoria AND otb.pl_ano = nov.pl_ano " +
                 "INNER JOIN tbl_dezembro dez " +
                 "ON nov.pl_categoria = dez.pl_categoria AND nov.pl_ano = dez.pl_ano " +
-                "WHERE jan.pl_ano = 2021;";
+                "WHERE jan.pl_ano = @Ano;";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
                 {

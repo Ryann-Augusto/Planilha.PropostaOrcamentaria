@@ -53,9 +53,16 @@ namespace Planilha1._0.Controllers
         [HttpPost]
         public void AbrirPlanilha()
         {
-            var janeiro = new mdJaneiro();
-            Response.Cookies["Ano"]["Abrir"] = Convert.ToString(Request["ano"]);
-            Response.Redirect("/planilha");
+            try
+            {
+                var janeiro = new mdJaneiro();
+                Response.Cookies["Ano"]["Abrir"] = Convert.ToString(Request["ano"]);
+                Response.Redirect("/planilha");
+            }
+            catch
+            {
+                Response.Redirect("/home");
+            }
         }
 
         public ActionResult About()

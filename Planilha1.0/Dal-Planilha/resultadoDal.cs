@@ -28,7 +28,50 @@ namespace Dal_Planilha
                 cmd.Parameters.Add("@Ano", MySqlDbType.Decimal).Value = Ano;
                 cmd.Parameters.Add("@Cat", MySqlDbType.VarChar).Value = Cat;
                 connection.Open();
-                
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = cmd;
+
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                connection.Close();
+
+                return table;
+            }
+        }
+
+        public void AlterarResultado(int Ano, string Cat, decimal FatProp, decimal FatReali)
+        {
+            //Altera os dados no DB
+            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_resultado SET pl_propResultado = @pl_proposta , pl_realiResultado = @pl_realizacao WHERE pl_categoria = @pl_categoria AND pl_ano = @pl_ano");
+            cmd.Parameters.Add("@pl_ano", MySqlDbType.Int32).Value = Ano;
+            cmd.Parameters.Add("@pl_categoria", MySqlDbType.VarChar).Value = Cat;
+            cmd.Parameters.Add("@pl_proposta", MySqlDbType.Decimal).Value = FatProp;
+            cmd.Parameters.Add("@pl_realizacao", MySqlDbType.Decimal).Value = FatReali;
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                cmd.Connection = connection;
+                cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+                cmd.Connection.Close();
+            }
+        }
+
+        public DataTable sobreFaturamento(int Ano)
+        {
+            string queryString = "SELECT res.pl_realiResultado AS Faturamento, rez.pl_realiResultado AS Funcionarios " +
+                "FROM tbl_resultado rez INNER JOIN tbl_resultado res " +
+                "WHERE res.pl_categoria = 'Faturamento' AND res.pl_ano = @Ano " +
+                "AND rez.pl_categoria = 'Funcionários' AND rez.pl_ano = @Ano; ";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                cmd.Parameters.Add("@Ano", MySqlDbType.Decimal).Value = Ano;
+                connection.Open();
+
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 adapter.SelectCommand = cmd;
 

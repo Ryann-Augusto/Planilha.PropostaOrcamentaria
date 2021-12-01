@@ -26,8 +26,7 @@ namespace Planilha1._0.Controllers
         {
             var janeiros = new mdJaneiro();
             janeiros.Mes = Request.Cookies["Mes"]["Name"].ToString();
-            var Janeiro = mdJaneiro.BuscaPorId(id, janeiros.Mes);
-            ViewBag.Janeiro = Janeiro;
+            ViewBag.Janeiro = mdJaneiro.BuscaPorId(id, janeiros.Mes);
             return View();
         }
         public void Modificar(int id)
