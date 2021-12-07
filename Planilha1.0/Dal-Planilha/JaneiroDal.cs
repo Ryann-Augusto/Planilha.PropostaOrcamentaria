@@ -19,7 +19,7 @@ namespace Dal_Planilha
         //Cria a funçao lista para ser usada em outras classes
         public DataTable Lista(int Ano, string mes)
         {
-            string queryString = "SELECT pl_codigo, pl_categoria, pl_proposta, pl_realizado FROM tbl_"+mes+" WHERE pl_ano = ?Ano";
+            string queryString = "SELECT mes.pl_codigo, cat.pl_categoria, pl_proposta, pl_realizado FROM tbl_"+mes+" mes INNER JOIN tbl_categoria cat ON cat.pl_codigo = mes.cod_categoria WHERE pl_ano = ?Ano";
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
                 //Select que chama atraves do ID
@@ -43,7 +43,7 @@ namespace Dal_Planilha
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
                     //Select que chama atraves do ID
-                    string queryString = "SELECT pl_codigo, pl_categoria, pl_proposta, pl_realizado FROM tbl_"+mes+" WHERE pl_codigo= ?Codigo";
+                    string queryString = "SELECT mes.pl_codigo, cat.pl_categoria, pl_proposta, pl_realizado FROM tbl_"+mes+" mes INNER JOIN tbl_categoria cat ON cat.pl_codigo = mes.cod_categoria WHERE mes.pl_codigo= ?Codigo";
                     MySqlCommand command = new MySqlCommand(queryString, connection);
                     command.Parameters.AddWithValue("?Codigo", Codigo);
                     command.Connection.Open();

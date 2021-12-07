@@ -42,7 +42,7 @@ namespace md_Planilha
             }
             return planilha;
         }
-       
+
         public void alter(string mes)
         {
             new Dal_Planilha.JaneiroDal().Alterar(this.Codigo, this.Proposta, this.Realizado, mes);
@@ -59,7 +59,7 @@ namespace md_Planilha
             {
                 new Dal_Planilha.CriarPlanilhaDal().ExisteAno(Ano);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -67,7 +67,7 @@ namespace md_Planilha
 
         public List<mdJaneiro> ListarTodos(int Ano)
         {
-            
+
             var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
             foreach (DataRow row in planilhaDB.MontarPlanilha(Ano).Rows)
             {
@@ -104,36 +104,37 @@ namespace md_Planilha
         }
         public List<mdJaneiro> ListarTotal(int Ano)
         {
-            var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
-            foreach (DataRow row in planilhaDB.ListarTotal(Ano).Rows)
+            string[] meses = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro" };
+            foreach (string Mes in meses)
             {
-                var planilha = new mdJaneiro();
-                planilha.TotalPropJaneiro = Convert.ToDecimal(row["jan_propTotal"]);
-                planilha.TotalRealiJaneiro = Convert.ToDecimal(row["jan_realiTotal"]);
-                planilha.TotalPropFevereiro = Convert.ToDecimal(row["fev_propTotal"]);
-                planilha.TotalRealiFevereiro = Convert.ToDecimal(row["fev_realiTotal"]);
-                planilha.TotalPropMarco = Convert.ToDecimal(row["mar_propTotal"]);
-                planilha.TotalRealiMarco = Convert.ToDecimal(row["mar_realiTotal"]);
-                planilha.TotalPropAbril = Convert.ToDecimal(row["abr_propTotal"]);
-                planilha.TotalRealiAbril = Convert.ToDecimal(row["abr_realiTotal"]);
-                planilha.TotalPropMaio = Convert.ToDecimal(row["mai_propTotal"]);
-                planilha.TotalRealiMaio = Convert.ToDecimal(row["mai_realiTotal"]);
-                planilha.TotalPropJunho = Convert.ToDecimal(row["jun_propTotal"]);
-                planilha.TotalRealiJunho = Convert.ToDecimal(row["jun_realiTotal"]);
-                planilha.TotalPropJulho = Convert.ToDecimal(row["jul_propTotal"]);
-                planilha.TotalRealiJulho = Convert.ToDecimal(row["jul_realiTotal"]);
-                planilha.TotalPropAgosto = Convert.ToDecimal(row["ago_propTotal"]);
-                planilha.TotalRealiAgosto = Convert.ToDecimal(row["ago_realiTotal"]);
-                planilha.TotalPropSetembro = Convert.ToDecimal(row["set_propTotal"]);
-                planilha.TotalRealiSetembro = Convert.ToDecimal(row["set_realiTotal"]);
-                planilha.TotalPropOutubro = Convert.ToDecimal(row["out_propTotal"]);
-                planilha.TotalRealiOutubro = Convert.ToDecimal(row["out_realiTotal"]);
-                planilha.TotalPropNovembro = Convert.ToDecimal(row["nov_propTotal"]);
-                planilha.TotalRealiNovembro = Convert.ToDecimal(row["nov_realiTotal"]);
-                planilha.TotalPropDezembro = Convert.ToDecimal(row["dez_propTotal"]);
-                planilha.TotalRealiDezembro = Convert.ToDecimal(row["dez_realiTotal"]);
 
-                lista.Add(planilha);
+                var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
+                foreach (DataRow row in planilhaDB.ListarTotal(Ano, Mes).Rows)
+                {
+                    var planilha = new mdJaneiro();
+                    planilha.TotalProposta = Convert.ToDecimal(row["jan_propTotal"]);
+                    planilha.TotalRealizado = Convert.ToDecimal(row["jan_realiTotal"]);
+                    lista.Add(planilha);
+
+                    new Dal_Planilha.CriarPlanilhaDal().AlterarTotalPropReali(Ano, Mes, planilha.TotalProposta, planilha.TotalRealizado);
+                }
+            }
+            return lista;
+        }
+        public List<mdJaneiro> ListarTotalRealizado(int Ano)
+        {
+            string[] meses = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro" };
+            foreach (string Mes in meses)
+            {
+
+                var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
+                foreach (DataRow row in planilhaDB.ListarTotalResultado(Ano, Mes).Rows)
+                {
+                    var planilha = new mdJaneiro();
+                    planilha.TotalPropResultado = Convert.ToDecimal(row["totalProp_result"]);
+                    planilha.TotalRealiResultado = Convert.ToDecimal(row["totalReali_result"]);
+                    lista.Add(planilha);
+                }
             }
             return lista;
         }

@@ -10,7 +10,7 @@ namespace Planilha1._0.Controllers
 {
     public class JaneiroController : Controller
     {
-        // GET: Planilha
+        [Authorize]
         public ActionResult Index()
         {
             var janeiro = new mdJaneiro();
@@ -22,6 +22,8 @@ namespace Planilha1._0.Controllers
             ViewBag.planilhaJaneiro = new mdJaneiro().Lista(janeiro.Ano, janeiro.Mes);
             return View();
         }
+
+        [Authorize]
         public ActionResult Adicionar(int id)
         {
             var janeiros = new mdJaneiro();

@@ -1,32 +1,31 @@
 ﻿body {
     margin-right: 60px;
     padding-right: 10px;
-    background: rgb(204, 204, 204);
+    background: #abc7af;
 }
 
 table {
     color: black;
     margin: 0px;
-    border: solid;
+    border: solid 1px black;
     overflow: hidden;
     border-collapse: separate;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
     flex-shrink: 0;
 }
 
-table th {
-    text-align: center;
-    font-size: 18px;
-    background-color: #1e9c4e;
-    border: solid black 1px;
-    border-top: hidden;
-}
+    table th {
+        text-align: center;
+        font-size: 18px;
+        background-color: #4ab051;
+        border-top: hidden;
+    }
 
         table tr 
         {
-            border-color: gainsboro;
+            border-color: black;
         }
 
         table td 
@@ -37,12 +36,26 @@ table th {
             text-align: center;
         }
 
+        /*Dar zoom nos td das tabelas*/
+        table td {
+            max-width: 100%;
+            -moz-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            transition: all 0.3s;
+        }
+
+        table td:hover {
+            -moz-transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+            background-color:gray;
+            color:white;
+        }
+
 .total {
     font-size: 18px;
-    background-color: #1e9c4e;
     text-align: center;
 }
-
 
 
 
@@ -52,3 +65,6 @@ div.box {
     display: inline-block;
 }
 
+tfoot td {
+    background-color: #4ab051;
+}

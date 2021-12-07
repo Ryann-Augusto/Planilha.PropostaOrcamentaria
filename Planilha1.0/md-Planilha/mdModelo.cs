@@ -13,15 +13,8 @@ namespace md_Planilha
         private int _ano;
         private string _mes;
         private string _categoria;
-        private decimal _propFaturamento;
-        private decimal _realiFaturamento;
         private decimal _proposta;
         private decimal _realizado;
-        private decimal _propTotal;
-        private decimal _realiTotal;
-        private decimal _propResultado;
-        private decimal _realiResultado;
-        private bool _mensagem;
 
         //Tabela Proposta/Realizado
         private decimal _janProposta;
@@ -50,38 +43,22 @@ namespace md_Planilha
         private decimal _dezRealizado;
 
         //Tabela Total
-        private decimal _totalPropJaneiro;
-        private decimal _totalRealiJaneiro;
-        private decimal _totalPropFevereiro;
-        private decimal _totalRealiFevereiro;
-        private decimal _totalPropMarco;
-        private decimal _totalRealiMarco;
-        private decimal _totalPropAbril;
-        private decimal _totalRealiAbril;
-        private decimal _totalPropMaio;
-        private decimal _totalRealiMaio;
-        private decimal _totalPropJunho;
-        private decimal _totalRealiJunho;
-        private decimal _totalPropJulho;
-        private decimal _totalRealiJulho;
-        private decimal _totalPropAgosto;
-        private decimal _totalRealiAgosto;
-        private decimal _totalPropSetembro;
-        private decimal _totalRealiSetembro;
-        private decimal _totalPropOutubro;
-        private decimal _totalRealiOutubro;
-        private decimal _totalPropNovembro;
-        private decimal _totalRealiNovembro;
-        private decimal _totalPropDezembro;
-        private decimal _totalRealiDezembro;
+        private decimal _totalProposta;
+        private decimal _totalRealizado;
+        private decimal _totalPropResultado;
+        private decimal _totalRealiResultado;
 
         //Tabela Resultado
         private decimal _faturamentoPropResult;
         private decimal _faturamentoRealiResult;
-
         private decimal _sobreFaturamento;
-        private decimal _sobreFuncionario;
-        
+        private decimal _propResultado;
+        private decimal _realiResultado;
+        private decimal _totalSobreFaturamento;
+        private decimal _contribuicaoDespesas;
+        private decimal _totalcontribDespesas;
+
+
 
         public int Codigo
         {
@@ -107,18 +84,6 @@ namespace md_Planilha
             set { _categoria = value; }
         }
 
-        public decimal PropFaturamento
-        {
-            get { return _propFaturamento; }
-            set { _propFaturamento = value; }
-        }
-
-        public decimal RealiFaturamento
-        {
-            get { return _realiFaturamento; }
-            set { _realiFaturamento = value; }
-        }
-
         public decimal Proposta
         {
             get { return _proposta; }
@@ -129,37 +94,7 @@ namespace md_Planilha
         {
             get { return _realizado; }
             set { _realizado = value; }
-        }
-
-        public decimal PropTotal
-        {
-            get { return _propTotal; }
-            set { _propTotal = value; }
-        }
-
-        public decimal RealiTotal
-        {
-            get { return _realiTotal; }
-            set { _realiTotal = value /*Somar todos os dados da tabela*/; }
-        }
-
-        public decimal PropResultado
-        {
-            get { return _propResultado; }
-            set { _propResultado = value; }
-        }
-
-        public decimal RealiResultado
-        {
-            get { return _realiResultado; }
-            set { _realiResultado = value; }
-        }
-
-        public bool Mensagem
-        {
-            get { return _mensagem; }
-            set { _mensagem = value; }
-        }
+        }        
 
         //Metodos que irão receber cada mês das tabelas e formar a tabela principal
         public decimal JanProposta
@@ -308,148 +243,28 @@ namespace md_Planilha
 
 
         //Inicia as variáveis do TOTAL
-        public decimal TotalPropJaneiro
+        public decimal TotalProposta
         {
-            get { return _totalPropJaneiro ; }
-            set { _totalPropJaneiro = value; }
+            get { return _totalProposta ; }
+            set { _totalProposta = value; }
         }
 
-        public decimal TotalRealiJaneiro
+        public decimal TotalRealizado
         {
-            get { return _totalRealiJaneiro; }
-            set { _totalRealiJaneiro = value; }
+            get { return _totalRealizado; }
+            set { _totalRealizado= value; }
         }
 
-        public decimal TotalPropFevereiro
+        public decimal TotalPropResultado
         {
-            get { return _totalPropFevereiro; }
-            set { _totalPropFevereiro = value; }
+            get { return _totalPropResultado; }
+            set { _totalPropResultado = value; }
         }
 
-        public decimal TotalRealiFevereiro
+        public decimal TotalRealiResultado
         {
-            get { return _totalRealiFevereiro; }
-            set { _totalRealiFevereiro = value; }
-        }
-
-        public decimal TotalPropMarco
-        {
-            get { return _totalPropMarco; }
-            set { _totalPropMarco = value; }
-        }
-
-        public decimal TotalRealiMarco
-        {
-            get { return _totalRealiMarco; }
-            set { _totalRealiMarco = value; }
-        }
-
-        public decimal TotalPropAbril
-        {
-            get { return _totalPropAbril; }
-            set { _totalPropAbril = value; }
-        }
-
-        public decimal TotalRealiAbril
-        {
-            get { return _totalRealiAbril; }
-            set { _totalRealiAbril = value; }
-        }
-
-        public decimal TotalPropMaio
-        {
-            get { return _totalPropMaio; }
-            set { _totalPropMaio = value; }
-        }
-
-        public decimal TotalRealiMaio
-        {
-            get { return _totalRealiMaio; }
-            set { _totalRealiMaio = value; }
-        }
-
-        public decimal TotalPropJunho
-        {
-            get { return _totalPropJunho; }
-            set { _totalPropJunho = value; }
-        }
-
-        public decimal TotalRealiJunho
-        {
-            get { return _totalRealiJunho; }
-            set { _totalRealiJunho = value; }
-        }
-
-        public decimal TotalPropJulho
-        {
-            get { return _totalPropJulho; }
-            set { _totalPropJulho = value; }
-        }
-
-        public decimal TotalRealiJulho
-        {
-            get { return _totalRealiJulho; }
-            set { _totalRealiJulho = value; }
-        }
-
-        public decimal TotalPropAgosto
-        {
-            get { return _totalPropAgosto; }
-            set { _totalPropAgosto= value; }
-        }
-
-        public decimal TotalRealiAgosto
-        {
-            get { return _totalRealiAgosto; }
-            set { _totalRealiAgosto = value; }
-        }
-
-        public decimal TotalPropSetembro
-        {
-            get { return _totalPropSetembro; }
-            set { _totalPropSetembro= value; }
-        }
-
-        public decimal TotalRealiSetembro
-        {
-            get { return _totalRealiSetembro; }
-            set { _totalRealiSetembro = value; }
-        }
-
-        public decimal TotalPropOutubro
-        {
-            get { return _totalPropOutubro; }
-            set { _totalPropOutubro= value; }
-        }
-
-        public decimal TotalRealiOutubro
-        {
-            get { return _totalRealiOutubro; }
-            set { _totalRealiOutubro = value; }
-        }
-
-        public decimal TotalPropNovembro
-        {
-            get { return _totalPropNovembro; }
-            set { _totalPropNovembro= value; }
-        }
-
-        public decimal TotalRealiNovembro
-        {
-            get { return _totalRealiNovembro; }
-            set { _totalRealiNovembro = value; }
-        }
-
-        public decimal TotalPropDezembro
-        {
-            get { return _totalPropDezembro; }
-            set { _totalPropDezembro = value; }
-        }
-
-        public decimal TotalRealiDezembro
-        {
-            get { return _totalRealiDezembro; }
-            set { _totalRealiDezembro = value; }
+            get { return _totalRealiResultado; }
+            set { _totalRealiResultado = value; }
         }
 
         //Tabela Resultado
@@ -467,16 +282,41 @@ namespace md_Planilha
 
 
         //Início do Sobre
+
         public decimal SobreFaturamento
         {
             get { return _sobreFaturamento; }
             set { _sobreFaturamento = value; }
         }
-
-        public decimal SobreFuncionario
+        public decimal PropResultado
         {
-            get { return _sobreFuncionario; }
-            set { _sobreFuncionario = value; }
+            get { return _propResultado; }
+            set { _propResultado = value; }
+        }
+
+        public decimal RealiResultado
+        {
+            get { return _realiResultado; }
+            set { _realiResultado = value; }
+        }
+
+        public decimal TotalSobreFaturamento
+        {
+            get { return _totalSobreFaturamento; }
+            set { _totalSobreFaturamento = value; }
+        }
+
+        //Inicio contribuição despesas
+        public decimal ContribuicaoDespesas
+                {
+                    get { return _contribuicaoDespesas; }
+                    set { _contribuicaoDespesas = value; }
+                }
+
+        public decimal TotalContribDespesas
+        {
+            get { return _totalcontribDespesas; }
+            set { _totalcontribDespesas = value; }
         }
     }
 }
