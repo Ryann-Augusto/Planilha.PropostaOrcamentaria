@@ -13,16 +13,17 @@ namespace Planilha1._0.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ViewBag.usuario = Session["Codigo"];
             return View();
         }
 
         [HttpPost]
         public void Criar()
         {
-            Response.Cookies["Ano"]["Name"] = Convert.ToString(Request["ano"]);
-            Response.Cookies["Mes"]["Name"] = Convert.ToString(Request["mes"]);
+            Session["Ano"] = Convert.ToString(Request["ano"]);
+            Session["Mes"] = Convert.ToString(Request["mes"]);
             
-            if (Response.Cookies["Ano"]["Name"] == "vazio" || Response.Cookies["Mes"]["Name"] == "vazio")
+            if (Convert.ToString(Session["Ano"]) == "vazio" || Convert.ToString(Session["Mes"]) == "vazio")
             {
                 TempData["erro"] = "Insira o Valor do Mês e Ano";
                 Response.Redirect("/home");
@@ -39,9 +40,10 @@ namespace Planilha1._0.Controllers
             try
             {
                 var janeiro = new mdJaneiro();
+                var cod = Session["Codigo"];
                 janeiro.Ano = Convert.ToInt32(Request["ano"]);
-                janeiro.ExisteAno(janeiro.Ano);
-                janeiro.NovaPlanilha(janeiro.Ano);
+                janeiro.ExisteAno(janeiro.Ano, Convert.ToInt32(cod));
+                janeiro.NovaPlanilha(janeiro.Ano, Convert.ToInt32(cod));
                 TempData["sucesso"] = "Planilha Criada com Sucesso!";
             }
             catch(Exception ex)
@@ -57,7 +59,7 @@ namespace Planilha1._0.Controllers
             try
             {
                 var janeiro = new mdJaneiro();
-                Response.Cookies["Ano"]["Abrir"] = Convert.ToString(Request["ano"]);
+                Session["Ano"] = Convert.ToString(Request["ano"]);
                 Response.Redirect("/planilha");
             }
             catch

@@ -58,7 +58,8 @@ namespace md_Planilha
         private decimal _contribuicaoDespesas;
         private decimal _totalcontribDespesas;
 
-
+        //Tabela Usuario
+        private int _codigoEmpresa;
 
         public int Codigo
         {
@@ -308,15 +309,22 @@ namespace md_Planilha
 
         //Inicio contribuição despesas
         public decimal ContribuicaoDespesas
-                {
-                    get { return _contribuicaoDespesas; }
-                    set { _contribuicaoDespesas = value; }
-                }
+        {
+            get { return _contribuicaoDespesas; }
+            set { _contribuicaoDespesas = value; }
+        }
 
         public decimal TotalContribDespesas
         {
             get { return _totalcontribDespesas; }
             set { _totalcontribDespesas = value; }
+        }
+
+        //Inicio Usuarios
+        public int CodigoEmpresa
+        {
+            get { return _codigoEmpresa; }
+            set { _codigoEmpresa = value; }
         }
     }
 }

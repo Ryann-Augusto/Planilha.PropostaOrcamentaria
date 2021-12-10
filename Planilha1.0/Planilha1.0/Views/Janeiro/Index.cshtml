@@ -14,28 +14,29 @@
 
 <div class="jumbotron">
     <h2>@ViewBag.Mes.Replace("c", "ç") @ViewBag.Ano</h2>
+    <h1>@ViewBag.usuario</h1>
     <br />
 
-        <table class="table">
+    <table class="table">
+        <tr>
+            <td>#</td>
+            <td>Categoria</td>
+            <td>Proposta</td>
+            <td>Realizado</td>
+            <td></td>
+
+        </tr>
+        @foreach (var p in mdJaneiro)
+        {
             <tr>
-                <td>#</td>
-                <td>Categoria</td>
-                <td>Proposta</td>
-                <td>Realizado</td>
-                <td></td>
+                <td>@p.Codigo</td>
+                <td>@p.Categoria</td>
+                <td>@p.Proposta.ToString("#,##0.00")</td>
+                <td>@p.Realizado.ToString("#,##0.00")</td>
 
+                <td><div><a href="/janeiro/@p.Codigo/adicionar" class="btn btn-primary">Alterar</a></div></td>
             </tr>
-            @foreach (var p in mdJaneiro)
-            {
-                <tr>
-                    <td>@p.Codigo</td>
-                    <td>@p.Categoria</td>
-                    <td>@p.Proposta.ToString("#,##0.00")</td>
-                    <td>@p.Realizado.ToString("#,##0.00")</td>
-
-                    <td><div><a href="/janeiro/@p.Codigo/adicionar" class="btn btn-primary">Alterar</a></div></td>
-                </tr>
-            }
-        </table>
+        }
+    </table>
 </div>
 

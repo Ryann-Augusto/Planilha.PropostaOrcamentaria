@@ -11,11 +11,11 @@ namespace md_Planilha
     {
         List<mdJaneiro> lista = new List<mdJaneiro>();
 
-        public List<mdJaneiro> Lista(int ano, string mes)
+        public List<mdJaneiro> Lista(int ano, string mes, int Cod)
         {
             var lista = new List<mdJaneiro>();
             var planilhaDB = new Dal_Planilha.JaneiroDal();
-            foreach (DataRow row in planilhaDB.Lista(ano, mes).Rows)
+            foreach (DataRow row in planilhaDB.Lista(ano, mes, Cod).Rows)
             {
                 var planilha = new mdJaneiro();
                 planilha.Codigo = Convert.ToInt32(row["pl_codigo"]);
@@ -28,12 +28,12 @@ namespace md_Planilha
             return lista;
         }
 
-        public static mdJaneiro BuscaPorId(int Codigo, string Mes)
+        public static mdJaneiro BuscaPorId(int Codigo, string Mes, int Cod)
         {
             var planilha = new mdJaneiro();
             var planilhaDB = new Dal_Planilha.JaneiroDal();
 
-            foreach (DataRow row in planilhaDB.BuscaPorId(Codigo, Mes).Rows)
+            foreach (DataRow row in planilhaDB.BuscaPorId(Codigo, Mes, Cod).Rows)
             {
                 planilha.Codigo = Convert.ToInt32(row["pl_codigo"]);
                 planilha.Categoria = Convert.ToString(row["pl_categoria"]);
@@ -43,21 +43,21 @@ namespace md_Planilha
             return planilha;
         }
 
-        public void alter(string mes)
+        public void alter(string mes, int Cod)
         {
-            new Dal_Planilha.JaneiroDal().Alterar(this.Codigo, this.Proposta, this.Realizado, mes);
+            new Dal_Planilha.JaneiroDal().Alterar(this.Codigo, this.Proposta, this.Realizado, mes, Cod);
         }
 
-        public void NovaPlanilha(int Ano)
+        public void NovaPlanilha(int Ano, int Cod)
         {
-            new Dal_Planilha.CriarPlanilhaDal().NovaPlanilha(Ano);
+            new Dal_Planilha.CriarPlanilhaDal().NovaPlanilha(Ano, Cod);
         }
 
-        public void ExisteAno(int Ano)
+        public void ExisteAno(int Ano, int Cod)
         {
             try
             {
-                new Dal_Planilha.CriarPlanilhaDal().ExisteAno(Ano);
+                new Dal_Planilha.CriarPlanilhaDal().ExisteAno(Ano, Cod);
             }
             catch (Exception ex)
             {
@@ -65,11 +65,11 @@ namespace md_Planilha
             }
         }
 
-        public List<mdJaneiro> ListarTodos(int Ano)
+        public List<mdJaneiro> ListarTodos(int Ano, int Cod)
         {
 
             var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
-            foreach (DataRow row in planilhaDB.MontarPlanilha(Ano).Rows)
+            foreach (DataRow row in planilhaDB.MontarPlanilha(Ano, Cod).Rows)
             {
                 var planilha = new mdJaneiro();
                 planilha.Categoria = Convert.ToString(row["categoria"]);
@@ -102,33 +102,33 @@ namespace md_Planilha
             }
             return lista;
         }
-        public List<mdJaneiro> ListarTotal(int Ano)
+        public List<mdJaneiro> ListarTotal(int Ano, int Cod)
         {
             string[] meses = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro" };
             foreach (string Mes in meses)
             {
 
                 var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
-                foreach (DataRow row in planilhaDB.ListarTotal(Ano, Mes).Rows)
+                foreach (DataRow row in planilhaDB.ListarTotal(Ano, Cod, Mes).Rows)
                 {
                     var planilha = new mdJaneiro();
                     planilha.TotalProposta = Convert.ToDecimal(row["jan_propTotal"]);
                     planilha.TotalRealizado = Convert.ToDecimal(row["jan_realiTotal"]);
                     lista.Add(planilha);
 
-                    new Dal_Planilha.CriarPlanilhaDal().AlterarTotalPropReali(Ano, Mes, planilha.TotalProposta, planilha.TotalRealizado);
+                    new Dal_Planilha.CriarPlanilhaDal().AlterarTotalPropReali(Ano, Cod, Mes, planilha.TotalProposta, planilha.TotalRealizado);
                 }
             }
             return lista;
         }
-        public List<mdJaneiro> ListarTotalRealizado(int Ano)
+        public List<mdJaneiro> ListarTotalRealizado(int Ano, int Cod)
         {
             string[] meses = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro" };
             foreach (string Mes in meses)
             {
 
                 var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
-                foreach (DataRow row in planilhaDB.ListarTotalResultado(Ano, Mes).Rows)
+                foreach (DataRow row in planilhaDB.ListarTotalResultado(Ano, Cod, Mes).Rows)
                 {
                     var planilha = new mdJaneiro();
                     planilha.TotalPropResultado = Convert.ToDecimal(row["totalProp_result"]);
