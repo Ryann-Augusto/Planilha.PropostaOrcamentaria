@@ -57,6 +57,8 @@ namespace md_Planilha
         private decimal _totalSobreFaturamento;
         private decimal _contribuicaoDespesas;
         private decimal _totalcontribDespesas;
+        private decimal _propostaTabResultado;
+        private decimal _realizadoTabResultado;
 
         //Tabela Usuario
         private int _codigoEmpresa;
@@ -281,6 +283,18 @@ namespace md_Planilha
             set { _faturamentoRealiResult = value; }
         }
 
+        //Linha Resultado abaixo do total da tabela Resultado
+        public decimal PropostaTabResultado
+        {
+            get { return _propostaTabResultado; }
+            set { _propostaTabResultado = value; }
+        }
+
+        public decimal RealizadoTabResultado
+        {
+            get { return _realizadoTabResultado; }
+            set { _realizadoTabResultado = value; }
+        }
 
         //Início do Sobre
 

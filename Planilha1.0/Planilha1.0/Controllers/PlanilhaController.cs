@@ -15,6 +15,7 @@ namespace Planilha1._0.Controllers
         public ActionResult Index()
         {
                 ViewBag.usuario = Session["Usuario"];
+                ViewBag.ano = Session["Ano"];
                 var janeiro = new mdJaneiro();
                 var cod = Session["Codigo"];
                 var ano = Session["Ano"].ToString();
@@ -29,6 +30,8 @@ namespace Planilha1._0.Controllers
                 ViewBag.despesas = new mdResultado().contribDespesas(janeiro.Ano, Convert.ToInt32(cod));
                 ViewBag.totaldespesas = mdResultado.TotalContribDespesas(janeiro.Ano, Convert.ToInt32(cod));
                 ViewBag.realizadoTotal = new mdJaneiro().ListarTotalRealizado(janeiro.Ano, Convert.ToInt32(cod));
+                ViewBag.propostaTabResultado = mdResultado.PropostaTabResultado(janeiro.Ano, Convert.ToInt32(cod));
+                ViewBag.realizadoTabResultado = mdResultado.RealizadoTabResultado(janeiro.Ano, Convert.ToInt32(cod));
                 return View();
             
         }

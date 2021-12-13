@@ -9,6 +9,8 @@
     md_Planilha.mdJaneiro propResult = ViewBag.propResultado;
     md_Planilha.mdJaneiro realiResult = ViewBag.realiResultado;
     md_Planilha.mdJaneiro totalDespesas = ViewBag.totaldespesas;
+    md_Planilha.mdJaneiro propostaTabRealizado = ViewBag.propostaTabResultado;
+    md_Planilha.mdJaneiro realizadoTabRealizado = ViewBag.realizadoTabResultado;
     ViewBag.Title = "Planilha";
     var a = 0;
     Layout = "~/Views/Shared/_Render.cshtml";
@@ -16,8 +18,7 @@
 
 <div class="container">
     <div class="col-md-6">
-        <h2>Planilha</h2>
-        <h1>@ViewBag.usuario</h1>
+        <h2>@ViewBag.usuario @ViewBag.ano</h2>
     </div>
     <div class="col-md-6">
         <a href="/planilha/impressao" class="btn btn-default fa fa-print fa-2x fa-border" target="_blank"></a>
@@ -140,14 +141,19 @@
                         {
                             <tr>
                                 <td>@fatR.Categoria</td>
-                                <td>@fatR.FaturamentoPropResult.ToString("R$: #,##0.00") </td>
-                                <td>@fatR.FaturamentoRealiResult.ToString("R$: #,##0.00")</td>
+                                <td>@fatR.FaturamentoPropResult.ToString("#,##0.00") </td>
+                                <td>@fatR.FaturamentoRealiResult.ToString("#,##0.00")</td>
                             </tr>
                         }
                         <tr>
                             <td>Total: </td>
                             <td>@propResult.PropResultado</td>
                             <td>@realiResult.RealiResultado</td>
+                        </tr>
+                        <tr>
+                            <td>Resultado</td>
+                            <td>@propostaTabRealizado.PropostaTabResultado.ToString("#,##0.00") </td>
+                            <td>@realizadoTabRealizado.RealizadoTabResultado.ToString("#,##0.00") </td>
                         </tr>
                     </tbody>
                 </table>
@@ -167,14 +173,18 @@
 
                     {
                         <tr>
-                            <td>@sob.SobreFaturamento.ToString("R$: #,##0.00")%</td>
+                            <td>@sob.SobreFaturamento.ToString("#,##0.00")%</td>
                         </tr>
                     }
                     <tr>
-                        <td>@totalSobre.TotalSobreFaturamento.ToString("R$: #,##0.00") %</td>
+                        <td>@totalSobre.TotalSobreFaturamento.ToString("#,##0.00") %</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
                     </tr>
                 </table>
             </div>
+
             <div class="box">
                 <table class="table-striped">
                     <tr>
@@ -190,11 +200,14 @@
 
                     {
                         <tr>
-                            <td>@desp.ContribuicaoDespesas.ToString("R$: #,##0.00") %</td>
+                            <td>@desp.ContribuicaoDespesas.ToString("#,##0.00") %</td>
                         </tr>
                     }
                     <tr>
-                        <td>@totalDespesas.TotalContribDespesas.ToString("R$: #,##0.00") %</td>
+                        <td>@totalDespesas.TotalContribDespesas.ToString("#,##0.00") %</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
                     </tr>
                 </table>
             </div>

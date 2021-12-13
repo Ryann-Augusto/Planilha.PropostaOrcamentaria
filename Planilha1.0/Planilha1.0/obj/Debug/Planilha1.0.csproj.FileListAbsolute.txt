@@ -111,4 +111,3 @@ C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.csproj.CoreCompileInputs.cache
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.pdb
-C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.csproj.CopyComplete

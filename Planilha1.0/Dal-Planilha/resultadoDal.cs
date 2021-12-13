@@ -266,5 +266,53 @@ namespace Dal_Planilha
                 cmd.Connection.Close();
             }
         }
+
+        public DataTable propostaTabResultado(int Ano, int Cod)
+        {
+            string queryString = "SELECT sum(result.pl_propResultado) - (total.pl_totalProposta) AS PropostaTabResultado FROM "+Cod+"tbl_resultado result " +
+                "INNER JOIN "+Cod+"tbl_total total ON result.cod_categoria = 1 AND result.pl_ano = total.pl_ano " +
+                "WHERE total.pl_ano = @Ano; ";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                cmd.Parameters.Add("@Ano", MySqlDbType.Decimal).Value = Ano;
+                connection.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = cmd;
+
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                connection.Close();
+
+                return table;
+            }
+        }
+
+        public DataTable realizadoTabResultado(int Ano, int Cod)
+        {
+            string queryString = "SELECT sum(result.pl_realiResultado) - (total.pl_totalRealizado) AS realiTabResultado FROM "+Cod+"tbl_resultado result " +
+                "INNER JOIN "+Cod+"tbl_total total ON result.cod_categoria = 1 AND result.pl_ano = total.pl_ano " +
+                "WHERE total.pl_ano = @Ano; ";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                cmd.Parameters.Add("@Ano", MySqlDbType.Decimal).Value = Ano;
+                connection.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = cmd;
+
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                connection.Close();
+
+                return table;
+            }
+        }
     }
 }

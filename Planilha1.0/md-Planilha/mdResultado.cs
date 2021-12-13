@@ -118,5 +118,27 @@ namespace md_Planilha
             }
             return planilha;
         }
+
+        public static mdJaneiro PropostaTabResultado(int Ano, int Cod)
+        {
+            var planilha = new mdJaneiro();
+            var planilhaDB = new Dal_Planilha.resultadoDal();
+            foreach (DataRow row in planilhaDB.propostaTabResultado(Ano, Cod).Rows)
+            {
+                planilha.PropostaTabResultado = Convert.ToDecimal(row["PropostaTabResultado"]);
+            }
+            return planilha;        
+        }
+
+        public static mdJaneiro RealizadoTabResultado(int Ano, int Cod)
+        {
+            var planilha = new mdJaneiro();
+            var planilhaDB = new Dal_Planilha.resultadoDal();
+            foreach (DataRow row in planilhaDB.realizadoTabResultado(Ano, Cod).Rows)
+            {
+                planilha.RealizadoTabResultado = Convert.ToDecimal(row["realiTabResultado"]);
+            }
+            return planilha;
+        }
     }
 }
