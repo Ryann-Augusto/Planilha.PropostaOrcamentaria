@@ -3,11 +3,10 @@
     md_Planilha.mdJaneiro mdJaneiro = ViewBag.Janeiro;
     ViewBag.Title = "Adcionar Valores";
 }
-
 <div class="jumbotron">
     <h3>Alterar Valores</h3>
     <div>
-        <a class="btn btn-default"@Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })</a>
+        <a class="btn btn-default" @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })</a>
     </div>
     <form action="/janeiro/@mdJaneiro.Codigo/modificar" method="post">
 
@@ -18,14 +17,15 @@
 
         <div class="form-group">
             <label for="data">Proposta:</label>
-            <input type="text" class="form-control" id="proposta" value="@mdJaneiro.Proposta" name="proposta">
+            <input maxlength="12" type="text" class="form-control valor" id="proposta" value="@mdJaneiro.Proposta" name="proposta" onclick="this.focus();this.select()">
         </div>
 
         <div class="form-group">
             <label for="data">Realizacao:</label>
-            <input type="text" class="form-control" id="realizado" value="@mdJaneiro.Realizado" name="realizado">
+            <input maxlength="12" type="text" class="form-control valor" id="realizado" value="@mdJaneiro.Realizado" name="realizado">
         </div>
 
         <button type="submit" class="btn btn-default">Alterar</button>
     </form>
 </div>
+

@@ -1,9 +1,11 @@
 ﻿body {
     background: rgb(204, 204, 204);
+    margin-top: -30px
 }
 
 @media print {
     @page {
+        margin-top: -25px;
         margin-left: 11px;
         box-shadow: 0;
         margin-right: 100px;
@@ -14,7 +16,8 @@
 table {
     border-collapse: collapse;
     width: 100%;
-    font-size: 88%;
+    font-size: 92%;
+    color:black;
 }
 
     table th {
@@ -25,11 +28,31 @@ table {
 
 th,
 td {
-    border: 1px solid #ddd;
+    border: 1px solid #757575;
     text-align: left;
     padding: 2px;
 }
 
 tr:nth-child(even) {
     background-color: #f2f2f2
+}
+
+.resultado{
+    width:500px;
+}
+.tabelas{
+    margin-top:20px;
+    width:160px;
+}
+.tabela tr td{
+    text-align:center;
+}
+div.box {
+    display: flex;
+    justify-content: center;
+    display: inline-block;
+}
+
+.total{
+    font-weight:bold;
 }

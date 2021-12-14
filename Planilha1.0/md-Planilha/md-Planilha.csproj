@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="mdImpressao.cs" />
     <Compile Include="mdResultado.cs" />
     <Compile Include="mdJaneiro.cs" />
     <Compile Include="mdModelo.cs" />

@@ -13,7 +13,6 @@ namespace Planilha1._0.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewBag.usuario = Session["Codigo"];
             return View();
         }
 

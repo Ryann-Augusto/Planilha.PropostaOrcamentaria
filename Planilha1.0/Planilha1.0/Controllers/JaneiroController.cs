@@ -18,7 +18,6 @@ namespace Planilha1._0.Controllers
             var ano = Session["Ano"].ToString();
             janeiro.Mes = Session["Mes"].ToString();
             janeiro.Ano = int.Parse(ano);
-            ViewBag.usuario = Session["Usuario"];
             ViewBag.Mes = janeiro.Mes;
             ViewBag.Ano = janeiro.Ano;
             ViewBag.planilhaJaneiro = new mdJaneiro().Lista(janeiro.Ano, janeiro.Mes, Convert.ToInt32(cod));

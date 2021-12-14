@@ -121,7 +121,7 @@ namespace md_Planilha
             }
             return lista;
         }
-        public List<mdJaneiro> ListarTotalRealizado(int Ano, int Cod)
+        public List<mdJaneiro> ListarTotalResultado(int Ano, int Cod)
         {
             string[] meses = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro" };
             foreach (string Mes in meses)

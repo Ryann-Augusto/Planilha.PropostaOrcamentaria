@@ -73,6 +73,7 @@ C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\bin\System.Web.WebPages.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\bin\System.Web.WebPages.Razor.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\bin\Ubiety.Dns.Core.dll
+C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\bin\WebActivatorEx.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\bin\WebGrease.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\bin\ZstdNet.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\Planilha1.0\bin\Dal-Planilha.dll

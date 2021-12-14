@@ -19,12 +19,22 @@ namespace Planilha1._0
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
+                      "~/Content/font-awesome.min.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/inputmask").Include(
+                      "~/Scripts/inputmask/inputmask.js",
+                      "~/Scripts/inputmask/jquery.inputmask.js",
+                      "~/Scripts/inputmask/inputmask.min.js",
+                      "~/Scripts/inputmask/jquery.inputmask.min.js"));
+
         }
     }
 }
