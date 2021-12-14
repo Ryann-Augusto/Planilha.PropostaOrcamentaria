@@ -61,7 +61,10 @@ namespace md_Planilha
         private decimal _realizadoTabResultado;
 
         //Tabela Usuario
-        private int _codigoEmpresa;
+        private int _codigoUsuario;
+        private string _nomeUsuario;
+        private string _senhaUsuario;
+        private int _nivelUsuario;
 
         public int Codigo
         {
@@ -335,10 +338,28 @@ namespace md_Planilha
         }
 
         //Inicio Usuarios
-        public int CodigoEmpresa
+        public int CodigoUsuario
         {
-            get { return _codigoEmpresa; }
-            set { _codigoEmpresa = value; }
+            get { return _codigoUsuario; }
+            set { _codigoUsuario = value; }
+        }
+
+        public string NomeUsuario
+        {
+            get { return _nomeUsuario; }
+            set { _nomeUsuario = value; }
+        }
+
+        public string SenhaUsuario
+        {
+            get { return _senhaUsuario; }
+            set { _senhaUsuario = value; }
+        }
+
+        public int NivelUsuario
+        {
+            get { return _nivelUsuario; }
+            set { _nivelUsuario = value; }
         }
     }
 }

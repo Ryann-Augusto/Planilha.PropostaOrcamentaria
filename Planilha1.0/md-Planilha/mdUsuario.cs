@@ -10,16 +10,38 @@ namespace md_Planilha
 {
     public class mdUsuario
     {
+        
+
         public static mdJaneiro ObterCodigo(string Usuario)
         {
-            var codigo = new mdJaneiro();
+            var usuario = new mdJaneiro();
             var codigoDb = new Dal_Planilha.UsuarioDal();
             
             foreach (DataRow row in codigoDb.ObterCodigo(Usuario).Rows)
             {
-                codigo.CodigoEmpresa = Convert.ToInt32(row["pl_codigo"]); 
+                usuario.CodigoUsuario= Convert.ToInt32(row["pl_codigo"]);
+                usuario.NivelUsuario = Convert.ToInt32(row["pl_nivel"]);
             }
-            return codigo;
+            return usuario;
+        }
+
+        
+
+        public List<mdJaneiro> ObterUsuarios()
+        {
+            var lista = new List<mdJaneiro>();
+            var planilhaDB = new Dal_Planilha.UsuarioDal();
+            foreach (DataRow row in planilhaDB.ObterUsuarios().Rows)
+            {
+                var usuario = new mdJaneiro();
+                usuario.CodigoUsuario = Convert.ToInt32(row["pl_codigo"]);
+                usuario.NomeUsuario = Convert.ToString(row["pl_usuario"]);
+                usuario.SenhaUsuario = Convert.ToString(row["pl_senha"]);
+                usuario.NivelUsuario = Convert.ToInt32(row["pl_nivel"]);
+
+                lista.Add(usuario);
+            }
+            return lista;
         }
     }
 }

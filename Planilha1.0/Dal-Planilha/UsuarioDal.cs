@@ -19,12 +19,33 @@ namespace Dal_Planilha
 
         public DataTable ObterCodigo(string Usuario)
         {
-                string queryString = "SELECT pl_codigo FROM tbl_usuario WHERE pl_usuario = @Usuario;";
+                string queryString = "SELECT pl_codigo, pl_nivel FROM tbl_usuario WHERE pl_usuario = @Usuario;";
 
                 using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
                 {
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("?Usuario", Usuario);
+                command.Parameters.AddWithValue("@Usuario", Usuario);
+                command.Connection.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = command;
+
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                command.Connection.Close();
+
+                return table;
+            }
+        }
+
+        public DataTable ObterUsuarios()
+        {
+            string queryString = "SELECT pl_codigo, pl_usuario, pl_senha, pl_nivel FROM tbl_usuario;";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Connection.Open();
 
                 MySqlDataAdapter adapter = new MySqlDataAdapter();

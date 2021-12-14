@@ -26,6 +26,6 @@ C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\md-Plani
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\md-Planilha\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\md-Planilha\obj\Debug\md-Planilha.csproj.AssemblyReference.cache
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\md-Planilha\obj\Debug\md-Planilha.csproj.CoreCompileInputs.cache
-C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\md-Planilha\obj\Debug\md-Planilha.csproj.CopyComplete
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\md-Planilha\obj\Debug\md-Planilha.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\md-Planilha\obj\Debug\md-Planilha.pdb
+C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_Planilha1.0\Planilha1.0\md-Planilha\obj\Debug\md-Planilha.csproj.CopyComplete

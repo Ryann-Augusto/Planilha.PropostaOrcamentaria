@@ -28,14 +28,22 @@ namespace ControleEstoque.Web.Controllers
             }
             
             var achou = new ValidaUsuario().ValidarUsuario(login.Usuario, login.Senha);
-            
+            var usuario = mdUsuario.ObterCodigo(login.Usuario);
+
             if (achou)
             {
+                if(usuario.NivelUsuario == 2)
+                {
                 FormsAuthentication.SetAuthCookie(login.Usuario, false);
-                var codigo = mdUsuario.ObterCodigo(login.Usuario);
                     Session["Usuario"] = login.Usuario;
-                    Session["Codigo"] = codigo.CodigoEmpresa;
+                    Session["Codigo"] = usuario.CodigoUsuario;
                     return Redirect("/home");
+                }
+                else if (usuario.NivelUsuario == 1)
+                {
+                    FormsAuthentication.SetAuthCookie(login.Usuario, false);
+                    return Redirect("/cadastrar");
+                }
             }
             else
             {
@@ -51,6 +59,41 @@ namespace ControleEstoque.Web.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Cadastrar()
+        {
+            ViewBag.Usuarios = new mdUsuario().ObterUsuarios();
+            return View();
+        }
+
+        [HttpPost]
+        public void Cadastro()
+        {
+            var Nome = Request["nome"];
+            var Senha = Request["senha"];
+            var ConfirmSenha = Request["confirmsenha"];
+            var Nivel = Request["cargo"];
+
+            if (Senha == ConfirmSenha)
+            {
+                if (Nivel == "vazio")
+                {
+                    TempData["erro"] = "Escolha um cargo";
+                    Response.Redirect("/conta/cadastrar");
+                }
+                else
+                {
+                    TempData["sucesso"] = "Usuário cadastrado com sucesso.";
+                    Response.Redirect("/conta/cadastrar");
+                }
+            }
+            else
+            {
+                TempData["erro"] = "Atenção! As senhas não estão iguais.";
+                Response.Redirect("/conta/cadastrar");
+            }   
         }
     }
 }

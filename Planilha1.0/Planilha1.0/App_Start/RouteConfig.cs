@@ -62,6 +62,18 @@ namespace Planilha1._0
                 );
 
             routes.MapRoute(
+                "conta_cadastrar",
+                "cadastrar",
+                new { controller = "Conta", action = "Cadastrar" }
+                );
+
+            routes.MapRoute(
+                "conta_cadastro",
+                "cadastro",
+                new { controller = "Conta", action = "Cadastro" }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

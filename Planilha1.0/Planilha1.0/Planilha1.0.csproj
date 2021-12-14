@@ -234,6 +234,7 @@
     <Content Include="Views\Planilha\Impressao.cshtml" />
     <Content Include="Views\Shared\_RenderImpressao.cshtml" />
     <Content Include="Views\Conta\Login.cshtml" />
+    <Content Include="Views\Conta\Cadastrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
