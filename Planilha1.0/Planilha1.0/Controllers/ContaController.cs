@@ -74,26 +74,46 @@ namespace ControleEstoque.Web.Controllers
             var Nome = Request["nome"];
             var Senha = Request["senha"];
             var ConfirmSenha = Request["confirmsenha"];
-            var Nivel = Request["cargo"];
+            int Nivel = Convert.ToInt32(Request["cargo"]);
 
             if (Senha == ConfirmSenha)
             {
-                if (Nivel == "vazio")
+                if (Nivel == 0)
                 {
                     TempData["erro"] = "Escolha um cargo";
                     Response.Redirect("/conta/cadastrar");
                 }
                 else
                 {
-                    TempData["sucesso"] = "Usuário cadastrado com sucesso.";
-                    Response.Redirect("/conta/cadastrar");
+                    var Usuario = new mdUsuario();
+                    if (Nivel == 1)
+                    {
+                        Usuario.CadUsuario(Nome, Senha, Nivel);
+                        TempData["sucesso"] = "Usuário cadastrado com sucesso.";
+                        Response.Redirect("/conta/cadastrar");
+                    }
+                    else
+                    {
+                        Usuario.CadUsuario(Nome, Senha, Nivel);
+                        var Cod = mdUsuario.ObterCodigo(Nome);
+                        Usuario.CriarTabelas(Cod.CodigoUsuario);
+                        TempData["sucesso"] = "Usuário cadastrado com sucesso.";
+                        Response.Redirect("/conta/cadastrar");
+                    }
                 }
             }
             else
             {
                 TempData["erro"] = "Atenção! As senhas não estão iguais.";
                 Response.Redirect("/conta/cadastrar");
-            }   
+            }
+        }
+
+        [AllowAnonymous]
+        public ActionResult Editar(int id)
+        { 
+            ViewBag.Editar = mdUsuario.BuscarUsuId(id);
+            return View();
         }
     }
 }

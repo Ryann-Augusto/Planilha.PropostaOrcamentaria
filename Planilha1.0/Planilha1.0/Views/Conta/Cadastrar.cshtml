@@ -15,6 +15,7 @@
 }
 
 <h2>Cadastro de Funcionários</h2>
+<h2>@ViewBag.Nome</h2>
 
 <div class="container">
     <br />
@@ -27,27 +28,32 @@
                 <th>Usuario</th>
                 <th>Senha</th>
                 <th>Nível</th>
+                <th></th>
+                <th></th>
             </tr>
             @foreach (var usu in usuario)
             {
-                <tr>
-                    <td>@usu.CodigoUsuario</td>
-                    <td>@usu.NomeUsuario</td>
-                    <td>@usu.SenhaUsuario</td>
-                    @{if (usu.NivelUsuario == 2)
+        <tr>
+            <td>@usu.CodigoUsuario</td>
+            <td>@usu.NomeUsuario</td>
+            <td>@usu.SenhaUsuario</td>
+            @{if (usu.NivelUsuario == 1)
 
-                        {
-                            <td>Funcionário</td>
-                        }
-                        else if (usu.NivelUsuario == 1)
-                        {
-                            <td>Administrador</td>
-                        }
-                    }
-                    <td>
-                        <a class="btn btn-primary fa fa-pencil pull-right" href="/home/index"><span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">&nbsp;Editar</span></a>
-                    </td>
-                </tr>
+                {
+                    <td>Administrador</td>
+                }
+                else if (usu.NivelUsuario == 2)
+                {
+                    <td>Funcionário</td>
+                }
+            }
+            <td>
+                <a style="width:100px;" class="btn btn-primary fa fa-pencil pull-right" href="/conta/@usu.CodigoUsuario/editar"><span style="font-family: Fantasy; font-size: 20px; ">&nbsp;Editar</span></a>
+            </td>
+            <td>
+                <a class="btn btn-danger fa fa-pencil pull-right" href="/conta/@usu.CodigoUsuario/excluir"><span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">&nbsp;Excluir</span></a>
+            </td>
+        </tr>
             }
         </table>
     </div>
@@ -106,3 +112,21 @@
     </div>
 </div>
 
+@*Inicio do popup Editar*@
+<div class="modal fade editar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close"> <span>&times;</span></button>
+                <div class="modal-title"><h3>Editar</h3></div>
+            </div>
+            <div class="modal-body">
+                    <label for="textNome" class="control-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" value="" name="nome">
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

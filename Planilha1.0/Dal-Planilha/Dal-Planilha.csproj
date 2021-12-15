@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CriarPlanilhaDal.cs" />
+    <Compile Include="CriarTabelaDal.cs" />
     <Compile Include="JaneiroDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="resultadoDal.cs" />
