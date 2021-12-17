@@ -35,7 +35,7 @@ namespace Dal_Planilha
                     // Call Read before accessing data.
                     if (result != 0)
                     {
-                        throw new Exception("Esse ano já existe");
+                       throw new Exception("Esse ano já existe");
                     }
                 }
             }

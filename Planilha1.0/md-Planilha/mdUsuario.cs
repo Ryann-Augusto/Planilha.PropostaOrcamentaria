@@ -51,11 +51,12 @@ namespace md_Planilha
 
         public void CriarTabelas(int Cod)
         {
-            string[] tabela = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro", "tbl_resultado", "tbl_total", "tbl_totalmeses" };
+            string[] tabela = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro" };
             foreach (var tbl in tabela)
             {
-                new Dal_Planilha.CriarTabelaDal().CriarTabela(Cod, tbl);
+                new Dal_Planilha.CriarTabelaDal().CriarTabelaMeses(Cod, tbl);
             }
+            new Dal_Planilha.CriarTabelaDal().CriarTabelas(Cod);
         }
 
         public static mdJaneiro BuscarUsuId(int Codigo)
@@ -80,6 +81,16 @@ namespace md_Planilha
             {
                 new Dal_Planilha.CriarTabelaDal().ApagarTabela(Cod, tbl);
             }
+        }
+        
+        public void Alterar(int Codigo, string Nome, string Senha)
+        {
+            new Dal_Planilha.UsuarioDal().Alterar(Codigo, Nome, Senha);
+        }
+
+        public void ApagarUsuario(int Cod)
+        {
+            new Dal_Planilha.UsuarioDal().ApagarUsuario(Cod);
         }
     }
 }

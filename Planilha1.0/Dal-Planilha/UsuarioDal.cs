@@ -98,5 +98,33 @@ namespace Dal_Planilha
                 return table;
             }
         }
+
+        public void Alterar(int Codigo, string Usuario, string Senha)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_usuario SET pl_usuario = @Usuario, pl_senha = @Senha WHERE pl_codigo = @Codigo;");
+            cmd.Parameters.Add("@Codigo", MySqlDbType.Int32).Value = Codigo;
+            cmd.Parameters.Add("@Usuario", MySqlDbType.VarChar).Value = Usuario;
+            cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = Senha;
+
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+        public void ApagarUsuario(int Cod)
+        {
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_usuario WHERE pl_codigo = @Codigo");
+            cmd.Parameters.Add("@Codigo", MySqlDbType.Int32).Value = Cod;
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
     }
 }

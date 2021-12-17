@@ -80,6 +80,18 @@ namespace Planilha1._0
                 );
 
             routes.MapRoute(
+                "conta_alterar",
+                "conta/{id}/alterar",
+                new { controller = "Conta", action = "Alterar", id = 0 }
+                );
+
+            routes.MapRoute(
+                "conta_apagar",
+                "conta/{id}/apagar",
+                new { controller = "Conta", action = "Apagar", id = 0 }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

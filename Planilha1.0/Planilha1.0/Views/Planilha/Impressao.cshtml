@@ -187,8 +187,8 @@
                     }
                     <tr>
                         <td class="total">Total</td>
-                        <td>@propResult.PropResultado</td>
-                        <td>@realiResult.RealiResultado</td>
+                        <td>@propResult.PropResultado.ToString("#,##0.00")</td>
+                        <td>@realiResult.RealiResultado.ToString("#,##0.00")</td>
                     </tr>
                     <tr>
                         <td class="total">Resultado</td>
@@ -213,7 +213,7 @@
 
                 {
                     <tr>
-                        <td>@sob.SobreFaturamento.ToString("#,##0.00")%</td>
+                        <td>@sob.SobreFaturamento.ToString("#,##0.00") %</td>
                     </tr>
                 }
                 <tr>

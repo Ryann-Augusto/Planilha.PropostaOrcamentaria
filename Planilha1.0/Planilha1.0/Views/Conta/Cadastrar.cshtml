@@ -2,7 +2,7 @@
 @{
     List<md_Planilha.mdJaneiro> usuario = ViewBag.Usuarios;
     ViewBag.Title = "Cadastrar";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdm.cshtml";
 }
 
 @if (TempData["sucesso"] != null)
@@ -51,7 +51,7 @@
                 <a style="width:100px;" class="btn btn-primary fa fa-pencil pull-right" href="/conta/@usu.CodigoUsuario/editar"><span style="font-family: Fantasy; font-size: 20px; ">&nbsp;Editar</span></a>
             </td>
             <td>
-                <a class="btn btn-danger fa fa-pencil pull-right" href="/conta/@usu.CodigoUsuario/excluir"><span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">&nbsp;Excluir</span></a>
+                <a class="btn btn-danger fa fa-pencil pull-right" href="/conta/@usu.CodigoUsuario/apagar" onclick="ValidaExclusao(@usu.CodigoUsuario, event)"><span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">&nbsp;Excluir</span></a>
             </td>
         </tr>
             }
@@ -93,7 +93,7 @@
                     <div class="form-group">
                         <label for="Nome">Cargo:</label>
                         <select class="form-control" name="cargo">
-                            <option value="vazio">Selecione o nível</option>
+                            <option value="0">Selecione o nível</option>
                             <option value="1">Administrador</option>
                             <option value="2">Funcionário</option>
                         </select>

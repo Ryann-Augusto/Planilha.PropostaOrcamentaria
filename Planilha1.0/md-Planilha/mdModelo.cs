@@ -64,6 +64,7 @@ namespace md_Planilha
         private int _codigoUsuario;
         private string _nomeUsuario;
         private string _senhaUsuario;
+        private string _confirmsenhaUsuario;
         private int _nivelUsuario;
 
         public int Codigo
@@ -354,6 +355,12 @@ namespace md_Planilha
         {
             get { return _senhaUsuario; }
             set { _senhaUsuario = value; }
+        }
+
+        public string ConfirmSenhaUsuario
+        {
+            get { return _confirmsenhaUsuario; }
+            set { _confirmsenhaUsuario = value; }
         }
 
         public int NivelUsuario

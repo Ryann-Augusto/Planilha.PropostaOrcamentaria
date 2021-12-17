@@ -16,9 +16,9 @@ namespace Dal_Planilha
             return ConfigurationManager.AppSettings["MysqlConn"];
         }
 
-        public void CriarTabela(int Cod, string Tbl)
+        public void CriarTabelaMeses(int Cod, string Tbl)
         {
-            MySqlCommand jan = new MySqlCommand("CREATE TABLE "+Cod+Tbl+
+            MySqlCommand meses = new MySqlCommand("CREATE TABLE "+Cod+Tbl+
                 "(pl_codigo int primary key not null auto_increment, " +
                 "pl_ano int(4) not null, " +
                 "pl_proposta decimal(10, 2) null, " +
@@ -26,19 +26,71 @@ namespace Dal_Planilha
                 "cod_categoria int not null, " +
                 "foreign key(cod_categoria) references tbl_Categoria(pl_codigo)) " +
                 "charset = utf8mb4; ");
+
             
             using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
             {
-                jan.Connection = conn;
+                meses.Connection = conn;
+
                 conn.Open();
-                jan.ExecuteNonQuery();
+
+                meses.ExecuteNonQuery();
+
+                conn.Close();
+            }
+        }
+        public void CriarTabelas(int Cod)
+        {
+            MySqlCommand resultado = new MySqlCommand("CREATE TABLE "+Cod+"tbl_resultado " +
+                "(pl_codigo int primary key not null auto_increment, " +
+                "pl_propResultado decimal(10, 2) null, " +
+                "pl_realiResultado decimal(10, 2) null, " +
+                "pl_sobreFaturamento decimal(10, 2) null, " +
+                "pl_contrib_Despesas decimal(10, 2) null, " +
+                "pl_ano int(4) null, " +
+                "cod_categoria int not null, " +
+                "foreign key(cod_categoria) references tbl_Categoria(pl_codigo))charset = utf8mb4;");
+
+            MySqlCommand total = new MySqlCommand("CREATE TABLE "+Cod+"tbl_total " +
+                "(pl_codigo int primary key auto_increment, " +
+                "pl_totalProposta decimal(10, 2) null, " +
+                "pl_totalRealizado decimal(10, 2) null, " +
+                "pl_ano int(4) not null)charset = utf8mb4;");
+
+            MySqlCommand totalMeses = new MySqlCommand("CREATE TABLE "+Cod+"tbl_totalmeses " +
+                "(pl_codigo int primary key auto_increment, " +
+                "pl_totalPropostaMes decimal(10, 2) null, " +
+                "pl_totalRealizadoMes decimal(10, 2) null, " +
+                "pl_tabelaMes varchar(30) null, " +
+                "pl_ano int(4) not null)charset = utf8mb4;");
+
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                resultado.Connection = conn;
+                total.Connection = conn;
+                totalMeses.Connection = conn;
+
+                conn.Open();
+
+                resultado.ExecuteNonQuery();
+                total.ExecuteNonQuery();
+                totalMeses.ExecuteNonQuery();
+
                 conn.Close();
             }
         }
 
         public void ApagarTabela(int Cod, string Tbl)
         {
-            MySqlCommand cmd = new MySqlCommand("DROP TABLE "+Cod+Tbl+";");
+            MySqlCommand cmd = new MySqlCommand("DROP TABLE "+Cod+Tbl);
+
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
         }
     }
 }

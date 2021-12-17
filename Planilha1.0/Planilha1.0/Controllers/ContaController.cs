@@ -115,5 +115,44 @@ namespace ControleEstoque.Web.Controllers
             ViewBag.Editar = mdUsuario.BuscarUsuId(id);
             return View();
         }
+
+        [HttpPost]
+        public void Alterar(int id)
+        {
+            var Usuario = new mdJaneiro();
+            Usuario.NomeUsuario = Request["nome"].ToString();
+            Usuario.SenhaUsuario = Request["senha"].ToString();
+            Usuario.ConfirmSenhaUsuario = Request["confirmsenha"].ToString();
+
+            if (Usuario.SenhaUsuario != Usuario.ConfirmSenhaUsuario)
+            {
+                TempData["erro"] = "Atenção! As senhas não estão iguais.";
+                Response.Redirect("/conta/cadastrar");
+            }
+            else
+            {
+                var Alterar = new mdUsuario();
+                Alterar.Alterar(id, Usuario.NomeUsuario, Usuario.SenhaUsuario);
+                TempData["sucesso"] = "Usuário alterado com sucesso.";
+                Response.Redirect("/conta/cadastrar");
+            }
+        }
+
+        public void Apagar(int id)
+        {
+            var Apagar = new mdUsuario();
+            var Editar = mdUsuario.BuscarUsuId(id);
+            if (Editar.NivelUsuario == 1)
+            {
+                Apagar.ApagarUsuario(id);
+                Response.Redirect("/conta/cadastrar");
+            }
+            else
+            {
+                Apagar.ApagarTabelas(id);
+                Apagar.ApagarUsuario(id);
+                Response.Redirect("/conta/cadastrar");
+            }
+        }
     }
 }
