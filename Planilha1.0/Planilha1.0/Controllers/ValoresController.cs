@@ -8,7 +8,7 @@ using md_Planilha;
 
 namespace Planilha1._0.Controllers
 {
-    public class JaneiroController : Controller
+    public class ValoresController : Controller
     {
         [Authorize]
         public ActionResult Index()
@@ -52,7 +52,7 @@ namespace Planilha1._0.Controllers
             {
                 TempData["erro"] = "Pagina não pode alterada"+ err;
             }
-            Response.Redirect("/janeiro");
+            Response.Redirect("/valores");
         }
     }
 }

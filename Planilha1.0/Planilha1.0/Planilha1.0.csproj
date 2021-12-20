@@ -166,7 +166,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ContaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JaneiroController.cs" />
+    <Compile Include="Controllers\ValoresController.cs" />
     <Compile Include="Controllers\PlanilhaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,9 +228,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Janeiro\Index.cshtml" />
+    <Content Include="Views\Valores\Index.cshtml" />
     <Content Include="Views\Planilha\Index.cshtml" />
-    <Content Include="Views\Janeiro\Adicionar.cshtml" />
+    <Content Include="Views\Valores\Adicionar.cshtml" />
     <Content Include="Views\Shared\_Render.cshtml" />
     <Content Include="Views\Planilha\Impressao.cshtml" />
     <Content Include="Views\Shared\_RenderImpressao.cshtml" />

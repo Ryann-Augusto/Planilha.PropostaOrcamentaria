@@ -29,7 +29,7 @@ namespace Planilha1._0.Controllers
             }
             else
             {
-            Response.Redirect("/janeiro");
+            Response.Redirect("/valores");
             }
         }
 

@@ -14,21 +14,21 @@ namespace Planilha1._0
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "janeiro",
-                "janeiro",
-                new { controller = "janeiro", action = "Index" }
+                "valores",
+                "valores",
+                new { controller = "Valores", action = "Index" }
             );
 
             routes.MapRoute(
-                "janeiro_adicionar",
-                "janeiro/{id}/adicionar",
-                new { controller = "Janeiro", action = "Adicionar", id = 0}
+                "valores_adicionar",
+                "valores/{id}/adicionar",
+                new { controller = "Valores", action = "Adicionar", id = 0}
             );
 
             routes.MapRoute(
-                "janeiro_modificar",
-                "janeiro/{id}/modificar",
-                new { controller = "Janeiro", action = "Modificar", id = 0 }
+                "valores_modificar",
+                "valores/{id}/modificar",
+                new { controller = "Valores", action = "Modificar", id = 0 }
             );
 
             routes.MapRoute(
