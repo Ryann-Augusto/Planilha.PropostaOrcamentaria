@@ -12,9 +12,9 @@ namespace md_Planilha
     {
         
 
-        public static mdJaneiro ObterCodigo(string Usuario)
+        public static mdValores ObterCodigo(string Usuario)
         {
-            var usuario = new mdJaneiro();
+            var usuario = new mdValores();
             var codigoDb = new Dal_Planilha.UsuarioDal();
             
             foreach (DataRow row in codigoDb.ObterCodigo(Usuario).Rows)
@@ -27,13 +27,13 @@ namespace md_Planilha
 
         
 
-        public List<mdJaneiro> ObterUsuarios()
+        public List<mdValores> ObterUsuarios()
         {
-            var lista = new List<mdJaneiro>();
+            var lista = new List<mdValores>();
             var planilhaDB = new Dal_Planilha.UsuarioDal();
             foreach (DataRow row in planilhaDB.ObterUsuarios().Rows)
             {
-                var usuario = new mdJaneiro();
+                var usuario = new mdValores();
                 usuario.CodigoUsuario = Convert.ToInt32(row["pl_codigo"]);
                 usuario.NomeUsuario = Convert.ToString(row["pl_usuario"]);
                 usuario.SenhaUsuario = Convert.ToString(row["pl_senha"]);
@@ -59,9 +59,9 @@ namespace md_Planilha
             new Dal_Planilha.CriarTabelaDal().CriarTabelas(Cod);
         }
 
-        public static mdJaneiro BuscarUsuId(int Codigo)
+        public static mdValores BuscarUsuId(int Codigo)
         {
-            var planilha = new mdJaneiro();
+            var planilha = new mdValores();
             var planilhaDB = new Dal_Planilha.UsuarioDal();
 
             foreach (DataRow row in planilhaDB.BuscarUsuId(Codigo).Rows)
@@ -82,10 +82,15 @@ namespace md_Planilha
                 new Dal_Planilha.CriarTabelaDal().ApagarTabela(Cod, tbl);
             }
         }
-        
-        public void Alterar(int Codigo, string Nome, string Senha)
+
+        public void AlterarNome(int Codigo, string Nome)
         {
-            new Dal_Planilha.UsuarioDal().Alterar(Codigo, Nome, Senha);
+            new Dal_Planilha.UsuarioDal().AlterarNome(Codigo, Nome);
+        }
+
+        public void AlterarTudo(int Codigo, string Nome, string Senha)
+        {
+            new Dal_Planilha.UsuarioDal().AlterarTudo(Codigo, Nome, Senha);
         }
 
         public void ApagarUsuario(int Cod)

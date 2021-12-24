@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Editar";
     Layout = "~/Views/Shared/_LayoutAdm.cshtml";
-    md_Planilha.mdJaneiro editar = ViewBag.Editar;
+    md_Planilha.mdValores editar = ViewBag.Editar;
 }
 
 <h2>Editar</h2>
@@ -23,14 +23,14 @@
                 <div class="form-group">
                     <label for="inputPassword" class="control-label">Senha</label>
                     <input name="senha" type="password" class="form-control" id="inputPassword" placeholder="Digite sua Senha..."
-                           data-minlength="6" required>
+                           data-minlength="6">
                     <span class="help-block">Mínimo de seis (6) digitos</span>
                 </div>
 
                 <div class="form-group">
                     <label for="inputConfirm" class="control-label">Confirme a Senha</label>
                     <input name="confirmsenha" type="password" class="form-control" id="inputConfirm" placeholder="Confirme sua Senha..."
-                           data-match="#inputPassword" data-match-error="Atenção! As senhas não estão iguais." required>
+                           data-match="#inputPassword" data-match-error="Atenção! As senhas não estão iguais.">
                     <div class="help-block with-errors"></div>
                 </div>
 

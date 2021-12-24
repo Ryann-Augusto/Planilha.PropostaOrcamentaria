@@ -9,9 +9,9 @@ namespace md_Planilha
 {
     public class mdResultado
     {
-        List<mdJaneiro> lista = new List<mdJaneiro>();
+        List<mdValores> lista = new List<mdValores>();
 
-        public List<mdJaneiro> Listarfaturamento(int Ano, int Cod)
+        public List<mdValores> Listarfaturamento(int Ano, int Cod)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace md_Planilha
                     var planilhaDB = new Dal_Planilha.resultadoDal();
                     foreach (DataRow row in planilhaDB.Resultados(Ano, Cat, Cod).Rows)
                     {
-                        var planilha = new mdJaneiro();
+                        var planilha = new mdValores();
                         planilha.Categoria = Convert.ToString(row["categoria"]);
                         planilha.FaturamentoPropResult = Convert.ToDecimal(row["faturamento_Prop"]);
                         planilha.FaturamentoRealiResult = Convert.ToDecimal(row["faturamento_Reali"]);
@@ -33,17 +33,18 @@ namespace md_Planilha
                 }
                 return lista;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
         }
 
-        public static mdJaneiro TotalPropResultados(int Ano, int Cod)
+        public static mdValores TotalPropResultados(int Ano, int Cod)
         {
             try
             {
-                var planilha = new mdJaneiro();
+                var planilha = new mdValores();
                 var planilhaDB = new Dal_Planilha.resultadoDal();
                 foreach (DataRow row in planilhaDB.totalPropResultados(Ano, Cod).Rows)
                 {
@@ -53,17 +54,18 @@ namespace md_Planilha
                 }
                 return planilha;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
         }
 
-        public static mdJaneiro TotalRealiResultados(int Ano, int Cod)
+        public static mdValores TotalRealiResultados(int Ano, int Cod)
         {
             try
             {
-                var planilha = new mdJaneiro();
+                var planilha = new mdValores();
                 var planilhaDB = new Dal_Planilha.resultadoDal();
                 foreach (DataRow row in planilhaDB.totalRealiResultados(Ano, Cod).Rows)
                 {
@@ -73,13 +75,14 @@ namespace md_Planilha
                 }
                 return planilha;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
         }
 
-        public List<mdJaneiro> sobreFaturamento(int Ano, int Cod)
+        public List<mdValores> sobreFaturamento(int Ano, int Cod)
         {
             try
             {
@@ -90,7 +93,7 @@ namespace md_Planilha
                 {
                     foreach (DataRow row in planilhaDB.sobreFaturamento(Ano, Cod, Cat).Rows)
                     {
-                        var planilha = new mdJaneiro();
+                        var planilha = new mdValores();
                         planilha.SobreFaturamento = Convert.ToDecimal(row["sobreFaturamento"]);
                         lista.Add(planilha);
 
@@ -99,17 +102,18 @@ namespace md_Planilha
                 }
                 return lista;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
         }
 
-        public static mdJaneiro TotalSobreFaturamento(int Ano, int Cod)
+        public static mdValores TotalSobreFaturamento(int Ano, int Cod)
         {
             try
             {
-                var planilha = new mdJaneiro();
+                var planilha = new mdValores();
                 var planilhaDB = new Dal_Planilha.resultadoDal();
                 foreach (DataRow row in planilhaDB.totalSobreFaturamento(Ano, Cod).Rows)
                 {
@@ -117,13 +121,14 @@ namespace md_Planilha
                 }
                 return planilha;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
         }
 
-        public List<mdJaneiro> contribDespesas(int Ano, int Cod)
+        public List<mdValores> contribDespesas(int Ano, int Cod)
         {
             try
             {
@@ -134,7 +139,7 @@ namespace md_Planilha
                 {
                     foreach (DataRow row in planilhaDB.contribuicaoDespesas(Ano, Cod, Cat).Rows)
                     {
-                        var planilha = new mdJaneiro();
+                        var planilha = new mdValores();
                         planilha.ContribuicaoDespesas = Convert.ToDecimal(row["contribDespesas"]);
                         lista.Add(planilha);
 
@@ -143,18 +148,18 @@ namespace md_Planilha
                 }
                 return lista;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
-
         }
 
-        public static mdJaneiro TotalContribDespesas(int Ano, int Cod)
+        public static mdValores TotalContribDespesas(int Ano, int Cod)
         {
             try
             {
-                var planilha = new mdJaneiro();
+                var planilha = new mdValores();
                 var planilhaDB = new Dal_Planilha.resultadoDal();
                 foreach (DataRow row in planilhaDB.totalContribDespesas(Ano, Cod).Rows)
                 {
@@ -162,47 +167,92 @@ namespace md_Planilha
                 }
                 return planilha;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
 
         }
 
-        public static mdJaneiro PropostaTabResultado(int Ano, int Cod)
+        public static mdValores PropostaTabResultado(int Ano, int Cod)
         {
             try
             {
-                var planilha = new mdJaneiro();
+                var planilha = new mdValores();
                 var planilhaDB = new Dal_Planilha.resultadoDal();
                 foreach (DataRow row in planilhaDB.propostaTabResultado(Ano, Cod).Rows)
                 {
                     planilha.PropostaTabResultado = Convert.ToDecimal(row["PropostaTabResultado"]);
+
+                    new Dal_Planilha.resultadoDal().AlterarPropTabResultado(Cod, Ano, planilha.PropostaTabResultado);
                 }
                 return planilha;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
 
         }
 
-        public static mdJaneiro RealizadoTabResultado(int Ano, int Cod)
+        public static mdValores RealizadoTabResultado(int Ano, int Cod)
         {
             try
             {
-                var planilha = new mdJaneiro();
+                var planilha = new mdValores();
                 var planilhaDB = new Dal_Planilha.resultadoDal();
                 foreach (DataRow row in planilhaDB.realizadoTabResultado(Ano, Cod).Rows)
                 {
                     planilha.RealizadoTabResultado = Convert.ToDecimal(row["realiTabResultado"]);
+
+                    new Dal_Planilha.resultadoDal().AlterarRealiTabResultado(Cod, Ano, planilha.RealizadoTabResultado);
                 }
                 return planilha;
             }
-            catch (Exception)
+            catch (Exception ez)
             {
-                throw new Exception("Não hà informações suficiente para montar a planilha!");
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
+            }
+        }
+
+        public static mdValores MetaProposta(int Ano, int Cod)
+        {
+            try
+            {
+                var planilha = new mdValores();
+                var planilhaDB = new Dal_Planilha.resultadoDal();
+                foreach (DataRow row in planilhaDB.MetaProposta(Ano, Cod).Rows)
+                {
+                    planilha.MetaProposta = Convert.ToDecimal(row["Meta_Proposta"]);
+                }
+                return planilha;
+            }
+            catch (Exception ez)
+            {
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
+            }
+        }
+
+        public static mdValores MetaRealizada(int Ano, int Cod)
+        {
+            try
+            {
+                var planilha = new mdValores();
+                var planilhaDB = new Dal_Planilha.resultadoDal();
+                foreach (DataRow row in planilhaDB.MetaRealizada(Ano, Cod).Rows)
+                {
+                    planilha.MetaRealizada = Convert.ToDecimal(row["Meta_Realizada"]);
+                }
+                return planilha;
+            }
+            catch (Exception ez)
+            {
+                ez = new Exception("Não hà informações suficiente para montar a planilha!");
+                throw new Exception(ez.Message);
             }
         }
     }

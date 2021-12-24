@@ -99,7 +99,22 @@ namespace Dal_Planilha
             }
         }
 
-        public void Alterar(int Codigo, string Usuario, string Senha)
+        public void AlterarNome(int Codigo, string Usuario)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_usuario SET pl_usuario = @Usuario WHERE pl_codigo = @Codigo;");
+            cmd.Parameters.Add("@Codigo", MySqlDbType.Int32).Value = Codigo;
+            cmd.Parameters.Add("@Usuario", MySqlDbType.VarChar).Value = Usuario;
+
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public void AlterarTudo(int Codigo, string Usuario, string Senha)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE tbl_usuario SET pl_usuario = @Usuario, pl_senha = @Senha WHERE pl_codigo = @Codigo;");
             cmd.Parameters.Add("@Codigo", MySqlDbType.Int32).Value = Codigo;

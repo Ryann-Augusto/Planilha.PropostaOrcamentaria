@@ -15,7 +15,7 @@
 <div class="jumbotron">
     <div class="row">
         <div class="col-md-6">
-            <label for="data">Escolha o mês:</label>
+            <label for="data">Inserir Valores:</label>
             <form action="/home/criar" method="post">
                 <select name="mes" id="selectMes" class="form-control">
                     <option value=vazio>Selecione o mês</option>
@@ -36,7 +36,7 @@
 
                 <label style="margin-top:48px;" for="data">Escolha o Ano:</label>
                 <select name="ano" id="selectAno" class="form-control">
-                    <option value="vazio">Selecione o ano</option>
+                    <option value="0">Selecione o ano</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>
@@ -54,7 +54,7 @@
             <label for="data">Criar Nova Tabela:</label>
             <form action="home/criarplanilha" method="post">
                 <select name="ano" id="selectAno" class="form-control">
-                    <option value="">Selecione o ano</option>
+                    <option value="0">Selecione o ano</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>
@@ -71,7 +71,7 @@
                 <label for="data">Abrir Planilha:</label>
                 <form action="home/abrirplanilha" method="post">
                     <select name="ano" id="selectAno" class="form-control">
-                        <option value="">Selecione o ano</option>
+                        <option value="0">Selecione o ano</option>
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>

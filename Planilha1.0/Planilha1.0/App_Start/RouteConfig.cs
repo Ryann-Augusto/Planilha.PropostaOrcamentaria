@@ -62,6 +62,12 @@ namespace Planilha1._0
                 );
 
             routes.MapRoute(
+                "planilha_graficos",
+                "graficos",
+                new { controller = "Planilha", action = "Graficos" }
+                );
+
+            routes.MapRoute(
                 "conta_cadastrar",
                 "cadastrar",
                 new { controller = "Conta", action = "Cadastrar" }

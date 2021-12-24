@@ -198,6 +198,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\formatmoney.js" />
+    <Content Include="Scripts\graficos.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\inputmask.js" />
     <Content Include="Scripts\inputmask\inputmask.min.js" />
@@ -238,6 +239,7 @@
     <Content Include="Views\Conta\Cadastrar.cshtml" />
     <Content Include="Views\Conta\Editar.cshtml" />
     <Content Include="Views\Shared\_LayoutAdm.cshtml" />
+    <Content Include="Views\Planilha\Graficos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

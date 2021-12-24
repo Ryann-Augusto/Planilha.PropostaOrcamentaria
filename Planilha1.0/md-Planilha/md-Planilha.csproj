@@ -42,9 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="mdGraficos.cs" />
     <Compile Include="mdImpressao.cs" />
     <Compile Include="mdResultado.cs" />
-    <Compile Include="mdJaneiro.cs" />
+    <Compile Include="mdValores.cs" />
     <Compile Include="mdModelo.cs" />
     <Compile Include="mdUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

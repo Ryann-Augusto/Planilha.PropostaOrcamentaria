@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Graficos";
+    Layout = "~/Views/Shared/_Render.cshtml";
+
+    //Graficos
+    var Prop = (ViewBag.Prop as List<decimal>);
+    var Reali = (ViewBag.Reali as List<decimal>);
+    var Proposta = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Prop));
+    var Realizado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Reali));
+}
+
+<h2>Graficos</h2>
+
+<center><h3>Propostas</h3></center>
+<canvas id="grafico" width="400" height="150"></canvas>
+
+<br />
+<br />
+
+<center><h3>Nova Proposta</h3></center>
+<canvas id="novoGrafico" width="400" height="150"></canvas>
+
+@section Scripts {
+    <script>
+
+        var meses = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        var Prop = @Proposta;
+        var Reali = @Realizado;
+    </script>
+}

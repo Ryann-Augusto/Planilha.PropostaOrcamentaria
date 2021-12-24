@@ -9,9 +9,9 @@
     @Styles.Render("~/Content/fontawesome")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-    <script src="~/Scripts/inputmask/jquery.inputmask.min.js"></script>
-    <script src="~/Scripts/formatmoney.js"></script>
-    <script src="~/Scripts/validacoes.js"></script>
+    <script defer src="~/Scripts/inputmask/jquery.inputmask.min.js"></script>
+    <script defer src="~/Scripts/formatmoney.js"></script>
+    <script defer src="~/Scripts/validacoes.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nome do aplicativo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Proposta Orçamentária", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 @if (Request.IsAuthenticated)

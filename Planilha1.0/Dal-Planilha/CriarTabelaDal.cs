@@ -55,6 +55,8 @@ namespace Dal_Planilha
                 "(pl_codigo int primary key auto_increment, " +
                 "pl_totalProposta decimal(10, 2) null, " +
                 "pl_totalRealizado decimal(10, 2) null, " +
+                "pl_propostaTabResultado decimal(10, 2) null, " +
+                "pl_realizadoTabResultado decimal(10, 2) null, " +
                 "pl_ano int(4) not null)charset = utf8mb4;");
 
             MySqlCommand totalMeses = new MySqlCommand("CREATE TABLE "+Cod+"tbl_totalmeses " +

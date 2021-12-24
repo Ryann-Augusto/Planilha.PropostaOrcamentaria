@@ -38,11 +38,11 @@ namespace Planilha1._0.Controllers
         {
             try
             {
-                var janeiro = new mdJaneiro();
+                var valores = new mdValores();
                 var cod = Session["Codigo"];
-                janeiro.Ano = Convert.ToInt32(Request["ano"]);
-                janeiro.ExisteAno(janeiro.Ano, Convert.ToInt32(cod));
-                janeiro.NovaPlanilha(janeiro.Ano, Convert.ToInt32(cod));
+                valores.Ano = Convert.ToInt32(Request["ano"]);
+                valores.ExisteAno(valores.Ano, Convert.ToInt32(cod));
+                valores.NovaPlanilha(valores.Ano, Convert.ToInt32(cod));
                 TempData["sucesso"] = "Planilha Criada com Sucesso!";
             }
             catch(Exception ex)
@@ -57,13 +57,21 @@ namespace Planilha1._0.Controllers
         {
             try
             {
-                var janeiro = new mdJaneiro();
-                Session["Ano"] = Convert.ToString(Request["ano"]);
+                int Ano = Convert.ToInt32(Request["ano"]);
+
+                if (Ano == 0)
+                {
+                    throw new Exception("Insira o Ano!");
+                }
+                Session["Ano"] = Ano;
                 Response.Redirect("/planilha");
+
+                
             }
-            catch
+            catch(Exception ez)
             {
                 Response.Redirect("/home");
+                TempData["erro"] = ez.Message;
             }
         }
         [Authorize]

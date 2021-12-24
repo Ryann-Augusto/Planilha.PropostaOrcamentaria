@@ -56,3 +56,7 @@ div.box {
 .total{
     font-weight:bold;
 }
+
+#metas tr td{
+    padding:10px;
+}

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Dal_Planilha
 {
-    public class JaneiroDal
+    public class ValoresDal
     {
         private string MysqlConn()
         {

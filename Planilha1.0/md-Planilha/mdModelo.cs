@@ -60,6 +60,11 @@ namespace md_Planilha
         private decimal _propostaTabResultado;
         private decimal _realizadoTabResultado;
 
+        //Metas
+        private decimal _metaProposta;
+        private decimal _metaRealizada;
+
+
         //Tabela Usuario
         private int _codigoUsuario;
         private string _nomeUsuario;
@@ -299,6 +304,20 @@ namespace md_Planilha
             get { return _realizadoTabResultado; }
             set { _realizadoTabResultado = value; }
         }
+
+        //Metas
+        public decimal MetaProposta
+        {
+            get { return _metaProposta; }
+            set { _metaProposta = value; }
+        }
+
+        public decimal MetaRealizada
+        {
+            get { return _metaRealizada; }
+            set { _metaRealizada = value; }
+        }
+
 
         //Início do Sobre
 

@@ -9,9 +9,10 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/planilhGeral.css" rel="stylesheet" type="text/css" />
+    
 </head>
 <body>
-    
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -20,6 +21,8 @@
         </footer>
     </div>
 
+    <script defer src="https://www.chartjs.org/dist/master/chart.min.js"></script>
+    <script defer src="~/Scripts/graficos.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -13,24 +13,24 @@ namespace Planilha1._0.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var janeiro = new mdJaneiro();
+            var valores = new mdValores();
             var cod = Session["Codigo"];
             var ano = Session["Ano"].ToString();
-            janeiro.Mes = Session["Mes"].ToString();
-            janeiro.Ano = int.Parse(ano);
-            ViewBag.Mes = janeiro.Mes;
-            ViewBag.Ano = janeiro.Ano;
-            ViewBag.planilhaJaneiro = new mdJaneiro().Lista(janeiro.Ano, janeiro.Mes, Convert.ToInt32(cod));
+            valores.Mes = Session["Mes"].ToString();
+            valores.Ano = int.Parse(ano);
+            ViewBag.Mes = valores.Mes;
+            ViewBag.Ano = valores.Ano;
+            ViewBag.planilhaValores = new mdValores().Lista(valores.Ano, valores.Mes, Convert.ToInt32(cod));
             return View();
         }
 
         [Authorize]
         public ActionResult Adicionar(int id)
         {
-            var janeiros = new mdJaneiro();
+            var valores = new mdValores();
             var cod = Session["Codigo"];
-            janeiros.Mes = Session["Mes"].ToString();
-            ViewBag.Janeiro = mdJaneiro.BuscaPorId(id, janeiros.Mes, Convert.ToInt32(cod));
+            valores.Mes = Session["Mes"].ToString();
+            ViewBag.Valores = mdValores.BuscaPorId(id, valores.Mes, Convert.ToInt32(cod));
             return View();
         }
         public void Modificar(int id)
@@ -38,14 +38,14 @@ namespace Planilha1._0.Controllers
             try
             {
                 //Janeiro
-                var janeiros = new mdJaneiro();
+                var valores = new mdValores();
                 var cod = Session["Codigo"];
-                janeiros.Mes = Session["Mes"].ToString();
-                var plJaneiro = mdJaneiro.BuscaPorId(id, janeiros.Mes, Convert.ToInt32(cod));
-                plJaneiro.Proposta = decimal.Parse(Request["proposta"].Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
-                plJaneiro.Realizado = decimal.Parse(Request["realizado"].Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
-                plJaneiro.Mes = Session["Mes"].ToString();
-                plJaneiro.alter(plJaneiro.Mes, Convert.ToInt32(cod));
+                valores.Mes = Session["Mes"].ToString();
+                var plValores = mdValores.BuscaPorId(id, valores.Mes, Convert.ToInt32(cod));
+                plValores.Proposta = decimal.Parse(Request["proposta"].Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
+                plValores.Realizado = decimal.Parse(Request["realizado"].Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
+                plValores.Mes = Session["Mes"].ToString();
+                plValores.alter(plValores.Mes, Convert.ToInt32(cod));
                 TempData["sucesso"] = "Pagina alterada com sucesso";
             }
             catch(Exception err)
