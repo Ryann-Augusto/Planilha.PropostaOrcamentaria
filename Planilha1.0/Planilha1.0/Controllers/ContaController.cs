@@ -73,14 +73,20 @@ namespace ControleEstoque.Web.Controllers
         {
             var Nome = Request["nome"];
             var Senha = Request["senha"];
-            var ConfirmSenha = Request["confirmsenha"];
             int Nivel = Convert.ToInt32(Request["cargo"]);
 
-            if (Senha == ConfirmSenha)
+
+            if (Nivel == 0)
             {
-                if (Nivel == 0)
+                TempData["erro"] = "Escolha um cargo";
+                Response.Redirect("/conta/cadastrar");
+            }
+            else
+            {
+                var Existente = new ValidaUsuario().UsuarioExistente(Nome);
+                if (Existente)
                 {
-                    TempData["erro"] = "Escolha um cargo";
+                    TempData["erro"] = "Atenção! Esse usuário já existe.";
                     Response.Redirect("/conta/cadastrar");
                 }
                 else
@@ -101,11 +107,6 @@ namespace ControleEstoque.Web.Controllers
                         Response.Redirect("/conta/cadastrar");
                     }
                 }
-            }
-            else
-            {
-                TempData["erro"] = "Atenção! As senhas não estão iguais.";
-                Response.Redirect("/conta/cadastrar");
             }
         }
 

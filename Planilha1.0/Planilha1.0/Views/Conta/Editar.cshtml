@@ -5,38 +5,45 @@
     md_Planilha.mdValores editar = ViewBag.Editar;
 }
 
-<h2>Editar</h2>
+<body id="cadastrar">
+    <div class="body-background"></div>
+    <div class="content">
+        <center><h2><b>Editar</b></h2></center>
 
-<div class="container">
-    <div class="row">
-        <div>
-            <a href="/conta/cadastrar" class="btn btn-default">Voltar</a>
-        </div>
-        
-        <div>
-            <form action="/conta/@editar.CodigoUsuario/alterar" method="post">
-                <div class="form-group">
-                    <label for="textNome" class="control-label">Nome</label>
-                    <input name="nome" id="textNome" class="form-control" value="@editar.NomeUsuario" type="text" required>
+        <div class="container">
+            <div class="table-responsive">
+                <div class="row-no-gutters jumbotron edit">
+                    <div>
+                        <form action="/conta/@editar.CodigoUsuario/alterar" method="post">
+                            <div class="form-group">
+                                <label for="textNome" class="control-label">Nome</label>
+                                <input name="nome" id="textNome" class="form-control" value="@editar.NomeUsuario" type="text" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPassword" class="control-label">Senha</label>
+                                <input name="senha" type="password" class="form-control" placeholder="Senha" id="pass1" onkeyup="checkPassEdit(); return false;" />
+                                <span class="help-block">Mínimo de seis (6) digitos</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputConfirm" class="control-label">Confirme a Senha</label>
+                                <input name="confirmSenha" type="password" class="form-control" placeholder="confirme sua senha" id="pass2" onkeyup="checkPassEdit(); return false;"
+                                       data-match="#inputPassword" data-match-error="Atenção! As senhas não estão iguais." />
+                                <div id="error-nwl"></div>
+                            </div>
+
+                            <div class="box">
+                                <a href="/conta/cadastrar" class="btn btn-default">Voltar</a>
+                            </div>
+
+                            <div class="box">
+                                <button type="submit" id="btnCadastrar" class="btn btn-primary">Alterar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="inputPassword" class="control-label">Senha</label>
-                    <input name="senha" type="password" class="form-control" id="inputPassword" placeholder="Digite sua Senha..."
-                           data-minlength="6">
-                    <span class="help-block">Mínimo de seis (6) digitos</span>
-                </div>
-
-                <div class="form-group">
-                    <label for="inputConfirm" class="control-label">Confirme a Senha</label>
-                    <input name="confirmsenha" type="password" class="form-control" id="inputConfirm" placeholder="Confirme sua Senha..."
-                           data-match="#inputPassword" data-match-error="Atenção! As senhas não estão iguais.">
-                    <div class="help-block with-errors"></div>
-                </div>
-
-                <button type="submit" class="btn btn-default">Alterar</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-
+</body>

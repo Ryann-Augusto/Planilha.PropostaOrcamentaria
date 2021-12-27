@@ -31,5 +31,21 @@ namespace Planilha1._0.Models
                 return result;
             }
         }
+
+        public bool UsuarioExistente(string Nome)
+        {
+            string queryString = "SELECT COUNT(1) FROM tbl_Usuario WHERE pl_usuario = @login";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Login", Nome);
+                connection.Open();
+
+                var result = Convert.ToBoolean(command.ExecuteScalar());
+
+                return result;
+            }
+        }
     }
 }

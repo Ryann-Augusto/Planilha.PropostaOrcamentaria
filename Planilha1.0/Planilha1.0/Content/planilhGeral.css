@@ -68,3 +68,15 @@ div.box {
 tfoot td {
     background-color: #4ab051;
 }
+
+/*Codificacao para pagina impressao*/
+
+@media print {
+    @page {
+        margin-top: 0px;
+        margin-left: 11px;
+        box-shadow: 0;
+        margin-right: 100px;
+        size: landscape;
+    }
+}

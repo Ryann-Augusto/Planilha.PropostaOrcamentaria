@@ -33,7 +33,66 @@ textarea {
     margin-top:20px;
 }
 
-.titulo{
+.edit {
+    width: 400px;
+    margin:auto;
+    margin-top: 20px;
+}
+
+div.box {
+    display: flex;
+    justify-content: center;
+    display: inline-block;
+}
+
+#btnCadastrar{
+    margin-left:147px;
+}
+
+.titulo {
     margin-bottom: 30px;
     text-transform: uppercase;
+}
+
+
+.body-background {
+    background-image: url(../Content/Images/segurança.jpg);
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    display: block;
+    background-size:100%;
+    width: 100%;
+    height: 100%;
+    opacity:60%;
+    filter:blur(5px);
+    background-repeat:no-repeat;
+}
+
+.body-content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    margin-left: 80px;
+    margin-right: 20px;
+}
+
+.tblCadastrar tr th {
+    text-align: center;
+    font-size: 18px;
+    background-color: #4ab051;
+    border-top: hidden;
+}
+
+.tblCadastrar tr {
+    border-color: black;
+}
+
+.tblCadastrar td {
+    padding: 8px;
+    font-size: 15px;
+    border: solid black 1px;
+    text-align: center;
 }

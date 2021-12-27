@@ -14,7 +14,7 @@ namespace Planilha1._0.Models
         public string Usuario { get; set; }
 
         [Required(ErrorMessage = "Informe a senha")]
-        [Display(Name ="Senha ")]
+        [Display(Name="Senha ")]
         [DataType(DataType.Password)]
         public string Senha { get; set; }
 

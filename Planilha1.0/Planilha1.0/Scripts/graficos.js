@@ -20,11 +20,11 @@
             },
             options: {
                 scales: {
-                    yAxes: [{
+                    yAxes: {
                         tickes: {
                             beginAtZero: true
                         }
-                    }]
+                    }
                 }
             }
         });
@@ -38,14 +38,14 @@ $(document)
             data: {
                 labels: meses,
                 datasets: [{
-                    label: 'Resultado1',
+                    label: 'Proposta',
                     backgroundColor:
                             '#6495ED',
                     borderColor: '#000000',
                     data: Prop,
                 },
                 {
-                    label: 'Proposta2',
+                    label: 'Realizado',
                     backgroundColor:
                             '#000080',
                     borderColor: 'rgb(13, 99, 132)',
@@ -54,11 +54,11 @@ $(document)
             },
             options: {
                 scales: {
-                    yAxes: [{
+                    yAxes: {
                         tickes: {
                             beginAtZero: true
                         }
-                    }]
+                    }
                 }
             }
         });
