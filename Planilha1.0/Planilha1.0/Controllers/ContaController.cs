@@ -137,6 +137,11 @@ namespace ControleEstoque.Web.Controllers
                 TempData["sucesso"] = "Nome de usuário alterado com sucesso.";
                 Response.Redirect("/conta/cadastrar");
             }
+            else if (Usuario.SenhaUsuario.Trim().Length < 6)
+            {
+                TempData["erro"] = "Atenção! A senha não pode ser menor que 6!";
+                Response.Redirect("/conta/cadastrar");
+            }
             else
             {
                 Alterar.AlterarTudo(id, Usuario.NomeUsuario, Usuario.SenhaUsuario);

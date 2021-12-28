@@ -43,22 +43,34 @@
                 }
                 else
                 {
-                     <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
                         <li>@Html.ActionLink("Login", "Login", "Home")</li>
-                     </ul>
+                    </ul>
                 }
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Fisco Brasil</p>
-        </footer>
+
+        @if (Request.IsAuthenticated)
+        {
+            <hr />
+
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Fisco Brasil</p>
+            </footer>
+        }
+        else
+        {
+            <footer>
+                <p id="fiscoBr">&copy; @DateTime.Now.Year - Fisco Brasil</p>
+            </footer>
+        }
+
     </div>
 
-   
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

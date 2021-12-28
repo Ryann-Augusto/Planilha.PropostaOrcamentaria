@@ -15,7 +15,7 @@
         <div class="alert alert-danger">@TempData["erro"]</div>
     }
 
-    <h2>Cadastro de Empresas</h2>
+    <h2><b>Cadastro de Empresas</b></h2>
     <h2>@ViewBag.Nome</h2>
 
     <div class="container col-xs-push-8">
@@ -63,15 +63,16 @@
 
     @*Inicio do popup cadastrar*@
     <div class="modal fade cadastrar">
-        <div class="modal-dialog">
+        <div id="popupCadastrar" class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button data-dismiss="modal" class="close"> <span>&times;</span></button>
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
                     <div class="modal-title"><h3><b>Cadastrar</b></h3></div>
                 </div>
                 <form action="/conta/cadastro" method="post">
                     <div class="modal-body">
 
+                        <div id="imgCadastro"><p id="cadUser">Cadastro de usuario</p></div>
 
                         <div class="form-group">
                             <label for="textNome" class="control-label">Nome</label>

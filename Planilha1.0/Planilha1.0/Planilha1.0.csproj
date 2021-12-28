@@ -183,6 +183,10 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\segurança.jpg" />
+    <Content Include="Content\Images\login.jpg" />
+    <Content Include="Content\Images\login2.jpg" />
+    <Content Include="Content\Images\login3.jpg" />
+    <Content Include="Content\Images\login4.jpg" />
     <Content Include="Content\Impressao.css" />
     <Content Include="Content\planilhGeral.css" />
     <Content Include="favicon.ico" />
