@@ -12,14 +12,15 @@ namespace md_Planilha
     {
         
 
-        public static mdValores ObterCodigo(string Usuario)
+        public static mdValores ObterCodigo(string Email)
         {
             var usuario = new mdValores();
             var codigoDb = new Dal_Planilha.UsuarioDal();
             
-            foreach (DataRow row in codigoDb.ObterCodigo(Usuario).Rows)
+            foreach (DataRow row in codigoDb.ObterCodigo(Email).Rows)
             {
                 usuario.CodigoUsuario= Convert.ToInt32(row["pl_codigo"]);
+                usuario.NomeUsuario= Convert.ToString(row["pl_usuario"]);
                 usuario.NivelUsuario = Convert.ToInt32(row["pl_nivel"]);
             }
             return usuario;
@@ -36,6 +37,7 @@ namespace md_Planilha
                 var usuario = new mdValores();
                 usuario.CodigoUsuario = Convert.ToInt32(row["pl_codigo"]);
                 usuario.NomeUsuario = Convert.ToString(row["pl_usuario"]);
+                usuario.EmailUsuario = Convert.ToString(row["pl_email"]);
                 usuario.SenhaUsuario = Convert.ToString(row["pl_senha"]);
                 usuario.NivelUsuario = Convert.ToInt32(row["pl_nivel"]);
 
@@ -44,9 +46,9 @@ namespace md_Planilha
             return lista;
         }
 
-        public void CadUsuario(string Nome, string Senha, int Nivel)
+        public void CadUsuario(string Nome, string Email, string Senha, int Nivel)
         {
-            new Dal_Planilha.UsuarioDal().CadUsuario(Nome, Senha, Nivel);
+            new Dal_Planilha.UsuarioDal().CadUsuario(Nome, Email, Senha, Nivel);
         }
 
         public void CriarTabelas(int Cod)
@@ -68,6 +70,7 @@ namespace md_Planilha
             {
                 planilha.CodigoUsuario = Convert.ToInt32(row["pl_codigo"]);
                 planilha.NomeUsuario = Convert.ToString(row["pl_usuario"]);
+                planilha.EmailUsuario = Convert.ToString(row["pl_email"]);
                 planilha.SenhaUsuario = Convert.ToString(row["pl_senha"]);
                 planilha.NivelUsuario = Convert.ToInt32(row["pl_nivel"]);
             }
@@ -83,14 +86,14 @@ namespace md_Planilha
             }
         }
 
-        public void AlterarNome(int Codigo, string Nome)
+        public void AlterarNomeEmail(int Codigo, string Nome, string Email)
         {
-            new Dal_Planilha.UsuarioDal().AlterarNome(Codigo, Nome);
+            new Dal_Planilha.UsuarioDal().AlterarNomeEmail(Codigo, Nome, Email);
         }
 
-        public void AlterarTudo(int Codigo, string Nome, string Senha)
+        public void AlterarTudo(int Codigo, string Nome, string Email, string Senha)
         {
-            new Dal_Planilha.UsuarioDal().AlterarTudo(Codigo, Nome, Senha);
+            new Dal_Planilha.UsuarioDal().AlterarTudo(Codigo, Nome, Email, Senha);
         }
 
         public void ApagarUsuario(int Cod)

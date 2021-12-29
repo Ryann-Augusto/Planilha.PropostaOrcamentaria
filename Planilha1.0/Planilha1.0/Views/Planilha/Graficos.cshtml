@@ -10,7 +10,9 @@
     var Realizado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Reali));
 }
 
-<h2>Graficos</h2>
+
+<h2>@ViewBag.usuario @ViewBag.ano</h2>
+
 <div class="graficos">
     <center><h3>Propostas</h3></center>
     <canvas id="grafico" width="400" height="150"></canvas>

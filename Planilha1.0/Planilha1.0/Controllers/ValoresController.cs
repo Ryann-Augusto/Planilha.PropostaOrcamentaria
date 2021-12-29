@@ -25,7 +25,7 @@ namespace Planilha1._0.Controllers
         }
 
         [Authorize]
-        public ActionResult Adicionar(int id)
+        public ActionResult Alterar(int id)
         {
             var valores = new mdValores();
             var cod = Session["Codigo"];

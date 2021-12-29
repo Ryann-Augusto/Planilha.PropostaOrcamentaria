@@ -19,10 +19,10 @@
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Usuario, new { @class = "form-label col-md-2" })
+                        @Html.LabelFor(m => m.Email, new { @class = "form-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Usuario, " ", new { @class = " text-danger " })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, " ", new { @class = " text-danger " })
                         </div>
                     </div>
                     <div class="form-group">

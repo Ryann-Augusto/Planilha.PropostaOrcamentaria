@@ -54,6 +54,8 @@ namespace Planilha1._0.Controllers
         {
             try
             {
+                ViewBag.usuario = Session["Usuario"];
+                ViewBag.ano = Session["Ano"];
                 var valores = new mdValores();
                 var cod = Session["Codigo"];
                 var ano = Session["Ano"].ToString();
@@ -87,6 +89,8 @@ namespace Planilha1._0.Controllers
         [Authorize]
         public ActionResult Graficos()
         {
+            ViewBag.usuario = Session["Usuario"];
+            ViewBag.ano = Session["Ano"];
             var valores = new mdValores();
             var cod = Session["Codigo"];
             var ano = Session["Ano"].ToString();

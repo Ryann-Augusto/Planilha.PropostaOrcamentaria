@@ -187,6 +187,8 @@
     <Content Include="Content\Images\login2.jpg" />
     <Content Include="Content\Images\login3.jpg" />
     <Content Include="Content\Images\login4.jpg" />
+    <Content Include="Content\Images\cadastro.jpg" />
+    <Content Include="Content\Images\cadastro2.jpg" />
     <Content Include="Content\Impressao.css" />
     <Content Include="Content\planilhGeral.css" />
     <Content Include="favicon.ico" />
@@ -236,7 +238,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Valores\Index.cshtml" />
     <Content Include="Views\Planilha\Index.cshtml" />
-    <Content Include="Views\Valores\Adicionar.cshtml" />
+    <Content Include="Views\Valores\Alterar.cshtml" />
     <Content Include="Views\Shared\_Render.cshtml" />
     <Content Include="Views\Planilha\Impressao.cshtml" />
     <Content Include="Views\Shared\_RenderImpressao.cshtml" />
@@ -245,6 +247,7 @@
     <Content Include="Views\Conta\Editar.cshtml" />
     <Content Include="Views\Shared\_LayoutAdm.cshtml" />
     <Content Include="Views\Planilha\Graficos.cshtml" />
+    <Content Include="Views\Valores\Adicionar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

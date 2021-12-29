@@ -19,12 +19,12 @@ namespace Dal_Planilha
 
         public DataTable ObterCodigo(string Usuario)
         {
-                string queryString = "SELECT pl_codigo, pl_nivel FROM tbl_usuario WHERE pl_usuario = @Usuario;";
+                string queryString = "SELECT pl_codigo, pl_usuario, pl_nivel FROM tbl_usuario WHERE pl_email = @Email;";
 
                 using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
                 {
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@Usuario", Usuario);
+                command.Parameters.AddWithValue("@Email", Usuario);
                 command.Connection.Open();
 
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -41,7 +41,7 @@ namespace Dal_Planilha
 
         public DataTable ObterUsuarios()
         {
-            string queryString = "SELECT pl_codigo, pl_usuario, pl_senha, pl_nivel FROM tbl_usuario;";
+            string queryString = "SELECT pl_codigo, pl_usuario, pl_email, pl_senha, pl_nivel FROM tbl_usuario;";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
@@ -60,11 +60,12 @@ namespace Dal_Planilha
             }
         }
         
-        public void CadUsuario(string Nome, string Senha, int Nivel)
+        public void CadUsuario(string Nome, string Email, string Senha, int Nivel)
         {
-            MySqlCommand Usu = new MySqlCommand("INSERT INTO tbl_usuario(pl_usuario, pl_senha, pl_nivel) VALUES(@Nome, @Senha, @Nivel);");
+            MySqlCommand Usu = new MySqlCommand("INSERT INTO tbl_usuario(pl_usuario, pl_email, pl_senha, pl_nivel) VALUES(@Nome, @Email, @Senha, @Nivel);");
 
             Usu.Parameters.Add("@Nome", MySqlDbType.VarChar).Value = Nome;
+            Usu.Parameters.Add("@Email", MySqlDbType.VarChar).Value = Email;
             Usu.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = Senha;
             Usu.Parameters.Add("@Nivel", MySqlDbType.Int32).Value = Nivel;
 
@@ -79,7 +80,7 @@ namespace Dal_Planilha
 
         public DataTable BuscarUsuId(int Codigo)
         {
-            string queryString = "SELECT pl_codigo, pl_usuario, pl_senha, pl_nivel FROM tbl_usuario WHERE pl_codigo = @Codigo;";
+            string queryString = "SELECT pl_codigo, pl_usuario, pl_email, pl_senha, pl_nivel FROM tbl_usuario WHERE pl_codigo = @Codigo;";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
@@ -99,11 +100,12 @@ namespace Dal_Planilha
             }
         }
 
-        public void AlterarNome(int Codigo, string Usuario)
+        public void AlterarNomeEmail(int Codigo, string Usuario, string Email)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_usuario SET pl_usuario = @Usuario WHERE pl_codigo = @Codigo;");
+            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_usuario SET pl_usuario = @Usuario, pl_email = @Email WHERE pl_codigo = @Codigo;");
             cmd.Parameters.Add("@Codigo", MySqlDbType.Int32).Value = Codigo;
             cmd.Parameters.Add("@Usuario", MySqlDbType.VarChar).Value = Usuario;
+            cmd.Parameters.Add("@Email", MySqlDbType.VarChar).Value = Email;
 
             using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
             {
@@ -114,11 +116,12 @@ namespace Dal_Planilha
             }
         }
 
-        public void AlterarTudo(int Codigo, string Usuario, string Senha)
+        public void AlterarTudo(int Codigo, string Usuario, string Email, string Senha)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_usuario SET pl_usuario = @Usuario, pl_senha = @Senha WHERE pl_codigo = @Codigo;");
+            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_usuario SET pl_usuario = @Usuario, pl_email = @Email, pl_senha = @Senha WHERE pl_codigo = @Codigo;");
             cmd.Parameters.Add("@Codigo", MySqlDbType.Int32).Value = Codigo;
             cmd.Parameters.Add("@Usuario", MySqlDbType.VarChar).Value = Usuario;
+            cmd.Parameters.Add("@Email", MySqlDbType.VarChar).Value = Email;
             cmd.Parameters.Add("@Senha", MySqlDbType.VarChar).Value = Senha;
 
             using (MySqlConnection conn = new MySqlConnection(MysqlConn()))

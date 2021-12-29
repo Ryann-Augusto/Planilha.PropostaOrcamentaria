@@ -68,6 +68,7 @@ namespace md_Planilha
         //Tabela Usuario
         private int _codigoUsuario;
         private string _nomeUsuario;
+        private string _emailUsuario;
         private string _senhaUsuario;
         private string _confirmsenhaUsuario;
         private int _nivelUsuario;
@@ -368,6 +369,12 @@ namespace md_Planilha
         {
             get { return _nomeUsuario; }
             set { _nomeUsuario = value; }
+        }
+
+        public string EmailUsuario
+        {
+            get { return _emailUsuario; }
+            set { _emailUsuario = value; }
         }
 
         public string SenhaUsuario

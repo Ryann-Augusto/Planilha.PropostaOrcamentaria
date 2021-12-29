@@ -20,9 +20,9 @@ namespace Planilha1._0
             );
 
             routes.MapRoute(
-                "valores_adicionar",
-                "valores/{id}/adicionar",
-                new { controller = "Valores", action = "Adicionar", id = 0}
+                "valores_alterar",
+                "valores/{id}/alterar",
+                new { controller = "Valores", action = "Alterar", id = 0}
             );
 
             routes.MapRoute(

@@ -17,7 +17,7 @@ namespace Planilha1._0.Models
 
         public bool ValidarUsuario(string Login, string Senha)
         {
-            string queryString = "SELECT COUNT(1) FROM tbl_Usuario WHERE pl_usuario = @login AND pl_senha = @Senha";
+            string queryString = "SELECT COUNT(1) FROM tbl_Usuario WHERE pl_email = @login AND pl_senha = @Senha";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
@@ -32,14 +32,14 @@ namespace Planilha1._0.Models
             }
         }
 
-        public bool UsuarioExistente(string Nome)
+        public bool UsuarioExistente(string Email)
         {
-            string queryString = "SELECT COUNT(1) FROM tbl_Usuario WHERE pl_usuario = @login";
+            string queryString = "SELECT COUNT(1) FROM tbl_Usuario WHERE pl_email = @login";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@Login", Nome);
+                command.Parameters.AddWithValue("@Login", Email);
                 connection.Open();
 
                 var result = Convert.ToBoolean(command.ExecuteScalar());

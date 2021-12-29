@@ -27,21 +27,21 @@ namespace ControleEstoque.Web.Controllers
                 return View(login);
             }
 
-            var achou = new ValidaUsuario().ValidarUsuario(login.Usuario, login.Senha);
-            var usuario = mdUsuario.ObterCodigo(login.Usuario);
+            var achou = new ValidaUsuario().ValidarUsuario(login.Email, login.Senha);
+            var usuario = mdUsuario.ObterCodigo(login.Email);
+            Session["Usuario"] = usuario.NomeUsuario;
+            Session["Codigo"] = usuario.CodigoUsuario;
 
             if (achou)
             {
                 if (usuario.NivelUsuario == 2)
                 {
-                    FormsAuthentication.SetAuthCookie(login.Usuario, false);
-                    Session["Usuario"] = login.Usuario;
-                    Session["Codigo"] = usuario.CodigoUsuario;
+                    FormsAuthentication.SetAuthCookie(login.Email, false);
                     return Redirect("/home");
                 }
                 else if (usuario.NivelUsuario == 1)
                 {
-                    FormsAuthentication.SetAuthCookie(login.Usuario, false);
+                    FormsAuthentication.SetAuthCookie(login.Email, false);
                     return Redirect("/cadastrar");
                 }
             }
@@ -72,6 +72,7 @@ namespace ControleEstoque.Web.Controllers
         public void Cadastro()
         {
             var Nome = Request["nome"];
+            var Email = Request["email"];
             var Senha = Request["senha"];
             int Nivel = Convert.ToInt32(Request["cargo"]);
 
@@ -83,7 +84,7 @@ namespace ControleEstoque.Web.Controllers
             }
             else
             {
-                var Existente = new ValidaUsuario().UsuarioExistente(Nome);
+                var Existente = new ValidaUsuario().UsuarioExistente(Email);
                 if (Existente)
                 {
                     TempData["erro"] = "Atenção! Esse usuário já existe.";
@@ -94,13 +95,13 @@ namespace ControleEstoque.Web.Controllers
                     var Usuario = new mdUsuario();
                     if (Nivel == 1)
                     {
-                        Usuario.CadUsuario(Nome, Senha, Nivel);
+                        Usuario.CadUsuario(Nome, Email, Senha, Nivel);
                         TempData["sucesso"] = "Usuário cadastrado com sucesso.";
                         Response.Redirect("/conta/cadastrar");
                     }
                     else
                     {
-                        Usuario.CadUsuario(Nome, Senha, Nivel);
+                        Usuario.CadUsuario(Nome, Email, Senha, Nivel);
                         var Cod = mdUsuario.ObterCodigo(Nome);
                         Usuario.CriarTabelas(Cod.CodigoUsuario);
                         TempData["sucesso"] = "Usuário cadastrado com sucesso.";
@@ -123,6 +124,7 @@ namespace ControleEstoque.Web.Controllers
             var Alterar = new mdUsuario();
             var Usuario = new mdValores();
             Usuario.NomeUsuario = Request["nome"].ToString();
+            Usuario.EmailUsuario = Request["email"].ToString();
             Usuario.SenhaUsuario = Request["senha"].ToString();
             Usuario.ConfirmSenhaUsuario = Request["confirmsenha"].ToString();
 
@@ -133,7 +135,7 @@ namespace ControleEstoque.Web.Controllers
             }
             else if (Usuario.SenhaUsuario == string.Empty && Usuario.ConfirmSenhaUsuario == string.Empty)
             {
-                Alterar.AlterarNome(id, Usuario.NomeUsuario);
+                Alterar.AlterarNomeEmail(id, Usuario.NomeUsuario, Usuario.EmailUsuario);
                 TempData["sucesso"] = "Nome de usuário alterado com sucesso.";
                 Response.Redirect("/conta/cadastrar");
             }
@@ -144,7 +146,7 @@ namespace ControleEstoque.Web.Controllers
             }
             else
             {
-                Alterar.AlterarTudo(id, Usuario.NomeUsuario, Usuario.SenhaUsuario);
+                Alterar.AlterarTudo(id, Usuario.NomeUsuario, Usuario.SenhaUsuario, Usuario.EmailUsuario);
                 TempData["sucesso"] = "Nome e senha de usuário alterado com sucesso.";
                 Response.Redirect("/conta/cadastrar");
             }

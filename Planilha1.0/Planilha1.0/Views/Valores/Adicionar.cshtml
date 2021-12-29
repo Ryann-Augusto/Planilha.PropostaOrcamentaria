@@ -1,31 +1,19 @@
 ﻿
 @{
-    md_Planilha.mdValores mdValores = ViewBag.Valores;
-    ViewBag.Title = "Adcionar Valores";
+    ViewBag.Title = "Adicionar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="jumbotron">
-    <h3>Alterar Valores</h3>
-    <div>
-        <a class="btn btn-default" @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })</a>
+
+<h2>Adicionar Categoria</h2>
+
+<div class="container">
+    <div class="jumbotron">
+        <table>
+            <tr>
+                <th>Código</th>
+                <th>Categoria</th>
+            </tr>
+        </table>
     </div>
-    <form action="/valores/@mdValores.Codigo/modificar" method="post">
-
-        <div class="form-group">
-            <label for="Nome">Categoria:</label>
-            <input class="form-control" id="disabledInput" type="text" value="@mdValores.Categoria" disabled="">
-        </div>
-
-        <div class="form-group">
-            <label for="data">Proposta:</label>
-            <input maxlength="12" type="text" class="form-control valor" id="proposta" value="@mdValores.Proposta" name="proposta" onclick="this.focus();this.select()">
-        </div>
-
-        <div class="form-group">
-            <label for="data">Realizacao:</label>
-            <input maxlength="12" type="text" class="form-control valor" id="realizado" value="@mdValores.Realizado" name="realizado" onclick="this.focus();this.select()">
-        </div>
-
-        <button type="submit" class="btn btn-default">Alterar</button>
-    </form>
 </div>
 
