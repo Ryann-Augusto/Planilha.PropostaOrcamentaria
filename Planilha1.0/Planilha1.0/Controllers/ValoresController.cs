@@ -45,14 +45,56 @@ namespace Planilha1._0.Controllers
                 plValores.Proposta = decimal.Parse(Request["proposta"].Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
                 plValores.Realizado = decimal.Parse(Request["realizado"].Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
                 plValores.Mes = Session["Mes"].ToString();
-                plValores.alter(plValores.Mes, Convert.ToInt32(cod));
-                TempData["sucesso"] = "Pagina alterada com sucesso";
+                plValores.alterValues(plValores.Mes, Convert.ToInt32(cod));
+                TempData["sucesso"] = "Valores alterados com sucesso";
             }
-            catch(Exception err)
+            catch (Exception err)
             {
-                TempData["erro"] = "Pagina não pode alterada"+ err;
+                TempData["erro"] = "Os valores não pode alterada" + err;
             }
             Response.Redirect("/valores");
+        }
+        public ActionResult Categoria()
+        {
+            var valores = new mdValores();
+            var cod = Session["Codigo"];
+            ViewBag.categoria = valores.ListarCategorias(Convert.ToInt32(cod));
+            return View();
+        }
+
+        public ActionResult AlterarCategoria(int id)
+        {
+            var cod = Session["Codigo"];
+            ViewBag.alterarCategoria = mdValores.BuscaCategoriaPorId(id, Convert.ToInt32(cod));
+            return View();
+        }
+
+        public void ModificarCategoria(int id)
+        {
+            try
+            {
+                var categoria = Request["categoria"].ToString();
+                var cod = Session["Codigo"];
+                var valores = new mdValores();
+                valores.alterCategory(id, categoria, Convert.ToInt32(cod));
+                TempData["sucesso"] = "Categoria alterada com sucesso";
+            }
+            catch (Exception err)
+            {
+                TempData["erro"] = "Categoria não pode alterada" + err;
+            }
+            Response.Redirect("/valores/categoria");
+        }
+
+        public void AdicionarCategoria()
+        {
+            var valores = new mdValores();
+            var cod = Session["Codigo"];
+            var categoria = Request["categoria"];
+            valores.AdicionarCategoria(Convert.ToInt32(cod), categoria);
+            var CodigoCategoria = mdValores.CodigoCategoria(Convert.ToInt32(cod), categoria);
+            
+            Response.Redirect("/valores/categoria");
         }
     }
 }

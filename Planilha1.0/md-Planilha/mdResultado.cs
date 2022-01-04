@@ -10,34 +10,34 @@ namespace md_Planilha
     public class mdResultado
     {
         List<mdValores> lista = new List<mdValores>();
+        List<mdValores> lista2 = new List<mdValores>();
 
         public List<mdValores> Listarfaturamento(int Ano, int Cod)
         {
-            try
+
+            int[] categoria = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            foreach (int Cat in categoria)
             {
-                int[] categoria = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-                foreach (int Cat in categoria)
+                var planilhaDB = new Dal_Planilha.resultadoDal();
+                foreach (DataRow row2 in planilhaDB.ResultadoDois(Ano, Cat, Cod).Rows)
                 {
-                    var planilhaDB = new Dal_Planilha.resultadoDal();
-                    foreach (DataRow row in planilhaDB.Resultados(Ano, Cat, Cod).Rows)
+                    decimal FaturamentoProp = Convert.ToDecimal(row2["faturamento_PropDois"]);
+                    decimal FaturamentoReali = Convert.ToDecimal(row2["faturamento_RealiDois"]);
+                    foreach (DataRow row in planilhaDB.ResultadoUm(Ano, Cat, Cod).Rows)
                     {
+
                         var planilha = new mdValores();
                         planilha.Categoria = Convert.ToString(row["categoria"]);
-                        planilha.FaturamentoPropResult = Convert.ToDecimal(row["faturamento_Prop"]);
-                        planilha.FaturamentoRealiResult = Convert.ToDecimal(row["faturamento_Reali"]);
+                        planilha.FaturamentoPropResult = FaturamentoProp + Convert.ToDecimal(row["faturamento_PropUm"]);
+                        planilha.FaturamentoRealiResult = FaturamentoReali + Convert.ToDecimal(row["faturamento_RealiUm"]);
 
                         lista.Add(planilha);
 
                         new Dal_Planilha.resultadoDal().AlterarResultado(Ano, Cod, Cat, planilha.FaturamentoPropResult, planilha.FaturamentoRealiResult);
                     }
                 }
-                return lista;
             }
-            catch (Exception ez)
-            {
-                ez = new Exception("Não hà informações suficiente para montar a planilha!");
-                throw new Exception(ez.Message);
-            }
+            return lista;
         }
 
         public static mdValores TotalPropResultados(int Ano, int Cod)
@@ -133,20 +133,26 @@ namespace md_Planilha
             try
             {
                 var planilhaDB = new Dal_Planilha.resultadoDal();
-
-                int[] categoria = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-                foreach (int Cat in categoria)
+                var planilhaDB2 = new Dal_Planilha.ValoresDal();
+                foreach (DataRow row in planilhaDB2.CodigoDasCategorias(Cod).Rows)
                 {
-                    foreach (DataRow row in planilhaDB.contribuicaoDespesas(Ano, Cod, Cat).Rows)
+                    var planilha = new mdValores();
+                    planilha.Codigo = Convert.ToInt32(row["pl_codigo"]);
+                    lista.Add(planilha);
+                }
+
+                foreach (var Cat in lista.ToArray())
+                {
+                    foreach (DataRow row in planilhaDB.contribuicaoDespesas(Ano, Cod, Cat.Codigo).Rows)
                     {
                         var planilha = new mdValores();
                         planilha.ContribuicaoDespesas = Convert.ToDecimal(row["contribDespesas"]);
-                        lista.Add(planilha);
+                        lista2.Add(planilha);
 
-                        new Dal_Planilha.resultadoDal().AlterarContribDespesas(Ano, Cod, Cat, planilha.ContribuicaoDespesas);
+                        new Dal_Planilha.resultadoDal().AlterarContribDespesas(Ano, Cod, Cat.Codigo, planilha.ContribuicaoDespesas);
                     }
                 }
-                return lista;
+                return lista2;
             }
             catch (Exception ez)
             {

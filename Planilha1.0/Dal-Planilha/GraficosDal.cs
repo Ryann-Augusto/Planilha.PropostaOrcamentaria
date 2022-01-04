@@ -18,7 +18,7 @@ namespace Dal_Planilha
 
         public DataTable MontarGraficos(int Ano, int Cod, string Mes)
         {
-            string queryString = "SELECT pl_proposta AS proposta, pl_realizado AS realizado FROM " + Cod + Mes + " WHERE cod_categoria = 1";
+            string queryString = "SELECT pl_proposta AS proposta, pl_realizado AS realizado FROM " + Cod + Mes + " WHERE cod_categoria = 1 AND pl_ano = @Ano;";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {

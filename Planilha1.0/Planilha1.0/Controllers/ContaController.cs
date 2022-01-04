@@ -102,7 +102,7 @@ namespace ControleEstoque.Web.Controllers
                     else
                     {
                         Usuario.CadUsuario(Nome, Email, Senha, Nivel);
-                        var Cod = mdUsuario.ObterCodigo(Nome);
+                        var Cod = mdUsuario.ObterCodigo(Email);
                         Usuario.CriarTabelas(Cod.CodigoUsuario);
                         TempData["sucesso"] = "Usuário cadastrado com sucesso.";
                         Response.Redirect("/conta/cadastrar");

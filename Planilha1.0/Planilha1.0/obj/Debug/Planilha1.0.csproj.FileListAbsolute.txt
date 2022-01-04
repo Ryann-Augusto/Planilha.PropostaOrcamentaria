@@ -110,6 +110,6 @@ C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_PropostaOrçamentaria1.0\Planilh
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_PropostaOrçamentaria1.0\Planilha1.0\Planilha1.0\bin\pt-br\System.Web.WebPages.Razor.resources.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_PropostaOrçamentaria1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.csproj.AssemblyReference.cache
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_PropostaOrçamentaria1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.csproj.CoreCompileInputs.cache
+C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_PropostaOrçamentaria1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.csproj.CopyComplete
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_PropostaOrçamentaria1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.dll
 C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_PropostaOrçamentaria1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.pdb
-C:\Users\Notebook TI\Documents\Projetos_TBL\MVC_PropostaOrçamentaria1.0\Planilha1.0\Planilha1.0\obj\Debug\Planilha1.0.csproj.CopyComplete

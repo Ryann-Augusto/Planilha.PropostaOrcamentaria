@@ -53,12 +53,13 @@ namespace md_Planilha
 
         public void CriarTabelas(int Cod)
         {
+            new Dal_Planilha.CriarTabelaDal().CriarTabelas(Cod);
+
             string[] tabela = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro" };
             foreach (var tbl in tabela)
             {
                 new Dal_Planilha.CriarTabelaDal().CriarTabelaMeses(Cod, tbl);
             }
-            new Dal_Planilha.CriarTabelaDal().CriarTabelas(Cod);
         }
 
         public static mdValores BuscarUsuId(int Codigo)
@@ -79,7 +80,7 @@ namespace md_Planilha
 
         public void ApagarTabelas(int Cod)
         {
-            string[] tabela = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro", "tbl_resultado", "tbl_total", "tbl_totalmeses" };
+            string[] tabela = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho", "tbl_julho", "tbl_agosto", "tbl_setembro", "tbl_outubro", "tbl_novembro", "tbl_dezembro", "tbl_resultado", "tbl_total", "tbl_totalmeses", "tbl_categoria" };
             foreach (var tbl in tabela)
             {
                 new Dal_Planilha.CriarTabelaDal().ApagarTabela(Cod, tbl);

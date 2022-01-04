@@ -20,28 +20,22 @@ namespace Dal_Planilha
 
         public void ExisteAno(int Ano, int Cod)
         {
-            try
-            {
-                string queryString = "SELECT COUNT(1) FROM " + Cod + "tbl_Janeiro WHERE pl_ano = @Ano";
+            string queryString = "SELECT COUNT(1) FROM " + Cod + "tbl_Janeiro WHERE pl_ano = @Ano";
 
-                using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+                connection.Open();
+
+                int result = Convert.ToInt32(command.ExecuteScalar());
+
+                // Call Read before accessing data.
+                if (result != 0)
                 {
-                    MySqlCommand command = new MySqlCommand(queryString, connection);
-                    command.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
-                    connection.Open();
-
-                    int result = Convert.ToInt32(command.ExecuteScalar());
-
-                    // Call Read before accessing data.
-                    if (result != 0)
-                    {
-                        throw new Exception("Esse ano já existe");
-                    }
+                    throw new Exception("Esse ano já existe");
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
+                connection.Close();
             }
         }
 
@@ -116,11 +110,61 @@ namespace Dal_Planilha
             }
         }
 
-        public DataTable MontarPlanilha(int Ano, int Cod)
+        public DataTable MontarPlanilhaParteUm(int Ano, int Cod)
         {
-            string queryString = "SELECT cat.pl_categoria AS categoria, jan.pl_proposta AS jan_proposta, jan.pl_realizado AS jan_realizado, fev.pl_proposta AS fev_proposta, fev.pl_realizado AS fev_realizado, mar.pl_proposta AS mar_proposta, mar.pl_realizado AS mar_realizado, abr.pl_proposta AS abr_proposta, abr.pl_realizado AS abr_realizado, mai.pl_proposta AS mai_proposta, mai.pl_realizado AS mai_realizado, jun.pl_proposta AS jun_proposta, jun.pl_realizado AS jun_realizado, jul.pl_proposta AS jul_proposta, jul.pl_realizado AS jul_realizado, ago.pl_proposta AS ago_proposta, ago.pl_realizado AS ago_realizado, stb.pl_proposta AS set_proposta, stb.pl_realizado AS set_realizado, otb.pl_proposta AS out_proposta, otb.pl_realizado AS out_realizado, nov.pl_proposta AS nov_proposta, nov.pl_realizado AS nov_realizado, dez.pl_proposta AS dez_proposta, dez.pl_realizado AS dez_realizado " +
-                "FROM " + Cod + "tbl_janeiro AS jan INNER JOIN tbl_categoria cat ON cat.pl_codigo = jan.cod_categoria INNER JOIN " + Cod + "tbl_fevereiro fev ON jan.cod_categoria = fev.cod_categoria INNER JOIN " + Cod + "tbl_marco mar ON fev.cod_categoria = mar.cod_categoria INNER JOIN " + Cod + "tbl_abril abr ON mar.cod_categoria = abr.cod_categoria INNER JOIN " + Cod + "tbl_maio mai ON abr.cod_categoria = mai.cod_categoria INNER JOIN " + Cod + "tbl_junho jun ON mai.cod_categoria = jun.cod_categoria INNER JOIN " + Cod + "tbl_julho jul ON jun.cod_categoria = jul.cod_categoria INNER JOIN " + Cod + "tbl_agosto ago ON jul.cod_categoria = ago.cod_categoria INNER JOIN " + Cod + "tbl_setembro stb ON ago.cod_categoria = stb.cod_categoria INNER JOIN " + Cod + "tbl_outubro otb ON stb.cod_categoria = otb.cod_categoria INNER JOIN " + Cod + "tbl_novembro nov ON otb.cod_categoria = nov.cod_categoria INNER JOIN " + Cod + "tbl_dezembro dez ON nov.cod_categoria = dez.cod_categoria " +
-                "WHERE jan.pl_ano = @Ano and fev.pl_ano = @Ano and mar.pl_ano = @Ano and abr.pl_ano = @Ano and mai.pl_ano = @Ano and jun.pl_ano = @Ano and jul.pl_ano = @Ano and ago.pl_ano = @Ano and stb.pl_ano = @Ano and otb.pl_ano = @Ano and nov.pl_ano = @Ano and dez.pl_ano = @Ano ";
+            string queryString = "SELECT pl_categoria AS categoria, " +
+                "jan.pl_proposta AS jan_proposta, jan.pl_realizado AS jan_realizado, " +
+                "fev.pl_proposta AS fev_proposta, fev.pl_realizado AS fev_realizado, " +
+                "mar.pl_proposta AS mar_proposta, mar.pl_realizado AS mar_realizado, " +
+                "abr.pl_proposta AS abr_proposta, abr.pl_realizado AS abr_realizado, " +
+                "mai.pl_proposta AS mai_proposta, mai.pl_realizado AS mai_realizado, " +
+                "jun.pl_proposta AS jun_proposta, jun.pl_realizado AS jun_realizado " +
+                "FROM " + Cod + "tbl_categoria cat " +
+                "INNER JOIN " + Cod + "tbl_janeiro AS jan ON cat.pl_codigo = jan.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_fevereiro fev ON jan.cod_categoria = fev.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_marco mar ON fev.cod_categoria = mar.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_abril abr ON mar.cod_categoria = abr.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_maio mai ON abr.cod_categoria = mai.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_junho jun ON mai.cod_categoria = jun.cod_categoria " +
+                "WHERE jan.pl_ano = @Ano and fev.pl_ano = @Ano and mar.pl_ano = @Ano " +
+                "AND abr.pl_ano = @Ano and mai.pl_ano = @Ano and jun.pl_ano = @Ano ";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Ano", MySqlDbType.Int32).Value = Ano;
+                command.Connection.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = command;
+
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                command.Connection.Close();
+
+                return table;
+            }
+        }
+
+        public DataTable MontarPlanilhaParteDois(int Ano, int Cod)
+        {
+            string queryString = "SELECT pl_categoria AS categoria , " +
+                "jul.pl_proposta AS jul_proposta, jul.pl_realizado AS jul_realizado, " +
+                "ago.pl_proposta AS ago_proposta, ago.pl_realizado AS ago_realizado, " +
+                "stb.pl_proposta AS set_proposta, stb.pl_realizado AS set_realizado, " +
+                "otb.pl_proposta AS out_proposta, otb.pl_realizado AS out_realizado, " +
+                "nov.pl_proposta AS nov_proposta, nov.pl_realizado AS nov_realizado, " +
+                "dez.pl_proposta AS dez_proposta, dez.pl_realizado AS dez_realizado " +
+                "FROM " + Cod + "tbl_categoria cat " +
+                "INNER JOIN " + Cod + "tbl_julho jul ON cat.pl_codigo = jul.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_agosto ago ON jul.cod_categoria = ago.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_setembro stb ON ago.cod_categoria = stb.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_outubro otb ON stb.cod_categoria = otb.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_novembro nov ON otb.cod_categoria = nov.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_dezembro dez ON nov.cod_categoria = dez.cod_categoria " +
+                "WHERE jul.pl_ano = @Ano and ago.pl_ano = @Ano and stb.pl_ano = @Ano " +
+                "AND otb.pl_ano = @Ano and nov.pl_ano = @Ano and dez.pl_ano = @Ano ";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
@@ -142,31 +186,23 @@ namespace Dal_Planilha
 
         public DataTable ListarTotal(int Ano, int Cod, string Mes)
         {
-            try
+            string queryString = "SELECT sum(pl_proposta) AS jan_propTotal, sum(pl_realizado) AS jan_realiTotal FROM " + Cod + Mes + " WHERE pl_ano = @Ano AND cod_categoria NOT IN (1)";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
-                string queryString = "SELECT sum(pl_proposta) AS jan_propTotal, sum(pl_realizado) AS jan_realiTotal FROM " + Cod + Mes + " WHERE pl_ano = @Ano AND cod_categoria NOT IN (1)";
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Ano", MySqlDbType.Int32).Value = Ano;
+                command.Connection.Open();
 
-                using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
-                {
-                    MySqlCommand command = new MySqlCommand(queryString, connection);
-                    command.Parameters.AddWithValue("@Ano", MySqlDbType.Int32).Value = Ano;
-                    command.Connection.Open();
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = command;
 
-                    MySqlDataAdapter adapter = new MySqlDataAdapter();
-                    adapter.SelectCommand = command;
+                DataTable table = new DataTable();
+                adapter.Fill(table);
 
-                    DataTable table = new DataTable();
-                    adapter.Fill(table);
+                command.Connection.Close();
 
-                    command.Connection.Close();
-
-                    return table;
-                }
-            }
-            catch (Exception ez)
-            {
-                ez = new Exception("Não hà informações suficiente para montar a planilha!");
-                throw new Exception(ez.Message);
+                return table;
             }
         }
 

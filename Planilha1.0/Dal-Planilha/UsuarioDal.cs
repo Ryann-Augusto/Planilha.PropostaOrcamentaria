@@ -17,14 +17,14 @@ namespace Dal_Planilha
             return ConfigurationManager.AppSettings["MysqlConn"];
         }
 
-        public DataTable ObterCodigo(string Usuario)
+        public DataTable ObterCodigo(string Email)
         {
                 string queryString = "SELECT pl_codigo, pl_usuario, pl_nivel FROM tbl_usuario WHERE pl_email = @Email;";
 
                 using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
                 {
                 MySqlCommand command = new MySqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@Email", Usuario);
+                command.Parameters.AddWithValue("@Email", Email);
                 command.Connection.Open();
 
                 MySqlDataAdapter adapter = new MySqlDataAdapter();

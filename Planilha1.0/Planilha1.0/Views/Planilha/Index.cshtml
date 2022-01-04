@@ -1,6 +1,11 @@
 ﻿@{
-    List<md_Planilha.mdValores> mdjaneiro = ViewBag.planilhaGeral;
+    List<md_Planilha.mdValores> ParteUm = ViewBag.montarParteUm;
+    List<md_Planilha.mdValores> ParteDois = ViewBag.montarParteDois;
     List<md_Planilha.mdValores> valorTotal = ViewBag.valorTotal;
+    List<md_Planilha.mdValores> primeiroTotal = ViewBag.primeiroTotal;
+    List<md_Planilha.mdValores> segundoTotal = ViewBag.segundoTotal;
+    List<md_Planilha.mdValores> primeiroResultado = ViewBag.primeiroResultado;
+    List<md_Planilha.mdValores> segundoResultado = ViewBag.segundoResultado;
     List<md_Planilha.mdValores> FaturamentoResult = ViewBag.FaturamentoResult;
     List<md_Planilha.mdValores> sobre = ViewBag.sobre;
     List<md_Planilha.mdValores> resultado = ViewBag.resultadoTotal;
@@ -22,7 +27,7 @@
     <div class="col-md-6">
         <h2>@ViewBag.usuario @ViewBag.ano</h2>
     </div>
-    
+
     <div class="box">
         <div class="col-md-6">
             <a href="/planilha/impressao" class="btn btn-default fa fa-print fa-2x fa-border" target="_blank"></a>
@@ -32,17 +37,82 @@
         </div>
     </div>
     <div class="tabela">
-        <table class="table-round-corner table table-striped">
-            <thead>
-                <tr>
+        <table class ="table-round-corner table table-striped">
+            <tr>
+                <th style="text-align:center;" colspan="2">Categoria</th>
+                <th style="text-align:center;" colspan="2">Janeiro</th>
+                <th style="text-align:center;" colspan="2">Fevereiro</th>
+                <th style="text-align:center;" colspan="2">Março</th>
+                <th style="text-align:center;" colspan="2">Abril</th>
+                <th style="text-align:center;" colspan="2">Maio</th>
+                <th style="text-align:center;" colspan="2">Junho</th>
 
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+                <td>Proposta</td>
+                <td>Realizado</td>
+            </tr>
+            @foreach (var p in ParteUm)
+            {
+                a += 1;
+                <tr>
+                    <td>@a</td>
+                    <td>@p.Categoria</td>
+                    <td>@p.JanProposta.ToString("#,##0.00")</td>
+                    <td>@p.JanRealizado.ToString("#,##0.00")</td>
+                    <td>@p.FevProposta.ToString("#,##0.00")</td>
+                    <td>@p.FevRealizado.ToString("#,##0.00")</td>
+                    <td>@p.MarProposta.ToString("#,##0.00")</td>
+                    <td>@p.MarRealizado.ToString("#,##0.00")</td>
+                    <td>@p.AbrProposta.ToString("#,##0.00")</td>
+                    <td>@p.AbrRealizado.ToString("#,##0.00")</td>
+                    <td>@p.MaiProposta.ToString("#,##0.00")</td>
+                    <td>@p.MaiRealizado.ToString("#,##0.00")</td>
+                    <td>@p.JunProposta.ToString("#,##0.00")</td>
+                    <td>@p.JunRealizado.ToString("#,##0.00")</td>
+
+                </tr>
+            }
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td class="total">Total</td>
+                    @foreach (var t in primeiroTotal)
+                    {
+                        <td>@t.TotalProposta.ToString("#,##0.00")</td>
+                        <td>@t.TotalRealizado.ToString("#,##0.00")</td>
+                    }
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="total">Resultado</td>
+                    @foreach (var pr in primeiroResultado)
+                    {
+                        <td>@pr.TotalPropResultado.ToString("#,##0.00")</td>
+                        <td>@pr.TotalRealiResultado.ToString("#,##0.00")</td>
+                    }
+                </tr>
+            </tfoot>
+            </table>
+            <br />
+
+
+            @*Inicio da segunda parte da tabela*@
+            <table class="table-round-corner table table-striped">
+                <tr>
                     <th colspan="2">Categoria</th>
-                    <th colspan="2">Janeiro</th>
-                    <th colspan="2">Fevereiro</th>
-                    <th colspan="2">Março</th>
-                    <th colspan="2">Abril</th>
-                    <th colspan="2">Maio</th>
-                    <th colspan="2">Junho</th>
                     <th colspan="2">Julho</th>
                     <th colspan="2">Agosto</th>
                     <th colspan="2">Setembro</th>
@@ -51,19 +121,8 @@
                     <th colspan="2">Dezembro</th>
                 </tr>
                 <tr>
-                    <td colspan="2"></td>
-                    <td>Proposta</td>
-                    <td>Realizado</td>
-                    <td>Proposta</td>
-                    <td>Realizado</td>
-                    <td>Proposta</td>
-                    <td>Realizado</td>
-                    <td>Proposta</td>
-                    <td>Realizado</td>
-                    <td>Proposta</td>
-                    <td>Realizado</td>
-                    <td>Proposta</td>
-                    <td>Realizado</td>
+                    <td></td>
+                    <td></td>
                     <td>Proposta</td>
                     <td>Realizado</td>
                     <td>Proposta</td>
@@ -77,27 +136,12 @@
                     <td>Proposta</td>
                     <td>Realizado</td>
                 </tr>
-            </thead>
-            @try
-            {
-                foreach (var p in mdjaneiro)
+                @foreach (var p in ParteDois)
                 {
                     a += 1;
                     <tr>
                         <td>@a</td>
                         <td>@p.Categoria</td>
-                        <td>@p.JanProposta.ToString("#,##0.00")</td>
-                        <td>@p.JanRealizado.ToString("#,##0.00")</td>
-                        <td>@p.FevProposta.ToString("#,##0.00")</td>
-                        <td>@p.FevRealizado.ToString("#,##0.00")</td>
-                        <td>@p.MarProposta.ToString("#,##0.00")</td>
-                        <td>@p.MarRealizado.ToString("#,##0.00")</td>
-                        <td>@p.AbrProposta.ToString("#,##0.00")</td>
-                        <td>@p.AbrRealizado.ToString("#,##0.00")</td>
-                        <td>@p.MaiProposta.ToString("#,##0.00")</td>
-                        <td>@p.MaiRealizado.ToString("#,##0.00")</td>
-                        <td>@p.JunProposta.ToString("#,##0.00")</td>
-                        <td>@p.JunRealizado.ToString("#,##0.00")</td>
                         <td>@p.JulProposta.ToString("#,##0.00")</td>
                         <td>@p.JulRealizado.ToString("#,##0.00")</td>
                         <td>@p.AgoProposta.ToString("#,##0.00")</td>
@@ -112,135 +156,130 @@
                         <td>@p.DezRealizado.ToString("#,##0.00")</td>
                     </tr>
                 }
-            }
-            catch (Exception ez)
-            {
-                TempData["erro"] = ez.Message;
-            }
-            <tfoot id="totalResult">
-                <tr>
-                    <td colspan="2" class="total"><b>Total</b></td>
-                    @foreach (var t in valorTotal)
+                <tr class="rodape">
+                    <td></td>
+                    <td class="total">Total</td>
+                    @foreach (var t in segundoTotal)
                     {
                         <td>@t.TotalProposta.ToString("#,##0.00")</td>
                         <td>@t.TotalRealizado.ToString("#,##0.00")</td>
                     }
                 </tr>
                 <tr>
-                    <td colspan="2" class="total"><b>Resultado</b></td>
-                    @foreach (var r in resultado)
+                    <td></td>
+                    <td class="total">Resultado</td>
+                    @foreach (var sr in segundoResultado)
                     {
-                        <td>@r.TotalPropResultado.ToString("#,##0.00")</td>
-                        <td>@r.TotalRealiResultado.ToString("#,##0.00")</td>
+                        <td>@sr.TotalPropResultado.ToString("#,##0.00")</td>
+                        <td>@sr.TotalRealiResultado.ToString("#,##0.00")</td>
                     }
                 </tr>
+            </table>
+            <br />
 
-            </tfoot>
-        </table>
-        <br />
-        <div class="box">
-            <table class="table-striped">
-                <thead>
+            <div class="box">
+                <table class="table-striped">
+                    <thead>
+                        <tr>
+                            <th colspan="3">Resultado</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Proposta Total</td>
+                            <td>Realizado Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var fatR in FaturamentoResult)
+                        {
+                            <tr>
+                                <td>@fatR.Categoria</td>
+                                <td>@fatR.FaturamentoPropResult.ToString("#,##0.00") </td>
+                                <td>@fatR.FaturamentoRealiResult.ToString("#,##0.00")</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>Total: </td>
+                            <td>@propResult.PropResultado.ToString("#,##0.00")</td>
+                            <td>@realiResult.RealiResultado.ToString("#,##0.00")</td>
+                        </tr>
+                        <tr>
+                            <td>Resultado</td>
+                            <td>@propostaTabResultado.PropostaTabResultado.ToString("#,##0.00") </td>
+                            <td>@realizadoTabResultado.RealizadoTabResultado.ToString("#,##0.00") </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box">
+                <table class="table-striped">
                     <tr>
-                        <th colspan="3">Resultado</th>
+                        <th>&nbsp;</th>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td>Proposta Total</td>
-                        <td>Realizado Total</td>
+                        <td>% Sobre o Faturamento</td>
                     </tr>
-                </thead>
-                <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    @foreach (var sob in sobre)
 
-                    @foreach (var fatR in FaturamentoResult)
                     {
                         <tr>
-                            <td>@fatR.Categoria</td>
-                            <td>@fatR.FaturamentoPropResult.ToString("#,##0.00") </td>
-                            <td>@fatR.FaturamentoRealiResult.ToString("#,##0.00")</td>
+                            <td>@sob.SobreFaturamento.ToString("#,##0.00")%</td>
                         </tr>
                     }
                     <tr>
-                        <td>Total: </td>
-                        <td>@propResult.PropResultado.ToString("#,##0.00")</td>
-                        <td>@realiResult.RealiResultado.ToString("#,##0.00")</td>
+                        <td>@totalSobre.TotalSobreFaturamento.ToString("#,##0.00") %</td>
                     </tr>
                     <tr>
-                        <td>Resultado</td>
-                        <td>@propostaTabResultado.PropostaTabResultado.ToString("#,##0.00") </td>
-                        <td>@realizadoTabResultado.RealizadoTabResultado.ToString("#,##0.00") </td>
+                        <td>&nbsp;</td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="box">
-            <table class="table-striped">
-                <tr>
-                    <th>&nbsp;</th>
-                </tr>
-                <tr>
-                    <td>% Sobre o Faturamento</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                @foreach (var sob in sobre)
+                </table>
+            </div>
 
-                {
+            <div class="box">
+                <table class="table-striped">
                     <tr>
-                        <td>@sob.SobreFaturamento.ToString("#,##0.00")%</td>
+                        <th>&nbsp;</th>
                     </tr>
-                }
-                <tr>
-                    <td>@totalSobre.TotalSobreFaturamento.ToString("#,##0.00") %</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="box">
-            <table class="table-striped">
-                <tr>
-                    <th>&nbsp;</th>
-                </tr>
-                <tr>
-                    <td>% Contribuição Despesas</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                @foreach (var desp in contribDespesas)
-
-                {
                     <tr>
-                        <td>@desp.ContribuicaoDespesas.ToString("#,##0.00") %</td>
+                        <td>% Contribuição Despesas</td>
                     </tr>
-                }
-                <tr>
-                    <td>@totalDespesas.TotalContribDespesas.ToString("#,##0.00") %</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>
-        </div>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    @foreach (var desp in contribDespesas)
 
-        <div class="box">
-            <table class="table-striped">
-                <tr>
-                    <td>Meta Proposta</td>
-                    <td>Meta Realizada</td>
-                </tr>
-                <tr>
-                    <td>@metaProp.MetaProposta.ToString("#,##0.00") %</td>
-                    <td>@metaReali.MetaRealizada.ToString("#,##0.00") %</td>
-                </tr>
-            </table>
-        </div>
+                    {
+                        <tr>
+                            <td>@desp.ContribuicaoDespesas.ToString("#,##0.00") %</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>@totalDespesas.TotalContribDespesas.ToString("#,##0.00") %</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
 
-    </div>
+            <div class="box">
+                <table class="table-striped">
+                    <tr>
+                        <td>Meta Proposta</td>
+                        <td>Meta Realizada</td>
+                    </tr>
+                    <tr>
+                        <td>@metaProp.MetaProposta.ToString("#,##0.00") %</td>
+                        <td>@metaReali.MetaRealizada.ToString("#,##0.00") %</td>
+                    </tr>
+                </table>
+            </div>
+
+</div>
     <br />
     <br />
     <br />

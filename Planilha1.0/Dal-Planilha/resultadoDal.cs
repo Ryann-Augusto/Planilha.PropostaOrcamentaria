@@ -15,12 +15,50 @@ namespace Dal_Planilha
         {
             return ConfigurationManager.AppSettings["MysqlConn"];
         }
-        public DataTable Resultados(int Ano, int Cat, int Cod)
+        public DataTable ResultadoUm(int Ano, int Cat, int Cod)
         {
-            string queryString = "SELECT cat.pl_categoria AS categoria, sum(jan.pl_proposta) + fev.pl_proposta + mar.pl_proposta + abr.pl_proposta + mai.pl_proposta + jun.pl_proposta + jul.pl_proposta + jul.pl_proposta + ago.pl_proposta + stb.pl_proposta + otb.pl_proposta + nov.pl_proposta + dez.pl_proposta AS faturamento_Prop, " +
-                "sum(jan.pl_realizado) +fev.pl_realizado + mar.pl_realizado + abr.pl_realizado + mai.pl_realizado + jun.pl_realizado + jul.pl_realizado + jul.pl_realizado + ago.pl_realizado + stb.pl_realizado + otb.pl_realizado + nov.pl_realizado + dez.pl_realizado AS faturamento_Reali " +
+            string queryString = "SELECT cat.pl_categoria AS categoria, sum(jan.pl_proposta) + fev.pl_proposta + mar.pl_proposta + abr.pl_proposta + mai.pl_proposta + jun.pl_proposta AS faturamento_PropUm, " +
+                "sum(jan.pl_realizado) + fev.pl_realizado + mar.pl_realizado + abr.pl_realizado + mai.pl_realizado + jun.pl_realizado AS faturamento_RealiUm " +
                 "FROM " + Cod + "tbl_janeiro jan " +
-                "INNER JOIN tbl_categoria cat ON cat.pl_codigo = jan.cod_categoria INNER JOIN " + Cod + "tbl_fevereiro fev ON jan.cod_categoria = fev.cod_categoria AND jan.pl_ano = fev.pl_ano INNER JOIN " + Cod + "tbl_marco mar ON fev.cod_categoria = mar.cod_categoria AND fev.pl_ano = mar.pl_ano INNER JOIN " + Cod + "tbl_abril abr ON mar.cod_categoria = abr.cod_categoria AND mar.pl_ano = abr.pl_ano INNER JOIN " + Cod + "tbl_maio mai ON abr.cod_categoria = mai.cod_categoria AND abr.pl_ano = mai.pl_ano INNER JOIN " + Cod + "tbl_junho jun ON mai.cod_categoria = jun.cod_categoria AND mai.pl_ano = jun.pl_ano INNER JOIN " + Cod + "tbl_julho jul ON jun.cod_categoria = jul.cod_categoria AND jun.pl_ano = jul.pl_ano INNER JOIN " + Cod + "tbl_agosto ago ON jul.cod_categoria = ago.cod_categoria AND jul.pl_ano = ago.pl_ano INNER JOIN " + Cod + "tbl_setembro stb ON ago.cod_categoria = stb.cod_categoria AND ago.pl_ano = stb.pl_ano INNER JOIN " + Cod + "tbl_outubro otb ON stb.cod_categoria = otb.cod_categoria AND stb.pl_ano = otb.pl_ano INNER JOIN " + Cod + "tbl_novembro nov ON otb.cod_categoria = nov.cod_categoria AND otb.pl_ano = nov.pl_ano INNER JOIN " + Cod + "tbl_dezembro dez ON nov.cod_categoria = dez.cod_categoria AND nov.pl_ano = dez.pl_ano WHERE jan.pl_ano = @Ano AND cat.pl_codigo = @Cat";
+                "INNER JOIN " + Cod + "tbl_categoria cat ON cat.pl_codigo = jan.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_fevereiro fev ON jan.cod_categoria = fev.cod_categoria AND jan.pl_ano = fev.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_marco mar ON fev.cod_categoria = mar.cod_categoria AND fev.pl_ano = mar.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_abril abr ON mar.cod_categoria = abr.cod_categoria AND mar.pl_ano = abr.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_maio mai ON abr.cod_categoria = mai.cod_categoria AND abr.pl_ano = mai.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_junho jun ON mai.cod_categoria = jun.cod_categoria AND mai.pl_ano = jun.pl_ano " +
+                "WHERE jan.pl_ano = @Ano AND cat.pl_codigo = @Cat";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand cmd = new MySqlCommand(queryString, connection);
+                cmd.Parameters.Add("@Ano", MySqlDbType.Decimal).Value = Ano;
+                cmd.Parameters.Add("@Cat", MySqlDbType.VarChar).Value = Cat;
+                connection.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = cmd;
+
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                connection.Close();
+
+                return table;
+            }
+        }
+
+        public DataTable ResultadoDois(int Ano, int Cat, int Cod)
+        {
+            string queryString = "SELECT sum(jul.pl_proposta) + jul.pl_proposta + ago.pl_proposta + stb.pl_proposta + otb.pl_proposta + nov.pl_proposta + dez.pl_proposta AS faturamento_PropDois, " +
+                "jul.pl_realizado + ago.pl_realizado + stb.pl_realizado + otb.pl_realizado + nov.pl_realizado + dez.pl_realizado AS faturamento_RealiDois " +
+                "FROM " + Cod + "tbl_julho jul " +
+                "INNER JOIN " + Cod + "tbl_categoria cat ON cat.pl_codigo = jul.cod_categoria " +
+                "INNER JOIN " + Cod + "tbl_agosto ago ON jul.cod_categoria = ago.cod_categoria AND jul.pl_ano = ago.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_setembro stb ON ago.cod_categoria = stb.cod_categoria AND ago.pl_ano = stb.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_outubro otb ON stb.cod_categoria = otb.cod_categoria AND stb.pl_ano = otb.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_novembro nov ON otb.cod_categoria = nov.cod_categoria AND otb.pl_ano = nov.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_dezembro dez ON nov.cod_categoria = dez.cod_categoria AND nov.pl_ano = dez.pl_ano " +
+                "WHERE jul.pl_ano = @Ano AND cat.pl_codigo = @Cat";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
@@ -230,7 +268,7 @@ namespace Dal_Planilha
 
         public DataTable totalContribDespesas(int Ano, int Cod)
         {
-            string queryString = "SELECT sum(pl_contrib_Despesas) AS totalContribDespesas FROM " + Cod + "tbl_resultado WHERE pl_ano = @Ano ";
+            string queryString = "SELECT sum(pl_contrib_Despesas) AS totalContribDespesas FROM " + Cod + "tbl_resultado WHERE pl_ano = @Ano AND pl_codigo NOT IN (1); ";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
@@ -350,7 +388,7 @@ namespace Dal_Planilha
         public DataTable MetaProposta(int Ano, int Cod)
         {
             string queryString = "SELECT sum(pl_propostaTabResultado / pl_propResultado * 100 ) as Meta_Proposta FROM " + Cod + "tbl_total tot " +
-                "INNER JOIN "+Cod+"tbl_resultado res ON tot.pl_ano = res.pl_ano " +
+                "INNER JOIN " + Cod + "tbl_resultado res ON tot.pl_ano = res.pl_ano " +
                 "WHERE tot.pl_ano = @Ano AND res.cod_categoria = 1; ";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))

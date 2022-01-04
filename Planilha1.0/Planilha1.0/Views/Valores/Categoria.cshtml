@@ -1,0 +1,60 @@
+﻿
+@{
+    List<md_Planilha.mdValores> categoria = ViewBag.categoria;
+    ViewBag.Title = "Adicionar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["sucesso"] != null)
+{
+    <div class="alert alert-success">@TempData["sucesso"]</div>
+}
+@if (TempData["erro"] != null)
+{
+    <div class="alert alert-danger">@TempData["erro"]</div>
+}
+
+<h2>Categorias</h2>
+
+
+<div class="container">
+    <div class="jumbotron">
+        <form action="/valores/adicionarcategoria">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Categoria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cat in categoria)
+                    {
+                        <tr>
+                            <td>@cat.Codigo</td>
+                            <td>@cat.Categoria</td>
+                            <td>
+                                <a class="btn btn-primary" href="/valores/@cat.Codigo/alterarcategoria">Alterar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <label class="fa fa-plus-circle"></label>
+                        </td>
+
+                        <td>
+                            <input type="text" name="categoria" class="form-control" id="categoria" />
+                        </td>
+                        <td>
+                            <button class="btn btn-success">Salvar</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
+    </div>
+</div>
+

@@ -247,7 +247,8 @@
     <Content Include="Views\Conta\Editar.cshtml" />
     <Content Include="Views\Shared\_LayoutAdm.cshtml" />
     <Content Include="Views\Planilha\Graficos.cshtml" />
-    <Content Include="Views\Valores\Adicionar.cshtml" />
+    <Content Include="Views\Valores\Categoria.cshtml" />
+    <Content Include="Views\Valores\AlterarCategoria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

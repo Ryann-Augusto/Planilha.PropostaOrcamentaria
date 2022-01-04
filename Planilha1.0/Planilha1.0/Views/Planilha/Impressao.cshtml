@@ -1,5 +1,6 @@
 ﻿@{
-    List<md_Planilha.mdValores> mdValores = ViewBag.planilhaGeral;
+    List<md_Planilha.mdValores> ParteUm = ViewBag.montarParteUm;
+    List<md_Planilha.mdValores> ParteDois = ViewBag.montarParteDois;
     List<md_Planilha.mdValores> primeiroTotal = ViewBag.primeiroTotal;
     List<md_Planilha.mdValores> segundoTotal = ViewBag.segundoTotal;
     List<md_Planilha.mdValores> FaturamentoResult = ViewBag.FaturamentoResult;
@@ -52,7 +53,7 @@
                     <td>Proposta</td>
                     <td>Realizado</td>
                 </tr>
-                @foreach (var p in mdValores)
+                @foreach (var p in ParteUm)
                 {
                     a += 1;
                     <tr>
@@ -123,7 +124,7 @@
                     <td>Proposta</td>
                     <td>Realizado</td>
                 </tr>
-                @foreach (var p in mdValores)
+                @foreach (var p in ParteDois)
                 {
                     a += 1;
                     <tr>

@@ -32,6 +32,30 @@ namespace Planilha1._0
             );
 
             routes.MapRoute(
+                "valores_categoria",
+                "valores/categoria",
+                new { controller = "Valores", action = "Categoria" }
+            );
+
+            routes.MapRoute(
+                "valores_alterarcategoria",
+                "valores/{id}/alterarcategoria",
+                new { controller = "Valores", action = "AlterarCategoria", id = 0 }
+            );
+
+            routes.MapRoute(
+                "valores_modificarcategoria",
+                "valores/{id}/modificarCategoria",
+                new { controller = "Valores", action = "ModificarCategoria", id = 0 }
+            );
+
+            routes.MapRoute(
+                "valores_adicionarcategoria",
+                "valores/adicionarcategoria",
+                new { controller = "Valores", action = "AdicionarCategoria" }
+            );
+
+            routes.MapRoute(
                 "home_criar",
                 "home/criar",
                 new { controller = "Home", action = "Criar" }
