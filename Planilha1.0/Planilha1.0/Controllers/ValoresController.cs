@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using md_Planilha;
+using Planilha1._0.Models;
 
 namespace Planilha1._0.Controllers
 {
@@ -48,9 +49,9 @@ namespace Planilha1._0.Controllers
                 plValores.alterValues(plValores.Mes, Convert.ToInt32(cod));
                 TempData["sucesso"] = "Valores alterados com sucesso";
             }
-            catch (Exception err)
+            catch
             {
-                TempData["erro"] = "Os valores não pode alterada" + err;
+                TempData["erro"] = "Os valores não foram alterados";
             }
             Response.Redirect("/valores");
         }
@@ -76,24 +77,74 @@ namespace Planilha1._0.Controllers
                 var categoria = Request["categoria"].ToString();
                 var cod = Session["Codigo"];
                 var valores = new mdValores();
-                valores.alterCategory(id, categoria, Convert.ToInt32(cod));
-                TempData["sucesso"] = "Categoria alterada com sucesso";
+
+                if (categoria.Trim().Length == 0)
+                {
+                    TempData["erro"] = "Insira um valor para a categoria";
+                }
+                else
+                {
+                    valores.alterCategory(id, categoria, Convert.ToInt32(cod));
+                    TempData["sucesso"] = "Categoria alterada com sucesso";
+                }
             }
-            catch (Exception err)
+            catch
             {
-                TempData["erro"] = "Categoria não pode alterada" + err;
+                TempData["erro"] = "Categoria não foi alterada";
             }
             Response.Redirect("/valores/categoria");
         }
 
         public void AdicionarCategoria()
         {
-            var valores = new mdValores();
-            var cod = Session["Codigo"];
-            var categoria = Request["categoria"];
-            valores.AdicionarCategoria(Convert.ToInt32(cod), categoria);
-            var CodigoCategoria = mdValores.CodigoCategoria(Convert.ToInt32(cod), categoria);
-            
+            try
+            {
+                var valores = new mdValores();
+                var cod = Session["Codigo"];
+                var categoria = Request["categoria"];
+
+                if (categoria.Trim().Length == 0)
+                {
+                    TempData["erro"] = "Insira um valor para a categoria";
+                }
+                else
+                {
+                    valores.AdicionarCategoria(Convert.ToInt32(cod), categoria);
+                    var CodigoCategoria = mdValores.CodigoCategoria(Convert.ToInt32(cod), categoria);
+
+                    int[] Anos = { 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028 };
+                    foreach (var Ano in Anos)
+                    {
+                        var achou = new ValidaCategoria().ProcurarCategoria(Convert.ToInt32(cod), Ano);
+                        if (achou)
+                        {
+                            valores.AdicionarCategoriaNaPlanilha(Ano, Convert.ToInt32(cod), CodigoCategoria.Codigo);
+                        }
+                    }
+                    TempData["sucesso"] = "Categoria adicionada com sucesso";
+                }
+            }
+            catch
+            {
+                TempData["erro"] = "Categoria não foi adicionada";
+            }
+
+            Response.Redirect("/valores/categoria");
+        }
+
+        public void DeletarCategoria(int id)
+        {
+            try
+            {
+                var cod = Convert.ToInt32(Session["Codigo"]);
+                var valores = new mdValores();
+                valores.DeletarCategoria(cod, id);
+                TempData["sucesso"] = "Categoria excluida!!";
+            }
+            catch
+            {
+                TempData["erro"] = "Categoria não pode ser excluida";
+            }
             Response.Redirect("/valores/categoria");
         }
     }

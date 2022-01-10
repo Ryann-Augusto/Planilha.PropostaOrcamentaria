@@ -1,7 +1,7 @@
 ﻿
 @{
     List<md_Planilha.mdValores> categoria = ViewBag.categoria;
-    ViewBag.Title = "Adicionar";
+    ViewBag.Title = "Categorias";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -30,13 +30,16 @@
                 <tbody>
                     @foreach (var cat in categoria)
                     {
-                        <tr>
-                            <td>@cat.Codigo</td>
-                            <td>@cat.Categoria</td>
-                            <td>
-                                <a class="btn btn-primary" href="/valores/@cat.Codigo/alterarcategoria">Alterar</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@cat.Codigo</td>
+                        <td>@cat.Categoria</td>
+                        <td>
+                            <a style="font-size:15px" class="btn btn-primary fa fa-pencil" href="/valores/@cat.Codigo/alterarcategoria"><span style="font-family:Arial"> <b>Alterar</b></span></a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger fa fa-trash" style="font-size:15px;" href="/valores/@cat.Codigo/deletarcategoria" onclick="ValidaExclusaoCategoria(@cat.Codigo, event);"><span style="font-family:Arial"> <b>Excluir</b></span></a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
                 <tfoot>
@@ -49,7 +52,7 @@
                             <input type="text" name="categoria" class="form-control" id="categoria" />
                         </td>
                         <td>
-                            <button class="btn btn-success">Salvar</button>
+                            <button style="font-size:16px;" class="btn btn-success fa fa-save"><span style="font-family:Arial;"><b> Salvar</b></span></button>
                         </td>
                     </tr>
                 </tfoot>

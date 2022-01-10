@@ -14,30 +14,36 @@ namespace Planilha1._0.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewBag.usuario = Session["Usuario"];
-            ViewBag.ano = Session["Ano"];
-            var valores = new mdValores();
-            var cod = Session["Codigo"];
-            var ano = Session["Ano"].ToString();
-            valores.Ano = int.Parse(ano);
-            ViewBag.montarParteUm = new mdValores().ParteUmMontarPlanilha(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.montarParteDois = new mdValores().ParteDoisMontarPlanilha(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.primeiroTotal = new mdValores().PrimeiroTotal(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.segundoTotal = new mdValores().SegundoTotal(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.primeiroResultado = new mdValores().PrimeiroResultado(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.segundoResultado = new mdValores().SegundoResultado(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.FaturamentoResult = new mdResultado().Listarfaturamento(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.sobre = new mdResultado().sobreFaturamento(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.propResultado = mdResultado.TotalPropResultados(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.realiResultado = mdResultado.TotalRealiResultados(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.totalSobre = mdResultado.TotalSobreFaturamento(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.despesas = new mdResultado().contribDespesas(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.totaldespesas = mdResultado.TotalContribDespesas(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.propostaTabResultado = mdResultado.PropostaTabResultado(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.realizadoTabResultado = mdResultado.RealizadoTabResultado(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.metaProposta = mdResultado.MetaProposta(valores.Ano, Convert.ToInt32(cod));
-            ViewBag.metaRealizada = mdResultado.MetaRealizada(valores.Ano, Convert.ToInt32(cod));
-
+            try
+            {
+                ViewBag.usuario = Session["Usuario"];
+                ViewBag.ano = Session["Ano"];
+                var valores = new mdValores();
+                var cod = Session["Codigo"];
+                var ano = Session["Ano"].ToString();
+                valores.Ano = int.Parse(ano);
+                ViewBag.montarParteUm = new mdValores().ParteUmMontarPlanilha(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.montarParteDois = new mdValores().ParteDoisMontarPlanilha(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.primeiroTotal = new mdValores().PrimeiroTotal(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.segundoTotal = new mdValores().SegundoTotal(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.primeiroResultado = new mdValores().PrimeiroResultado(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.segundoResultado = new mdValores().SegundoResultado(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.FaturamentoResult = new mdResultado().Listarfaturamento(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.sobre = new mdResultado().sobreFaturamento(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.propResultado = mdResultado.TotalPropResultados(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.realiResultado = mdResultado.TotalRealiResultados(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.totalSobre = mdResultado.TotalSobreFaturamento(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.despesas = new mdResultado().contribDespesas(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.totaldespesas = mdResultado.TotalContribDespesas(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.propostaTabResultado = mdResultado.PropostaTabResultado(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.realizadoTabResultado = mdResultado.RealizadoTabResultado(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.metaProposta = mdResultado.MetaProposta(valores.Ano, Convert.ToInt32(cod));
+                ViewBag.metaRealizada = mdResultado.MetaRealizada(valores.Ano, Convert.ToInt32(cod));
+            }
+            catch (Exception ez)
+            {
+                TempData["erro"] = ez.Message;
+            }
             return View();
         }
 
@@ -73,7 +79,7 @@ namespace Planilha1._0.Controllers
             }
             catch (Exception ez)
             {
-                TempData["erro"] = ez.Message;
+                TempData["erro"] = ez.ToString();
                 Response.Redirect("/planilha");
                 return View();
             }
@@ -102,6 +108,23 @@ namespace Planilha1._0.Controllers
             ViewBag.Prop = proposta;
             ViewBag.Reali = realizado;
             return View();
+        }
+
+        public void ExcluirPlanilha()
+        {
+            //try
+            //{
+            var ano = Convert.ToInt32(Session["ano"]);
+            var Cod = Convert.ToInt32(Session["codigo"]);
+            var valores = new mdValores();
+            valores.ExcluirPlanilha(Cod, ano);
+            TempData["sucesso"] = "Planilha excluida com sucesso!";
+            //}
+            //catch (Exception err)
+            //{
+            //    TempData["erro"] = "Planilha não pode ser excluida!" + err;
+            //}
+            Response.Redirect("/home");
         }
     }
 }

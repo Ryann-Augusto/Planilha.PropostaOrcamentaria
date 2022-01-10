@@ -39,11 +39,23 @@ namespace Planilha1._0.Controllers
             try
             {
                 var valores = new mdValores();
-                var cod = Session["Codigo"];
+                var cod = Convert.ToInt32(Session["Codigo"]);
                 valores.Ano = Convert.ToInt32(Request["ano"]);
-                valores.ExisteAno(valores.Ano, Convert.ToInt32(cod));
-                valores.NovaPlanilha(valores.Ano, Convert.ToInt32(cod));
-                TempData["sucesso"] = "Planilha Criada com Sucesso!";
+                if (cod == 0)
+                {
+                    TempData["erro"] = "Sessão encerrada";
+                    Response.Redirect("/conta/login");
+                }
+                else if (valores.Ano == 0)
+                {
+                    TempData["erro"] = "Insira um Ano";
+                }
+                else
+                {
+                    valores.ExisteAno(valores.Ano, Convert.ToInt32(cod));
+                    valores.NovaPlanilha(valores.Ano, Convert.ToInt32(cod));
+                    TempData["sucesso"] = "Planilha Criada com Sucesso!";
+                }
             }
             catch(Exception ex)
             {
@@ -61,7 +73,7 @@ namespace Planilha1._0.Controllers
 
                 if (Ano == 0)
                 {
-                    throw new Exception("Insira o Ano!");
+                    throw new Exception("Insira um Ano!");
                 }
                 Session["Ano"] = Ano;
                 Response.Redirect("/planilha");
@@ -74,6 +86,7 @@ namespace Planilha1._0.Controllers
                 TempData["erro"] = ez.Message;
             }
         }
+
         [Authorize]
         public ActionResult About()
         {

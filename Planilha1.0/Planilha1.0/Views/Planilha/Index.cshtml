@@ -20,91 +20,105 @@
     md_Planilha.mdValores metaReali = ViewBag.metaRealizada;
     ViewBag.Title = "Planilha";
     var a = 0;
+    var b = 0;
     Layout = "~/Views/Shared/_Render.cshtml";
+
+
+
 }
 
-<div class="container">
-    <div class="col-md-6">
-        <h2>@ViewBag.usuario @ViewBag.ano</h2>
-    </div>
+@if (primeiroTotal == null || segundoTotal == null || propResult == null || totalSobre == null)
+{
+    TempData["erro"] = "Não hà informações suficiente para montar a planilha ou esse ano não foi criado!";
+    Response.Redirect("/home");
+}
+else
+{
 
-    <div class="box">
+
+
+    <div class="container">
         <div class="col-md-6">
-            <a href="/planilha/impressao" class="btn btn-default fa fa-print fa-2x fa-border" target="_blank"></a>
+            <h2>@ViewBag.usuario @ViewBag.ano</h2>
         </div>
-        <div class="col-md-6">
-            <a href="/planilha/graficos" class="btn btn-default fa fa-bar-chart fa-2x fa-border" target="_blank"></a>
+
+        <div class="box">
+            <div class="col-md-6">
+                <a href="/planilha/impressao" class="btn btn-default fa fa-print fa-2x fa-border" target="_blank"></a>
+            </div>
+            <div class="col-md-6">
+                <a href="/planilha/graficos" class="btn btn-default fa fa-bar-chart fa-2x fa-border" target="_blank"></a>
+            </div>
         </div>
-    </div>
-    <div class="tabela">
-        <table class ="table-round-corner table table-striped">
-            <tr>
-                <th style="text-align:center;" colspan="2">Categoria</th>
-                <th style="text-align:center;" colspan="2">Janeiro</th>
-                <th style="text-align:center;" colspan="2">Fevereiro</th>
-                <th style="text-align:center;" colspan="2">Março</th>
-                <th style="text-align:center;" colspan="2">Abril</th>
-                <th style="text-align:center;" colspan="2">Maio</th>
-                <th style="text-align:center;" colspan="2">Junho</th>
-
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>Proposta</td>
-                <td>Realizado</td>
-                <td>Proposta</td>
-                <td>Realizado</td>
-                <td>Proposta</td>
-                <td>Realizado</td>
-                <td>Proposta</td>
-                <td>Realizado</td>
-                <td>Proposta</td>
-                <td>Realizado</td>
-                <td>Proposta</td>
-                <td>Realizado</td>
-            </tr>
-            @foreach (var p in ParteUm)
-            {
-                a += 1;
+        <div class="tabela">
+            <table class="table-round-corner table table-striped">
                 <tr>
-                    <td>@a</td>
-                    <td>@p.Categoria</td>
-                    <td>@p.JanProposta.ToString("#,##0.00")</td>
-                    <td>@p.JanRealizado.ToString("#,##0.00")</td>
-                    <td>@p.FevProposta.ToString("#,##0.00")</td>
-                    <td>@p.FevRealizado.ToString("#,##0.00")</td>
-                    <td>@p.MarProposta.ToString("#,##0.00")</td>
-                    <td>@p.MarRealizado.ToString("#,##0.00")</td>
-                    <td>@p.AbrProposta.ToString("#,##0.00")</td>
-                    <td>@p.AbrRealizado.ToString("#,##0.00")</td>
-                    <td>@p.MaiProposta.ToString("#,##0.00")</td>
-                    <td>@p.MaiRealizado.ToString("#,##0.00")</td>
-                    <td>@p.JunProposta.ToString("#,##0.00")</td>
-                    <td>@p.JunRealizado.ToString("#,##0.00")</td>
+                    <th style="text-align:center;" colspan="2">Categoria</th>
+                    <th style="text-align:center;" colspan="2">Janeiro</th>
+                    <th style="text-align:center;" colspan="2">Fevereiro</th>
+                    <th style="text-align:center;" colspan="2">Março</th>
+                    <th style="text-align:center;" colspan="2">Abril</th>
+                    <th style="text-align:center;" colspan="2">Maio</th>
+                    <th style="text-align:center;" colspan="2">Junho</th>
 
-                </tr>
-            }
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td class="total">Total</td>
-                    @foreach (var t in primeiroTotal)
-                    {
-                        <td>@t.TotalProposta.ToString("#,##0.00")</td>
-                        <td>@t.TotalRealizado.ToString("#,##0.00")</td>
-                    }
                 </tr>
                 <tr>
                     <td></td>
-                    <td class="total">Resultado</td>
-                    @foreach (var pr in primeiroResultado)
-                    {
-                        <td>@pr.TotalPropResultado.ToString("#,##0.00")</td>
-                        <td>@pr.TotalRealiResultado.ToString("#,##0.00")</td>
-                    }
+                    <td></td>
+                    <td>Proposta</td>
+                    <td>Realizado</td>
+                    <td>Proposta</td>
+                    <td>Realizado</td>
+                    <td>Proposta</td>
+                    <td>Realizado</td>
+                    <td>Proposta</td>
+                    <td>Realizado</td>
+                    <td>Proposta</td>
+                    <td>Realizado</td>
+                    <td>Proposta</td>
+                    <td>Realizado</td>
                 </tr>
-            </tfoot>
+                @foreach (var p in ParteUm)
+                {
+                    a += 1;
+                    <tr>
+                        <td>@a</td>
+                        <td>@p.Categoria</td>
+                        <td>@p.JanProposta.ToString("#,##0.00")</td>
+                        <td>@p.JanRealizado.ToString("#,##0.00")</td>
+                        <td>@p.FevProposta.ToString("#,##0.00")</td>
+                        <td>@p.FevRealizado.ToString("#,##0.00")</td>
+                        <td>@p.MarProposta.ToString("#,##0.00")</td>
+                        <td>@p.MarRealizado.ToString("#,##0.00")</td>
+                        <td>@p.AbrProposta.ToString("#,##0.00")</td>
+                        <td>@p.AbrRealizado.ToString("#,##0.00")</td>
+                        <td>@p.MaiProposta.ToString("#,##0.00")</td>
+                        <td>@p.MaiRealizado.ToString("#,##0.00")</td>
+                        <td>@p.JunProposta.ToString("#,##0.00")</td>
+                        <td>@p.JunRealizado.ToString("#,##0.00")</td>
+
+                    </tr>
+                }
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td class="total">Total</td>
+                        @foreach (var t in primeiroTotal)
+                        {
+                            <td>@t.TotalProposta.ToString("#,##0.00")</td>
+                            <td>@t.TotalRealizado.ToString("#,##0.00")</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="total">Resultado</td>
+                        @foreach (var pr in primeiroResultado)
+                        {
+                            <td>@pr.TotalPropResultado.ToString("#,##0.00")</td>
+                            <td>@pr.TotalRealiResultado.ToString("#,##0.00")</td>
+                        }
+                    </tr>
+                </tfoot>
             </table>
             <br />
 
@@ -138,9 +152,9 @@
                 </tr>
                 @foreach (var p in ParteDois)
                 {
-                    a += 1;
+                    b += 1;
                     <tr>
-                        <td>@a</td>
+                        <td>@b</td>
                         <td>@p.Categoria</td>
                         <td>@p.JulProposta.ToString("#,##0.00")</td>
                         <td>@p.JulRealizado.ToString("#,##0.00")</td>
@@ -227,7 +241,7 @@
 
                     {
                         <tr>
-                            <td>@sob.SobreFaturamento.ToString("#,##0.00")%</td>
+                            <td>@sob.SobreFaturamento.ToString("#,##0.00") %</td>
                         </tr>
                     }
                     <tr>
@@ -278,11 +292,13 @@
                     </tr>
                 </table>
             </div>
-
-</div>
-    <br />
-    <br />
-    <br />
-</div>
-
+        </div>
+        <br />
+        <br />
+        <center><a href="planilha/excluirplanilha" id="excluirPlanilha" class="btn btn-link" onclick="ValidaExclusaoPlanilha(@Session["ano"], event);">Excluir Planilha</a></center>
+        <br />
+        <br />
+        <br />
+    </div>
+}
 

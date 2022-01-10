@@ -11,10 +11,7 @@
 <a class="btn btn-default" @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })</a>*@
 
 <div class="container">
-    <div class="jumbotron">
-        <div class="bottom">
-            <a class="btn btn-default" href="/valores/categoria">Voltar</a>
-        </div>
+    <div class="jumbotron edit">
         <form action="/valores/@valores.Codigo/modificarcategoria" method="post">
             <div class="form-group">
                 <label for="Nome">Código:</label>
@@ -25,7 +22,14 @@
                 <label for="data">Categoria:</label>
                 <input type="text" class="form-control" id="categoria" value="@valores.Categoria" name="categoria">
             </div>
-            <button type="submit" class="btn btn-default">Alterar</button>
+
+            <div class="box">
+                <a class="btn btn-default" href="/valores/categoria">Voltar</a>
+            </div>
+
+            <div class="box">
+                <button type="submit" class="btn btn-primary btnAlterar">Alterar</button>
+            </div>
         </form>
     </div>
 </div>

@@ -39,23 +39,122 @@ namespace Dal_Planilha
             }
         }
 
-        public void NovaPlanilha(int Ano, int Cod)
+        public void NovaPlanilha(int Ano, int Cod, int Cat)
         {
-            MySqlCommand Jan = new MySqlCommand("INSERT INTO " + Cod + "tbl_Janeiro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Fev = new MySqlCommand("INSERT INTO " + Cod + "tbl_Fevereiro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Mar = new MySqlCommand("INSERT INTO " + Cod + "tbl_Marco(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Abr = new MySqlCommand("INSERT INTO " + Cod + "tbl_Abril(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Mai = new MySqlCommand("INSERT INTO " + Cod + "tbl_Maio(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Jun = new MySqlCommand("INSERT INTO " + Cod + "tbl_Junho(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Jul = new MySqlCommand("INSERT INTO " + Cod + "tbl_Julho(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Ago = new MySqlCommand("INSERT INTO " + Cod + "tbl_Agosto(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Set = new MySqlCommand("INSERT INTO " + Cod + "tbl_Setembro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Out = new MySqlCommand("INSERT INTO " + Cod + "tbl_Outubro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Nov = new MySqlCommand("INSERT INTO " + Cod + "tbl_Novembro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Dez = new MySqlCommand("INSERT INTO " + Cod + "tbl_Dezembro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, 1), (@Ano, 0, 0, 2), (@Ano, 0, 0, 3), (@Ano, 0, 0, 4), (@Ano, 0, 0, 5), (@Ano, 0, 0, 6), (@Ano, 0, 0, 7), (@Ano, 0, 0, 8), (@Ano, 0, 0, 9), (@Ano, 0, 0, 10)");
-            MySqlCommand Res = new MySqlCommand("INSERT INTO " + Cod + "tbl_resultado(pl_ano, pl_propResultado, pl_realiResultado, cod_categoria, pl_sobreFaturamento, pl_contrib_Despesas) VALUES (@Ano, 0, 0, 1, NULL, NULL), (@Ano, 0, 0, 2, 0, 0), (@Ano, 0, 0, 3, 0, 0), (@Ano, 0, 0, 4, 0, 0), (@Ano, 0, 0, 5, 0, 0), (@Ano, 0, 0, 6, 0, 0 ), (@Ano, 0, 0, 7, 0, 0), (@Ano, 0, 0, 8, 0, 0 ), (@Ano, 0, 0, 9, 0, 0), (@Ano, 0, 0, 10, 0, 0)");
+            MySqlCommand Jan = new MySqlCommand("INSERT INTO " + Cod + "tbl_Janeiro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Fev = new MySqlCommand("INSERT INTO " + Cod + "tbl_Fevereiro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Mar = new MySqlCommand("INSERT INTO " + Cod + "tbl_Marco(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Abr = new MySqlCommand("INSERT INTO " + Cod + "tbl_Abril(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Mai = new MySqlCommand("INSERT INTO " + Cod + "tbl_Maio(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Jun = new MySqlCommand("INSERT INTO " + Cod + "tbl_Junho(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Jul = new MySqlCommand("INSERT INTO " + Cod + "tbl_Julho(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Ago = new MySqlCommand("INSERT INTO " + Cod + "tbl_Agosto(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Set = new MySqlCommand("INSERT INTO " + Cod + "tbl_Setembro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Out = new MySqlCommand("INSERT INTO " + Cod + "tbl_Outubro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Nov = new MySqlCommand("INSERT INTO " + Cod + "tbl_Novembro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Dez = new MySqlCommand("INSERT INTO " + Cod + "tbl_Dezembro(pl_ano, pl_proposta, pl_realizado, cod_categoria) VALUES (@Ano, 0, 0, @Cat);");
+            MySqlCommand Res = new MySqlCommand("INSERT INTO " + Cod + "tbl_resultado(pl_ano, pl_propResultado, pl_realiResultado, cod_categoria, pl_sobreFaturamento, pl_contrib_Despesas) VALUES (@Ano, 0, 0, @Cat, 0, 0);");
+
+
+            Jan.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Fev.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Mar.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Abr.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Mai.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Jun.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Jul.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Ago.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Set.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Out.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Nov.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Dez.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+            Res.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
+
+            Jan.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Fev.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Mar.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Abr.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Mai.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Jun.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Jul.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Ago.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Set.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Out.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Nov.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Dez.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+            Res.Parameters.Add("@Cat", MySqlDbType.Int32).Value = Cat;
+
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                Jan.Connection = conn;
+                Fev.Connection = conn;
+                Mar.Connection = conn;
+                Abr.Connection = conn;
+                Mai.Connection = conn;
+                Jun.Connection = conn;
+                Jul.Connection = conn;
+                Ago.Connection = conn;
+                Set.Connection = conn;
+                Out.Connection = conn;
+                Nov.Connection = conn;
+                Dez.Connection = conn;
+                Res.Connection = conn;
+
+                conn.Open();
+                Jan.ExecuteNonQuery();
+                Fev.ExecuteNonQuery();
+                Mar.ExecuteNonQuery();
+                Abr.ExecuteNonQuery();
+                Mai.ExecuteNonQuery();
+                Jun.ExecuteNonQuery();
+                Jul.ExecuteNonQuery();
+                Ago.ExecuteNonQuery();
+                Set.ExecuteNonQuery();
+                Out.ExecuteNonQuery();
+                Nov.ExecuteNonQuery();
+                Dez.ExecuteNonQuery();
+                Res.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public void TotalMesesPlanilha(int Ano, int Cod)
+        {
             MySqlCommand Total = new MySqlCommand("INSERT INTO " + Cod + "tbl_total(pl_ano, pl_totalProposta, pl_totalRealizado, pl_propostaTabResultado, pl_realizadoTabResultado) VALUES (@Ano, 0, 0, 0, 0)");
             MySqlCommand Meses = new MySqlCommand("INSERT INTO " + Cod + "tbl_totalmeses(pl_ano, pl_totalPropostaMes, pl_totalRealizadoMes, pl_tabelaMes) VALUES (@Ano, 0, 0, 'tbl_janeiro'), (@Ano, 0, 0, 'tbl_fevereiro'), (@Ano, 0, 0, 'tbl_marco'), (@Ano, 0, 0, 'tbl_abril'), (@Ano, 0, 0, 'tbl_maio'), (@Ano, 0, 0, 'tbl_junho'), (@Ano, 0, 0, 'tbl_julho'), (@Ano, 0, 0, 'tbl_agosto'), (@Ano, 0, 0, 'tbl_setembro'), (@Ano, 0, 0, 'tbl_outubro'), (@Ano, 0, 0, 'tbl_novembro'), (@Ano, 0, 0, 'tbl_dezembro')");
+
+            Total.Parameters.AddWithValue("@Ano", MySqlDbType.Int32).Value = Ano;
+            Meses.Parameters.AddWithValue("@Ano", MySqlDbType.Int32).Value = Ano;
+
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                Total.Connection = conn;
+                Meses.Connection = conn;
+
+                conn.Open();
+                Total.ExecuteNonQuery();
+                Meses.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public void DeletarCategoria(int Cod, int Ano)
+        {
+            MySqlCommand Jan = new MySqlCommand("DELETE FROM " + Cod + "tbl_Janeiro WHERE pl_ano = @Ano;");
+            MySqlCommand Fev = new MySqlCommand("DELETE FROM " + Cod + "tbl_Fevereiro WHERE pl_ano = @Ano;");
+            MySqlCommand Mar = new MySqlCommand("DELETE FROM " + Cod + "tbl_Marco WHERE pl_ano = @Ano;");
+            MySqlCommand Abr = new MySqlCommand("DELETE FROM " + Cod + "tbl_Abril WHERE pl_ano = @Ano;");
+            MySqlCommand Mai = new MySqlCommand("DELETE FROM " + Cod + "tbl_Maio WHERE pl_ano = @Ano;");
+            MySqlCommand Jun = new MySqlCommand("DELETE FROM " + Cod + "tbl_Junho WHERE pl_ano = @Ano;");
+            MySqlCommand Jul = new MySqlCommand("DELETE FROM " + Cod + "tbl_Julho WHERE pl_ano = @Ano;");
+            MySqlCommand Ago = new MySqlCommand("DELETE FROM " + Cod + "tbl_Agosto WHERE pl_ano = @Ano;");
+            MySqlCommand Set = new MySqlCommand("DELETE FROM " + Cod + "tbl_Setembro WHERE pl_ano = @Ano;");
+            MySqlCommand Out = new MySqlCommand("DELETE FROM " + Cod + "tbl_Outubro WHERE pl_ano = @Ano;");
+            MySqlCommand Nov = new MySqlCommand("DELETE FROM " + Cod + "tbl_Novembro WHERE pl_ano = @Ano;");
+            MySqlCommand Dez = new MySqlCommand("DELETE FROM " + Cod + "tbl_Dezembro WHERE pl_ano = @Ano;");
+            MySqlCommand Res = new MySqlCommand("DELETE FROM " + Cod + "tbl_resultado WHERE pl_ano = @Ano;");
+            MySqlCommand Total = new MySqlCommand("DELETE FROM " + Cod + "tbl_total WHERE pl_ano = @Ano;");
+            MySqlCommand Meses = new MySqlCommand("DELETE FROM " + Cod + "tbl_totalmeses WHERE pl_ano = @Ano;");
 
             Jan.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
             Fev.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
@@ -90,6 +189,7 @@ namespace Dal_Planilha
                 Res.Connection = conn;
                 Total.Connection = conn;
                 Meses.Connection = conn;
+
                 conn.Open();
                 Jan.ExecuteNonQuery();
                 Fev.ExecuteNonQuery();
@@ -109,6 +209,7 @@ namespace Dal_Planilha
                 conn.Close();
             }
         }
+
 
         public DataTable MontarPlanilhaParteUm(int Ano, int Cod)
         {
@@ -209,7 +310,7 @@ namespace Dal_Planilha
         public void AlterarTotalPropReali(int Ano, int Cod, string Mes, decimal totalPropMes, decimal totalRealiMes)
         {
             //Altera os dados no DB
-            MySqlCommand cmd = new MySqlCommand("UPDATE " + Cod + "tbl_totalmeses SET pl_totalPropostaMes = @totalPropMes, pl_totalRealizadoMes = @totalRealiMes, pl_ano = @Ano WHERE pl_tabelaMes = @Mes;");
+            MySqlCommand cmd = new MySqlCommand("UPDATE " + Cod + "tbl_totalmeses SET pl_totalPropostaMes = @totalPropMes, pl_totalRealizadoMes = @totalRealiMes WHERE pl_ano = @Ano AND pl_tabelaMes = @Mes;");
             cmd.Parameters.Add("@Ano", MySqlDbType.Int32).Value = Ano;
             cmd.Parameters.Add("@Mes", MySqlDbType.VarChar).Value = Mes;
             cmd.Parameters.Add("@totalPropMes", MySqlDbType.Decimal).Value = totalPropMes;

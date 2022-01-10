@@ -1,5 +1,25 @@
 ﻿var ValidaExclusao = function (id, evento) {
-    if (confirm("Essa exclusão será permanente, perderá todos os dados salvos desse usuário?")) {
+    if (confirm("Essa exclusão será permanente, perderá todos os dados salvos desse usuário!")) {
+        return true
+    }
+    else {
+        evento.preventDefault();
+        return false;
+    }
+}
+
+var ValidaExclusaoCategoria = function (id, evento) {
+    if (confirm("Essa exclusão irá REMOVER a categoria e todos seus valores!")) {
+        return true
+    }
+    else {
+        evento.preventDefault();
+        return false;
+    }
+}
+
+var ValidaExclusaoPlanilha = function (ano, evento) {
+    if (confirm("Deseja excluir a planilha do ano " + ano + " ?")) {
         return true
     }
     else {

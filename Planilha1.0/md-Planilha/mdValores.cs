@@ -10,6 +10,7 @@ namespace md_Planilha
     public class mdValores : mdModelo
     {
         List<mdValores> lista = new List<mdValores>();
+        List<mdValores> listarCat = new List<mdValores>();
 
         public List<mdValores> Lista(int ano, string mes, int Cod)
         {
@@ -94,12 +95,39 @@ namespace md_Planilha
 
         public void NovaPlanilha(int Ano, int Cod)
         {
-            new Dal_Planilha.CriarPlanilhaDal().NovaPlanilha(Ano, Cod);
+            var planilhaDB2 = new Dal_Planilha.ValoresDal();
+            foreach (DataRow row in planilhaDB2.CodigoDeTodasCategorias(Cod).Rows)
+            {
+                var planilha = new mdValores();
+                planilha.Codigo = Convert.ToInt32(row["pl_codigo"]);
+                listarCat.Add(planilha);
+            }
+
+            foreach (var Cat in listarCat.ToArray())
+            {
+                new Dal_Planilha.CriarPlanilhaDal().NovaPlanilha(Ano, Cod, Cat.Codigo);
+            }
+            new Dal_Planilha.CriarPlanilhaDal().TotalMesesPlanilha(Ano, Cod);
+        }
+
+        public void ExcluirPlanilha(int Cod, int Ano)
+        {
+            new Dal_Planilha.CriarPlanilhaDal().DeletarCategoria(Cod, Ano);
+        }
+
+        public void AdicionarCategoriaNaPlanilha(int Ano, int Cod, int Cat)
+        {
+            new Dal_Planilha.CriarPlanilhaDal().NovaPlanilha(Ano, Cod, Cat);
         }
 
         public void AdicionarCategoria(int Cod, string Categoria)
         {
             new Dal_Planilha.ValoresDal().AdicionarCategoria(Cod, Categoria);
+        }
+
+        public void DeletarCategoria(int Cod, int Id)
+        {
+            new Dal_Planilha.CriarPlanilhaDal().DeletarCategoria(Cod, Id);
         }
 
         public void ExisteAno(int Ano, int Cod)
@@ -182,16 +210,22 @@ namespace md_Planilha
             string[] meses = { "tbl_janeiro", "tbl_fevereiro", "tbl_marco", "tbl_abril", "tbl_maio", "tbl_junho" };
             foreach (string Mes in meses)
             {
-
-                var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
-                foreach (DataRow row in planilhaDB.ListarTotal(Ano, Cod, Mes).Rows)
+                try
                 {
-                    var planilha = new mdValores();
-                    planilha.TotalProposta = Convert.ToDecimal(row["jan_propTotal"]);
-                    planilha.TotalRealizado = Convert.ToDecimal(row["jan_realiTotal"]);
-                    lista.Add(planilha);
+                    var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
+                    foreach (DataRow row in planilhaDB.ListarTotal(Ano, Cod, Mes).Rows)
+                    {
+                        var planilha = new mdValores();
+                        planilha.TotalProposta = Convert.ToDecimal(row["jan_propTotal"]);
+                        planilha.TotalRealizado = Convert.ToDecimal(row["jan_realiTotal"]);
+                        lista.Add(planilha);
 
-                    new Dal_Planilha.CriarPlanilhaDal().AlterarTotalPropReali(Ano, Cod, Mes, planilha.TotalProposta, planilha.TotalRealizado);
+                        new Dal_Planilha.CriarPlanilhaDal().AlterarTotalPropReali(Ano, Cod, Mes, planilha.TotalProposta, planilha.TotalRealizado);
+                    }
+                }
+                catch
+                {
+                    throw new Exception("Não hà informações suficiente para montar a planilha!");
                 }
             }
             return lista;
@@ -203,15 +237,22 @@ namespace md_Planilha
             foreach (string Mes in meses)
             {
 
-                var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
-                foreach (DataRow row in planilhaDB.ListarTotal(Ano, Cod, Mes).Rows)
+                try
                 {
-                    var planilha = new mdValores();
-                    planilha.TotalProposta = Convert.ToDecimal(row["jan_propTotal"]);
-                    planilha.TotalRealizado = Convert.ToDecimal(row["jan_realiTotal"]);
-                    lista.Add(planilha);
+                    var planilhaDB = new Dal_Planilha.CriarPlanilhaDal();
+                    foreach (DataRow row in planilhaDB.ListarTotal(Ano, Cod, Mes).Rows)
+                    {
+                        var planilha = new mdValores();
+                        planilha.TotalProposta = Convert.ToDecimal(row["jan_propTotal"]);
+                        planilha.TotalRealizado = Convert.ToDecimal(row["jan_realiTotal"]);
+                        lista.Add(planilha);
 
-                    new Dal_Planilha.CriarPlanilhaDal().AlterarTotalPropReali(Ano, Cod, Mes, planilha.TotalProposta, planilha.TotalRealizado);
+                        new Dal_Planilha.CriarPlanilhaDal().AlterarTotalPropReali(Ano, Cod, Mes, planilha.TotalProposta, planilha.TotalRealizado);
+                    }
+                }
+                catch
+                {
+                    throw new Exception("Não hà informações suficiente para montar a planilha!");
                 }
             }
             return lista;

@@ -50,6 +50,12 @@ namespace Planilha1._0
             );
 
             routes.MapRoute(
+                "valores_deletarcategoria",
+                "valores/{id}/deletarcategoria",
+                new { controller = "Valores", action = "DeletarCategoria", id = 0 }
+            );
+
+            routes.MapRoute(
                 "valores_adicionarcategoria",
                 "valores/adicionarcategoria",
                 new { controller = "Valores", action = "AdicionarCategoria" }
@@ -65,6 +71,12 @@ namespace Planilha1._0
                 "home_criarplanilha",
                 "home/criarplanilha",
                 new { controller = "Home", action = "CriarPlanilha" }
+            );
+
+            routes.MapRoute(
+                "planilha_excluirplanilha",
+                "planilha/excluirplanilha",
+                new { controller = "Planilha", action = "ExcluirPlanilha" }
             );
 
             routes.MapRoute(

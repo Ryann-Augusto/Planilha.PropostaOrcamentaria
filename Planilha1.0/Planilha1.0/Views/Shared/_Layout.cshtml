@@ -29,24 +29,23 @@
                 @if (Request.IsAuthenticated)
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Categorias", "Categoria", "Valores")</li>
-                        <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                        <li><a href="/home"><span class="fa fa-home"></span> Início</a></li>
+                        <li><a href="/valores/Categoria"><span class="fa fa-list-ul"></span> Categorias</a></li>
+                        <li><a href="/home/contact"><span class="fa fa-phone-square"></span> Contato</a></li>
                     </ul>
 
                     using (Html.BeginForm("LogOff", "Conta", FormMethod.Post, new { id = "logoffForm" }))
                     {
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Olá @Session["Usuario"]</a></li>
-                            <li><a href="javascript:document.getElementById('logoffForm').submit()">Sair</a></li>
+                            <li><a href="#"><span class="fa fa-user-circle"></span> Olá @Session["Usuario"]</a></li>
+                            <li><a href="javascript:document.getElementById('logoffForm').submit()">Sair <span class="fa fa-sign-out"></span></a></li>
                         </ul>
                     }
                 }
                 else
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                        <li><a href="/conta/login"><span class="fa fa-sign-in"></span> Login</a></li>
                     </ul>
                 }
             </div>

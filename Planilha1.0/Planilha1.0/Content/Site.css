@@ -45,7 +45,7 @@ div.box {
     display: inline-block;
 }
 
-#btnCadastrar{
+.btnAlterar{
     margin-left:147px;
 }
 
@@ -162,3 +162,10 @@ div#tblHome{
     border-color:green;
 }
 
+#excluirPlanilha{
+    color:red;
+}
+
+#excluirPlanilha:hover{
+    color:darkred;
+}

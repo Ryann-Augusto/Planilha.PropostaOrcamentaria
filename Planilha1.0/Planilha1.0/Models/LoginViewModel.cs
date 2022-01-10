@@ -8,7 +8,7 @@ namespace Planilha1._0.Models
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Informe o ebdereço de email")]
+        [Required(ErrorMessage = "Informe o endereço de email")]
         [Display(Name = "Email ")]
         public string Email { get; set; }
 

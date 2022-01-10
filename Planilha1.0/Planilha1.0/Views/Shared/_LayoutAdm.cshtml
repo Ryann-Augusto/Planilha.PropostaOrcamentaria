@@ -29,8 +29,8 @@
                 @using (Html.BeginForm("LogOff", "Conta", FormMethod.Post, new { id = "logoffForm" }))
                 {
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Olá @Session["Usuario"]</a></li>
-                    <li><a href="javascript:document.getElementById('logoffForm').submit()">Sair</a></li>
+                    <li><a href="#"><span class="fa fa-user-circle"></span> Olá @Session["Usuario"]</a></li>
+                    <li><a href="javascript:document.getElementById('logoffForm').submit()">Sair <span class="fa fa-sign-out"></span></a></li>
                 </ul>
                 }
             

@@ -121,6 +121,26 @@ namespace Dal_Planilha
             }
         }
 
+        public DataTable CodigoDeTodasCategorias(int Cod)
+        {
+            string queryString = "SELECT pl_codigo FROM " + Cod + "tbl_categoria ORDER BY pl_codigo ASC;";
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Connection.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = command;
+
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                command.Connection.Close();
+
+                return table;
+            }
+        }
+
         public DataTable CodigoCategoria(int Cod, string Cat)
         {
             string queryString = "SELECT pl_codigo FROM " + Cod + "tbl_categoria WHERE pl_categoria = @Categoria;";
@@ -165,7 +185,7 @@ namespace Dal_Planilha
         public void AlterarCategoria(int id, string Categoria, int Cod)
         {
             //Altera os dados no DB
-            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_categoria SET pl_categoria = @Categoria WHERE pl_codigo = @tbl_codigo");
+            MySqlCommand cmd = new MySqlCommand("UPDATE " + Cod + "tbl_categoria SET pl_categoria = @Categoria WHERE pl_codigo = @tbl_codigo");
             cmd.Parameters.Add("@tbl_codigo", MySqlDbType.Int32).Value = id;
             cmd.Parameters.AddWithValue("@Categoria", Categoria);
 

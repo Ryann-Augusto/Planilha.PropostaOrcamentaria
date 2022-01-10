@@ -3,11 +3,9 @@
     md_Planilha.mdValores mdValores = ViewBag.Valores;
     ViewBag.Title = "Adcionar Valores";
 }
-<div class="jumbotron">
+<div class="jumbotron edit">
     <h3>Alterar Valores</h3>
-    <div>
-        <a class="btn btn-default" @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })</a>
-    </div>
+    
     <form action="/valores/@mdValores.Codigo/modificar" method="post">
 
         <div class="form-group">
@@ -25,7 +23,13 @@
             <input maxlength="12" type="text" class="form-control valor" id="realizado" value="@mdValores.Realizado" name="realizado" onclick="this.focus();this.select()">
         </div>
 
-        <button type="submit" class="btn btn-default">Alterar</button>
+        <div class="box">
+            <a class="btn btn-default" @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })</a>
+        </div>
+
+        <div class="box">
+            <button type="submit" class="btn btn-primary btnAlterar">Alterar</button>
+        </div>
     </form>
 </div>
 

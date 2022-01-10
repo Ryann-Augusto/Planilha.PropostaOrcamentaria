@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Página Inicial";
 }
 
 @if (TempData["sucesso"] != null)
@@ -47,11 +47,11 @@
                     <option value="2028">2028</option>
                 </select>
 
-                <button type="submit" class="btn btn-default" style="margin-top: 5px;">Próximo</button>
+                <button type="submit" class="btn btn-default" style="margin-top: 5px; margin-left: 203px">Próximo</button>
             </form>
         </div>
         <div class="col-md-6">
-            <label for="data">Criar Nova Tabela:</label>
+            <label for="data">Criar ou Excluir uma Tabela:</label>
             <form action="home/criarplanilha" method="post">
                 <select name="ano" id="selectAno" class="form-control">
                     <option value="0">Selecione o ano</option>
@@ -65,6 +65,7 @@
                     <option value="2028">2028</option>
                 </select>
                 <button type="submit" class="btn btn-default" style="margin-top: 5px;">Criar</button>
+
             </form>
 
             <div style="margin-top:10px;">
@@ -81,29 +82,10 @@
                         <option value="2027">2027</option>
                         <option value="2028">2028</option>
                     </select>
-                    <button type="submit" class="btn btn-default" formtarget="_blank" style="margin-top: 5px;">Abrir</button>
+                    <button type="submit" class="btn btn-default" formtarget="_blank" style="margin-top: 5px; margin-left: 224px ">Abrir</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-@*Inicio Dos PopUps*@
-<div class="modal fade valores">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close"><span>&times;</span></button>
-                <div class="modal-title">Inserir Valores</div>
-            </div>
-            <div class="modal-body">
-
-            </div>
-            <div class="modal-footer">
-
-            </div>
-        </div>
-    </div>
-</div>
-
 
