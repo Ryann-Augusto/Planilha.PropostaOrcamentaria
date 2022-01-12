@@ -1,4 +1,5 @@
-﻿var ValidaExclusao = function (id, evento) {
+﻿
+var ValidaExclusao = function (id, evento) {
     if (confirm("Essa exclusão será permanente, perderá todos os dados salvos desse usuário!")) {
         return true
     }
@@ -17,17 +18,6 @@ var ValidaExclusaoCategoria = function (id, evento) {
         return false;
     }
 }
-
-var ValidaExclusaoPlanilha = function (ano, evento) {
-    if (confirm("Deseja excluir a planilha do ano " + ano + " ?")) {
-        return true
-    }
-    else {
-        evento.preventDefault();
-        return false;
-    }
-}
-
 
 
 function checkPass() {

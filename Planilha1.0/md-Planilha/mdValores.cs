@@ -112,7 +112,7 @@ namespace md_Planilha
 
         public void ExcluirPlanilha(int Cod, int Ano)
         {
-            new Dal_Planilha.CriarPlanilhaDal().DeletarCategoria(Cod, Ano);
+            new Dal_Planilha.CriarPlanilhaDal().ExcluirPlanilha(Cod, Ano);
         }
 
         public void AdicionarCategoriaNaPlanilha(int Ano, int Cod, int Cat)
@@ -125,9 +125,9 @@ namespace md_Planilha
             new Dal_Planilha.ValoresDal().AdicionarCategoria(Cod, Categoria);
         }
 
-        public void DeletarCategoria(int Cod, int Id)
+        public void ExcluirCategoria(int Cod, int Id)
         {
-            new Dal_Planilha.CriarPlanilhaDal().DeletarCategoria(Cod, Id);
+            new Dal_Planilha.CriarPlanilhaDal().ExcluirCategoria(Cod, Id);
         }
 
         public void ExisteAno(int Ano, int Cod)

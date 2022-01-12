@@ -18,13 +18,15 @@
     md_Planilha.mdValores metaReali = ViewBag.metaRealizada;
     ViewBag.Title = "Planilha";
     var a = 0;
+    var b = 0;
     Layout = "~/Views/Shared/_RenderImpressao.cshtml";
 }
 
 <body>
     <div class="container">
-
-        <center><h2>@ViewBag.usuario @ViewBag.ano</h2></center> <br />
+        <div class="nomePlanilhas">
+            <center><h2>PROPOSTA ORÇAMENTÁRIA <br /> @ViewBag.usuario @ViewBag.ano</h2></center> <br />
+        </div>
         <div class="tabela">
             <table>
                 <tr>
@@ -96,8 +98,10 @@
                 </tfoot>
             </table>
             <br />
+            
 
             @*Inicio da segunda parte da tabela*@
+        <div class="box parteDois">
             <table>
                 <tr>
                     <th colspan="2">Categoria</th>
@@ -126,9 +130,9 @@
                 </tr>
                 @foreach (var p in ParteDois)
                 {
-                    a += 1;
+                    b += 1;
                     <tr>
-                        <td>@a</td>
+                        <td>@b</td>
                         <td>@p.Categoria</td>
                         <td>@p.JulProposta.ToString("#,##0.00")</td>
                         <td>@p.JulRealizado.ToString("#,##0.00")</td>
@@ -163,6 +167,8 @@
                     }
                 </tr>
             </table>
+        </div>
+            
             <br />
 
             <div class="box">

@@ -50,9 +50,9 @@ namespace Planilha1._0
             );
 
             routes.MapRoute(
-                "valores_deletarcategoria",
-                "valores/{id}/deletarcategoria",
-                new { controller = "Valores", action = "DeletarCategoria", id = 0 }
+                "valores_excluircategoria",
+                "valores/{id}/excluircategoria",
+                new { controller = "Valores", action = "ExcluirCategoria", id = 0 }
             );
 
             routes.MapRoute(
@@ -116,21 +116,21 @@ namespace Planilha1._0
                 );
 
             routes.MapRoute(
-                "conta_editar",
-                "conta/{id}/editar",
-                new { controller = "Conta", action = "Editar", id = 0 }
+                "conta_alterarUsuario",
+                "conta/{id}/alterarusuario",
+                new { controller = "Conta", action = "AlterarUsuario", id = 0 }
                 );
 
             routes.MapRoute(
-                "conta_alterar",
-                "conta/{id}/alterar",
-                new { controller = "Conta", action = "Alterar", id = 0 }
+                "conta_modificarUsuario",
+                "conta/{id}/modificarusuario",
+                new { controller = "Conta", action = "ModificarUsuario", id = 0 }
                 );
 
             routes.MapRoute(
-                "conta_apagar",
-                "conta/{id}/apagar",
-                new { controller = "Conta", action = "Apagar", id = 0 }
+                "conta_apagarUsuario",
+                "conta/{id}/apagarusuario",
+                new { controller = "Conta", action = "ApagarUsuario", id = 0 }
                 );
 
             routes.MapRoute(

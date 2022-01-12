@@ -138,7 +138,7 @@ namespace Dal_Planilha
             }
         }
 
-        public void DeletarCategoria(int Cod, int Ano)
+        public void ExcluirPlanilha(int Cod, int Ano)
         {
             MySqlCommand Jan = new MySqlCommand("DELETE FROM " + Cod + "tbl_Janeiro WHERE pl_ano = @Ano;");
             MySqlCommand Fev = new MySqlCommand("DELETE FROM " + Cod + "tbl_Fevereiro WHERE pl_ano = @Ano;");
@@ -206,6 +206,74 @@ namespace Dal_Planilha
                 Res.ExecuteNonQuery();
                 Total.ExecuteNonQuery();
                 Meses.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public void ExcluirCategoria(int Cod, int Id)
+        {
+            MySqlCommand Jan = new MySqlCommand("DELETE FROM " + Cod + "tbl_Janeiro WHERE cod_categoria = @Id;");
+            MySqlCommand Fev = new MySqlCommand("DELETE FROM " + Cod + "tbl_Fevereiro WHERE cod_categoria = @Id;");
+            MySqlCommand Mar = new MySqlCommand("DELETE FROM " + Cod + "tbl_Marco WHERE cod_categoria = @Id;");
+            MySqlCommand Abr = new MySqlCommand("DELETE FROM " + Cod + "tbl_Abril WHERE cod_categoria = @Id;");
+            MySqlCommand Mai = new MySqlCommand("DELETE FROM " + Cod + "tbl_Maio WHERE cod_categoria = @Id;");
+            MySqlCommand Jun = new MySqlCommand("DELETE FROM " + Cod + "tbl_Junho WHERE cod_categoria = @Id;");
+            MySqlCommand Jul = new MySqlCommand("DELETE FROM " + Cod + "tbl_Julho WHERE cod_categoria = @Id;");
+            MySqlCommand Ago = new MySqlCommand("DELETE FROM " + Cod + "tbl_Agosto WHERE cod_categoria = @Id;");
+            MySqlCommand Set = new MySqlCommand("DELETE FROM " + Cod + "tbl_Setembro WHERE cod_categoria = @Id;");
+            MySqlCommand Out = new MySqlCommand("DELETE FROM " + Cod + "tbl_Outubro WHERE cod_categoria = @Id;");
+            MySqlCommand Nov = new MySqlCommand("DELETE FROM " + Cod + "tbl_Novembro WHERE cod_categoria = @Id;");
+            MySqlCommand Dez = new MySqlCommand("DELETE FROM " + Cod + "tbl_Dezembro WHERE cod_categoria = @Id;");
+            MySqlCommand Res = new MySqlCommand("DELETE FROM " + Cod + "tbl_resultado WHERE cod_categoria = @Id;");
+            MySqlCommand Cat = new MySqlCommand("DELETE FROM " + Cod + "tbl_Categoria WHERE pl_codigo = @Id;");
+
+            Jan.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Fev.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Mar.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Abr.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Mai.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Jun.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Jul.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Ago.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Set.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Out.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Nov.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Dez.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Res.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+            Cat.Parameters.Add("@Id", MySqlDbType.Int32).Value = Id;
+
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                Jan.Connection = conn;
+                Fev.Connection = conn;
+                Mar.Connection = conn;
+                Abr.Connection = conn;
+                Mai.Connection = conn;
+                Jun.Connection = conn;
+                Jul.Connection = conn;
+                Ago.Connection = conn;
+                Set.Connection = conn;
+                Out.Connection = conn;
+                Nov.Connection = conn;
+                Dez.Connection = conn;
+                Res.Connection = conn;
+                Cat.Connection = conn;
+
+                conn.Open();
+                Jan.ExecuteNonQuery();
+                Fev.ExecuteNonQuery();
+                Mar.ExecuteNonQuery();
+                Abr.ExecuteNonQuery();
+                Mai.ExecuteNonQuery();
+                Jun.ExecuteNonQuery();
+                Jul.ExecuteNonQuery();
+                Ago.ExecuteNonQuery();
+                Set.ExecuteNonQuery();
+                Out.ExecuteNonQuery();
+                Nov.ExecuteNonQuery();
+                Dez.ExecuteNonQuery();
+                Res.ExecuteNonQuery();
+                Cat.ExecuteNonQuery();
                 conn.Close();
             }
         }

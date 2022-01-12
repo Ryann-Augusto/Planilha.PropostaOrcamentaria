@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Graficos";
-    Layout = "~/Views/Shared/_Render.cshtml";
+    Layout = "~/Views/Shared/_RenderImpressao.cshtml";
 
     //Graficos
     var Prop = (ViewBag.Prop as List<decimal>);
@@ -10,8 +10,9 @@
     var Realizado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Reali));
 }
 
-
-<h2>@ViewBag.usuario @ViewBag.ano</h2>
+<div class="nomePlanilhas">
+    <h2>PROPOSTA ORÇAMENTÁRIA <br /> @ViewBag.usuario @ViewBag.ano</h2>
+</div>
 
 <div class="graficos">
     <center><h3>Propostas</h3></center>

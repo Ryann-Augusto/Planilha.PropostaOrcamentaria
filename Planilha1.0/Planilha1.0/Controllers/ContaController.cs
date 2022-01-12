@@ -68,6 +68,7 @@ namespace ControleEstoque.Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public void Cadastro()
         {
@@ -112,14 +113,14 @@ namespace ControleEstoque.Web.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Editar(int id)
+        public ActionResult AlterarUsuario(int id)
         {
             ViewBag.Editar = mdUsuario.BuscarUsuId(id);
             return View();
         }
 
         [HttpPost]
-        public void Alterar(int id)
+        public void ModificarUsuario(int id)
         {
             var Alterar = new mdUsuario();
             var Usuario = new mdValores();
@@ -146,13 +147,13 @@ namespace ControleEstoque.Web.Controllers
             }
             else
             {
-                Alterar.AlterarTudo(id, Usuario.NomeUsuario, Usuario.SenhaUsuario, Usuario.EmailUsuario);
+                Alterar.AlterarTudo(id, Usuario.NomeUsuario, Usuario.EmailUsuario, Usuario.SenhaUsuario);
                 TempData["sucesso"] = "Nome e senha de usuário alterado com sucesso.";
                 Response.Redirect("/conta/cadastrar");
             }
         }
 
-        public void Apagar(int id)
+        public void ApagarUsuario(int id)
         {
             var Apagar = new mdUsuario();
             var Editar = mdUsuario.BuscarUsuId(id);

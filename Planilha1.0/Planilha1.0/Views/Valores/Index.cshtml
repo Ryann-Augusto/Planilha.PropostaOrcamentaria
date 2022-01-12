@@ -1,43 +1,58 @@
 ﻿@{
     List<md_Planilha.mdValores> mdValores = ViewBag.planilhaValores;
+    var meses = ViewBag.Meses;
     ViewBag.Title = ViewBag.Mes;
+    var a = 0;
 }
 
-@if (TempData["sucesso"] != null)
-{
-    <div class="alert alert-success">@TempData["sucesso"]</div>
-}
-@if (TempData["erro"] != null)
-{
-    <div class="alert alert-danger">@TempData["erro"]</div>
-}
 
-<div class="jumbotron">
-    <div class="box">
-        <h2>@ViewBag.Mes.Replace("c", "ç") @ViewBag.Ano</h2>
+
+<div class="jumbotron jumpAjustado">
+    @if (TempData["sucesso"] != null)
+    {
+        <div class="alert alert-success">@TempData["sucesso"]</div>
+    }
+    @if (TempData["erro"] != null)
+    {
+        <div class="alert alert-danger">@TempData["erro"]</div>
+    }
+    <div class="box nomePagina">
+        <h2>@ViewBag.Mes.Replace("c", "ç") @ViewBag.Ano <br /> @meses</h2>
     </div>
+    <br />
     <br />
 
     <table class="table">
         <tr>
-            <td>#</td>
-            <td>Categoria</td>
-            <td>Proposta</td>
-            <td>Realizado</td>
-            <td></td>
+            <th>#</th>
+            <th>Categoria</th>
+            <th>Proposta</th>
+            <th>Realizado</th>
+            <th></th>
 
         </tr>
         @foreach (var p in mdValores)
         {
+            a += 1;
             <tr>
-                <td>@p.Codigo</td>
+                <td>@a</td>
                 <td>@p.Categoria</td>
                 <td>@p.Proposta.ToString("#,##0.00")</td>
                 <td>@p.Realizado.ToString("#,##0.00")</td>
 
-                <td><div><a href="/valores/@p.Codigo/alterar" class="btn btn-primary">Alterar</a></div></td>
+                <td><div><a href="/valores/@p.Codigo/alterar" class="btn btn-primary"><span class="fa fa-pencil"></span> Alterar</a></div></td>
             </tr>
         }
+        <tfoot>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a class="btn btn-warning" href="/planilha"><span class="fa fa-table"></span> Planilha</a></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 

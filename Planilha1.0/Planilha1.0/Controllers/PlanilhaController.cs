@@ -112,18 +112,18 @@ namespace Planilha1._0.Controllers
 
         public void ExcluirPlanilha()
         {
-            //try
-            //{
+            try
+            {
             var ano = Convert.ToInt32(Session["ano"]);
             var Cod = Convert.ToInt32(Session["codigo"]);
             var valores = new mdValores();
             valores.ExcluirPlanilha(Cod, ano);
             TempData["sucesso"] = "Planilha excluida com sucesso!";
-            //}
-            //catch (Exception err)
-            //{
-            //    TempData["erro"] = "Planilha não pode ser excluida!" + err;
-            //}
+            }
+            catch (Exception err)
+            {
+                TempData["erro"] = "Planilha não pode ser excluida!" + err;
+            }
             Response.Redirect("/home");
         }
     }

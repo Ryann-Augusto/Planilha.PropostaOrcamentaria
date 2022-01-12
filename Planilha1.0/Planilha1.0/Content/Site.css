@@ -60,6 +60,7 @@ div.box {
 
 .body-background-cadastrar {
     background-image: url(../Content/Images/cadastro2.jpg);
+    position:fixed;
     left: 0;
     right: 0;
     z-index: -1;
@@ -169,3 +170,52 @@ div#tblHome{
 #excluirPlanilha:hover{
     color:darkred;
 }
+
+div.fade{
+    text-align:left;
+}
+
+button.btnHome {
+    margin-top: 5px;
+    margin-left: 224px;
+}
+
+button#btnInserirValores {
+    margin-top: 5px;
+    margin-left: 203px;
+}
+
+label#plusCircle {
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+.table td {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.table th {
+    font-size: 20px;
+    font-family: 'Segoe UI';
+}
+
+div.jumpAjustado{
+    padding-top:0px;
+}
+
+div.nomePagina {
+    padding-top: 20px;
+    font-family: fantasy;
+}
+
+div.nomePlanilhas{
+    font-family:fantasy;
+}
+
+span.popupExcluir {
+    transform: translate(2px, 20%);
+    color: #d9534f;
+}
+
+

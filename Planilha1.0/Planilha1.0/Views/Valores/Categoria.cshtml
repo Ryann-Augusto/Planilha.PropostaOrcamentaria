@@ -5,20 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (TempData["sucesso"] != null)
-{
-    <div class="alert alert-success">@TempData["sucesso"]</div>
-}
-@if (TempData["erro"] != null)
-{
-    <div class="alert alert-danger">@TempData["erro"]</div>
-}
-
-<h2>Categorias</h2>
-
-
 <div class="container">
-    <div class="jumbotron">
+    <div class="jumbotron jumpAjustado">
+        @if (TempData["sucesso"] != null)
+        {
+            <div class="alert alert-success">@TempData["sucesso"] <span class="fa fa-check fa-2x"></span></div>
+        }
+        @if (TempData["erro"] != null)
+        {
+            <div class="alert alert-danger">@TempData["erro"] <span class="fa fa-times fa-2x"></span></div>
+        }
+
+        <div class="nomePagina">
+            <h2>Categorias</h2>
+        </div>
+        <br />
         <form action="/valores/adicionarcategoria">
             <table class="table">
                 <thead>
@@ -30,29 +31,50 @@
                 <tbody>
                     @foreach (var cat in categoria)
                     {
-                    <tr>
-                        <td>@cat.Codigo</td>
-                        <td>@cat.Categoria</td>
-                        <td>
-                            <a style="font-size:15px" class="btn btn-primary fa fa-pencil" href="/valores/@cat.Codigo/alterarcategoria"><span style="font-family:Arial"> <b>Alterar</b></span></a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger fa fa-trash" style="font-size:15px;" href="/valores/@cat.Codigo/deletarcategoria" onclick="ValidaExclusaoCategoria(@cat.Codigo, event);"><span style="font-family:Arial"> <b>Excluir</b></span></a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td class="Categoria">@cat.Codigo</td>
+                            <td class="Categoria">@cat.Categoria</td>
+                            <td>
+                                <a class="btn btn-primary" style="font-size:14px;" href="/valores/@cat.Codigo/alterarcategoria"><span class="fa fa-pencil"></span><b> Alterar</b></a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" style="font-size:14px;" data-toggle="modal" data-target=".@cat.Codigo"><span class="fa fa-trash"></span><b> Excluir</b></a>
+
+                                <!-- ALERT EXCLUIR CATEGORIA -->
+                                <div class="modal fade @cat.Codigo">
+                                    <div id="popupCategoria" class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                                                <div class="modal-title"><h3><span class="fa fa-info-circle fa-2x popupExcluir"></span><b> Excluir Categoria "@cat.Categoria" </b></h3></div>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p style="font-size:15px;">Essa exclusão será permantente, todos os dados dessa categoria serão excluidos!</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="/valores/@cat.Codigo/excluircategoria" class="btn btn-danger">Excluir</a>
+                                                <button class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FIM DO ALERT -->
+
+                            </td>
+                        </tr>
                     }
                 </tbody>
                 <tfoot>
                     <tr>
                         <td>
-                            <label class="fa fa-plus-circle"></label>
+                            <label class="fa fa-plus-circle" id="plusCircle"></label>
                         </td>
 
                         <td>
                             <input type="text" name="categoria" class="form-control" id="categoria" />
                         </td>
                         <td>
-                            <button style="font-size:16px;" class="btn btn-success fa fa-save"><span style="font-family:Arial;"><b> Salvar</b></span></button>
+                            <button class="btn btn-success" style="font-size:14.5px;" ><span class="fa fa-save"></span><b> Salvar</b></button>
                         </td>
                     </tr>
                 </tfoot>
@@ -60,4 +82,6 @@
         </form>
     </div>
 </div>
+
+
 

@@ -1,16 +1,57 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Fisco Brasil</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/fontawesome")
     <link href="~/Content/Impressao.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Proposta Orçamentária", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav">
+                        @*<li><a href="/home"><span class="fa fa-home"></span> Início</a></li>*@
+                        <li><a href="/planilha"><span class="fa fa-table"></span> Planilha</a></li>
+                        <li><a href="/planilha/Impressao"><span class="fa fa-print"></span> Impressão</a></li>
+                        <li><a href="/planilha/graficos"><span class="fa fa-bar-chart-o"></span> Gráficos</a></li>
+                    </ul>
+
+                    using (Html.BeginForm("logOff", "Conta", FormMethod.Post, new { id = "logoffForm" }))
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="fa fa-user-circle"></span> Olá @Session["usuario"]</a></li>
+                            <li><a href="javascript:document.getElementeById('logoffForm').submit()">Sair <span class="fa fa-sign-out"></span></a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/conta/login"><span class="fa fa-sign-in"></span> Login</a></li>
+                    </ul>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -19,6 +60,8 @@
         </footer>
     </div>
 
+    <script defer src="https://www.chartjs.org/dist/master/chart.min.js"></script>
+    <script defer src="~/Scripts/graficos.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -34,22 +34,11 @@
 }
 else
 {
-
-
-
     <div class="container">
-        <div class="col-md-6">
-            <h2>@ViewBag.usuario @ViewBag.ano</h2>
+        <div class="nomePlanilhas">
+            <center><h2>PROPOSTA ORÇAMENTÁRIA <br /> @ViewBag.usuario @ViewBag.ano</h2></center>
         </div>
 
-        <div class="box">
-            <div class="col-md-6">
-                <a href="/planilha/impressao" class="btn btn-default fa fa-print fa-2x fa-border" target="_blank"></a>
-            </div>
-            <div class="col-md-6">
-                <a href="/planilha/graficos" class="btn btn-default fa fa-bar-chart fa-2x fa-border" target="_blank"></a>
-            </div>
-        </div>
         <div class="tabela">
             <table class="table-round-corner table table-striped">
                 <tr>
@@ -295,10 +284,28 @@ else
         </div>
         <br />
         <br />
-        <center><a href="planilha/excluirplanilha" id="excluirPlanilha" class="btn btn-link" onclick="ValidaExclusaoPlanilha(@Session["ano"], event);">Excluir Planilha</a></center>
+        <center><a id="excluirPlanilha" class="btn btn-link" data-toggle="modal" data-target=".excluir">Excluir Planilha</a></center>
         <br />
         <br />
         <br />
     </div>
 }
+
+<div class="modal fade excluir">
+    <div id="popupExcluir" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                <div class="modal-title"><h3><b>Excluir Planilha @Session["ano"]</b></h3></div>
+            </div>
+            <div class="modal-body">
+                <p>A exclusão será permanente, todos os dados serão perdidos!</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/planilha/excluirplanilha" class="btn btn-danger">Excluir</a>
+                <button class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 

@@ -25,6 +25,7 @@ namespace Planilha1._0.Controllers
             return View();
         }
 
+
         [Authorize]
         public ActionResult Alterar(int id)
         {
@@ -132,18 +133,18 @@ namespace Planilha1._0.Controllers
             Response.Redirect("/valores/categoria");
         }
 
-        public void DeletarCategoria(int id)
+        public void ExcluirCategoria(int id)
         {
             try
             {
                 var cod = Convert.ToInt32(Session["Codigo"]);
                 var valores = new mdValores();
-                valores.DeletarCategoria(cod, id);
+                valores.ExcluirCategoria(cod, id);
                 TempData["sucesso"] = "Categoria excluida!!";
             }
-            catch
+            catch (Exception err)
             {
-                TempData["erro"] = "Categoria não pode ser excluida";
+                TempData["erro"] = "Categoria não pode ser excluida" + err;
             }
             Response.Redirect("/valores/categoria");
         }

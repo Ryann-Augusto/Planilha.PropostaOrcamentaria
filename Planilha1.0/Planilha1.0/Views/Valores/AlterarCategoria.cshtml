@@ -5,13 +5,12 @@
     md_Planilha.mdValores valores = ViewBag.alterarCategoria;
 }
 
-<h2>AlterarCategoria</h2>
-
 @*Botão para volta à pagina anterior 
 <a class="btn btn-default" @Html.ActionLink("Voltar", null, null, null, new { href = Request.UrlReferrer })</a>*@
 
 <div class="container">
     <div class="jumbotron edit">
+        <h2>AlterarCategoria</h2>
         <form action="/valores/@valores.Codigo/modificarcategoria" method="post">
             <div class="form-group">
                 <label for="Nome">Código:</label>
