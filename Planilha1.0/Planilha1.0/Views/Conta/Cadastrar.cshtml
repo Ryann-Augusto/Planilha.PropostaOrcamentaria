@@ -5,24 +5,30 @@
     Layout = "~/Views/Shared/_LayoutAdm.cshtml";
 }
 
+@if (TempData["sucesso"] != null)
+{
+    <div class="alert alert-success" id="notfyCadastrar">@TempData["sucesso"]</div>
+}
+@if (TempData["erro"] != null)
+{
+    <div class="alert alert-danger" id="notfyCadastrar">@TempData["erro"]</div>
+}
+
 <body id="cadastrar">
 
     <div class="body-background-cadastrar"></div>
-    @if (TempData["sucesso"] != null)
-    {
-        <div class="alert alert-success">@TempData["sucesso"]</div>
-    }
-    @if (TempData["erro"] != null)
-    {
-        <div class="alert alert-danger">@TempData["erro"]</div>
-    }
-    
 
-<div class="container col-xs-push-8">
-    <h2><b>Cadastro de Usuarios <span class="fa fa-user"></span></b></h2>
-    <div class="table-responsive">
+
+    <div id="tituloCadastrar">
+        <h2 id="btnCadUsuarios">Cadastro de Usuarios <span class="fa fa-user"></span></h2>
+    </div>
+
+    <div class="container col-xs-push-8">
         <div class="row-no-gutters">
-            <button class="btn btn-success fa fa-user-plus pull-right fa-2x" data-toggle="modal" data-target=".cadastrar" style="margin-bottom:10px;"><span style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">&nbsp;Cadastrar</span></button>
+            <div id="tituloCadastrar">
+
+            </div>
+            <button id="btnCadastrar" class="btn btn-success fa fa-user-plus pull-right fa-2x" data-toggle="modal" data-target=".cadastrar"><span style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">&nbsp;Cadastrar</span></button>
             <br />
             <table id="tableCad" class="table table-bordered tblCadastrar table-responsive">
                 <tr>
@@ -32,7 +38,7 @@
                     <th>Senha</th>
                     <th>Nível</th>
                     <th></th>
-                    <th></th>
+
                 </tr>
                 @foreach (var usu in usuario)
                 {
@@ -51,42 +57,46 @@
                                 <td>Funcionário</td>
                             }
                         }
-                        <td>
-                            <a class="btn btn-primary" href="/conta/@usu.CodigoUsuario/alterarusuario"><span class="fa fa-pencil"></span> <b>Alterar</b></a>
+                    <td>
+                        <a style="font-size:22px; padding:5px 8px;" class="btn btn-primary fa fa-pencil" href="/conta/@usu.CodigoUsuario/alterarusuario"></a>
+                        <a style="font-size:22px; padding:5px 10px;" class="btn btn-danger fa fa-trash-o" data-toggle="modal" data-target=".@usu.CodigoUsuario"></a>
 
+                        @if (usu.SituacaoUsuario == 1)
+                        {
+                            <a style="font-size:22px; padding:5px 10px;" class="btn btn-warning fa fa-ban" href="/conta/@usu.CodigoUsuario/bloquearusuario"></a>
+                        }
+                        else if (usu.SituacaoUsuario == 0)
+                        {
+                            <a style="font-size:22px; padding:5px 10px;" class="btn btn-success fa fa-ban" href="/conta/@usu.CodigoUsuario/bloquearusuario"></a>
+                        }
 
-
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" data-toggle="modal" data-target=".@usu.CodigoUsuario"><span class="fa fa-trash-o"></span> <b>Excluir</b></a>
-
-                            <!-- INICIO DO ALERT EXCLUIR USUARIO-->
-                            <div class="modal fade @usu.CodigoUsuario">
-                                <div id="exluirUsuario" class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button data-dismiss="modal" class="close"><span>&times;</span></button>
-                                            <div class="modal-title"><h3><span class="fa fa-info-circle fa-2x popupExcluir"></span><b>  Excluir Usuario "@usu.NomeUsuario"</b></h3></div>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Essa exclusão é permanente, todos os dados do usuario será perdido!</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="/conta/@usu.CodigoUsuario/apagarusuario" class="btn btn-danger">Excluir</a>
-                                            <button data-dismiss="modal" class="btn btn-primary">Cancelar</button>
-                                        </div>
+                        <!-- INICIO DO ALERT EXCLUIR USUARIO-->
+                        <div class="modal fade @usu.CodigoUsuario">
+                            <div id="exluirUsuario" class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                                        <div class="modal-title"><h3><span class="fa fa-info-circle fa-2x popupExcluir"></span><b>  Excluir Usuario "@usu.NomeUsuario"</b></h3></div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Essa exclusão é permanente, todos os dados do usuario será perdido!</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="/conta/@usu.CodigoUsuario/apagarusuario" class="btn btn-danger">Excluir</a>
+                                        <button data-dismiss="modal" class="btn btn-primary">Cancelar</button>
                                     </div>
                                 </div>
                             </div>
-                            <!-- FIM DO ALERT -->
+                        </div>
+                        <!-- FIM DO ALERT -->
 
-                        </td>
+                    </td>
                     </tr>
                 }
             </table>
         </div>
     </div>
-</div>
+
 
     @*Inicio do popup cadastrar*@
     <div class="modal fade cadastrar">
@@ -94,12 +104,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button data-dismiss="modal" class="close"><span>&times;</span></button>
-                    <div class="modal-title"><h3><b>Cadastrar</b></h3></div>
+                    <div class="modal-title"><h3><b>Cadastrar</b> <span class="fa fa-user-plus"></span></h3></div>
                 </div>
                 <form action="/conta/cadastro" method="post">
                     <div class="modal-body">
 
-                        <div id="imgCadastro"><p id="cadUser">Cadastro de usuario</p></div>
+                        <div id="imgCadastro">
+                            <p id="Cad">Cadastro</p>
+                            <h3 id="De">De</h3>
+                            <p id="Usu">Usuari<span class="fa fa-user-circle"></span></p>
+                        </div>
 
                         <div class="form-group">
                             <label for="textNome" class="control-label">Nome</label>
@@ -134,7 +148,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="btnCadastrar" class="btn btn-success">Cadastrar</button>
+                        <button type="submit" id="btnPopupCadastrar" class="btn btn-success">Cadastrar</button>
                         <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>

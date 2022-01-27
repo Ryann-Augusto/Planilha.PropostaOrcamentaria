@@ -9,16 +9,19 @@
     <div class="jumbotron jumpAjustado">
         @if (TempData["sucesso"] != null)
         {
-            <div class="alert alert-success">@TempData["sucesso"] <span class="fa fa-check fa-2x"></span></div>
+            <div class="alert alert-success" id="notfyCategoria">@TempData["sucesso"] <span class="fa fa-check fa-2x"></span></div>
         }
         @if (TempData["erro"] != null)
         {
-            <div class="alert alert-danger">@TempData["erro"] <span class="fa fa-times fa-2x"></span></div>
+            <div class="alert alert-danger" id="notfyCategoria">@TempData["erro"] <span class="fa fa-times fa-2x"></span></div>
         }
 
-        <div class="nomePagina">
-            <h2>Categorias</h2>
-        </div>
+        <center>
+            <div class="nomePagina" id="categTitulo">
+                <h2>Categorias</h2>
+
+            </div>
+        </center>
         <br />
         <form action="/valores/adicionarcategoria">
             <table class="table">
@@ -74,7 +77,7 @@
                             <input type="text" name="categoria" class="form-control" id="categoria" />
                         </td>
                         <td>
-                            <button class="btn btn-success" style="font-size:14.5px;" ><span class="fa fa-save"></span><b> Salvar</b></button>
+                            <button class="btn btn-success" style="font-size:14.5px;"><span class="fa fa-save"></span><b> Salvar</b></button>
                         </td>
                     </tr>
                 </tfoot>

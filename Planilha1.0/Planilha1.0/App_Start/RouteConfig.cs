@@ -22,7 +22,7 @@ namespace Planilha1._0
             routes.MapRoute(
                 "valores_alterar",
                 "valores/{id}/alterar",
-                new { controller = "Valores", action = "Alterar", id = 0}
+                new { controller = "Valores", action = "Alterar", id = 0 }
             );
 
             routes.MapRoute(
@@ -65,7 +65,7 @@ namespace Planilha1._0
                 "home_criar",
                 "home/criar",
                 new { controller = "Home", action = "Criar" }
-            );          
+            );
 
             routes.MapRoute(
                 "home_criarplanilha",
@@ -94,7 +94,7 @@ namespace Planilha1._0
             routes.MapRoute(
                 "planilha_impressao",
                 "impressao",
-                new { controller = "Planilha", action = "Impressao"}
+                new { controller = "Planilha", action = "Impressao" }
                 );
 
             routes.MapRoute(
@@ -131,6 +131,12 @@ namespace Planilha1._0
                 "conta_apagarUsuario",
                 "conta/{id}/apagarusuario",
                 new { controller = "Conta", action = "ApagarUsuario", id = 0 }
+                );
+
+            routes.MapRoute(
+                "conta_bloquearUsuario",
+                "conta/{id}/bloquearusuario",
+                new { controller = "Conta", action = "BloquearUsuario", id = 0 }
                 );
 
             routes.MapRoute(

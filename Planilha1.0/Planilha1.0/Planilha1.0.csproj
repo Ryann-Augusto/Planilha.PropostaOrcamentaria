@@ -185,13 +185,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\home.jpg" />
+    <Content Include="Content\Images\home2.jpg" />
     <Content Include="Content\Images\segurança.jpg" />
     <Content Include="Content\Images\login.jpg" />
     <Content Include="Content\Images\login2.jpg" />
-    <Content Include="Content\Images\login3.jpg" />
     <Content Include="Content\Images\login4.jpg" />
     <Content Include="Content\Images\cadastro.jpg" />
     <Content Include="Content\Images\cadastro2.jpg" />
+    <Content Include="Content\Images\userplus.png" />
     <Content Include="Content\Impressao.css" />
     <Content Include="Content\planilhGeral.css" />
     <Content Include="favicon.ico" />
@@ -232,6 +234,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\notificacoes.js" />
     <Content Include="Scripts\validacoes.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

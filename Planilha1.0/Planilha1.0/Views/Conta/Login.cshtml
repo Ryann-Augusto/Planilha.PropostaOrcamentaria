@@ -5,6 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (TempData["sucesso"] != null)
+{
+    <div class="alert alert-success">@TempData["sucesso"]</div>
+}
+@if (TempData["erro"] != null)
+{
+    <div class="alert alert-danger">@TempData["erro"]</div>
+}
+
 <div class="body-background-login"></div>
 <div class="container login">
     <div class="content">

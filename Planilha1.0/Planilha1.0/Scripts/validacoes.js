@@ -1,28 +1,7 @@
 ﻿
-var ValidaExclusao = function (id, evento) {
-    if (confirm("Essa exclusão será permanente, perderá todos os dados salvos desse usuário!")) {
-        return true
-    }
-    else {
-        evento.preventDefault();
-        return false;
-    }
-}
-
-var ValidaExclusaoCategoria = function (id, evento) {
-    if (confirm("Essa exclusão irá REMOVER a categoria e todos seus valores!")) {
-        return true
-    }
-    else {
-        evento.preventDefault();
-        return false;
-    }
-}
-
-
 function checkPass() {
 
-    var btnCad = document.getElementById('btnCadastrar');
+    var btnCad = document.getElementById('btnPopupCadastrar');
     var Cargos = document.querySelector("#cargos")
 
     btnCad.disabled = true;
@@ -69,7 +48,7 @@ function checkPassEdit() {
     var goodColor = "#66cc66";
     var badColor = "#ff6666";
 
-    if (pass1.value.length > 5) {
+    if (pass1.value.length > 5 || pass1.value.length < 30) {
         pass1.style.backgroundColor = goodColor;
         message.style.color = goodColor;
 

@@ -8,9 +8,9 @@ using System.Web.Mvc;
 
 namespace Planilha1._0.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -87,7 +87,6 @@ namespace Planilha1._0.Controllers
             }
         }
 
-        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -95,7 +94,6 @@ namespace Planilha1._0.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -9,9 +9,9 @@ using Planilha1._0.Models;
 
 namespace Planilha1._0.Controllers
 {
+    [Authorize]
     public class ValoresController : Controller
     {
-        [Authorize]
         public ActionResult Index()
         {
             var valores = new mdValores();
@@ -25,8 +25,6 @@ namespace Planilha1._0.Controllers
             return View();
         }
 
-
-        [Authorize]
         public ActionResult Alterar(int id)
         {
             var valores = new mdValores();

@@ -23,33 +23,31 @@ table {
         border-top: hidden;
     }
 
-        table tr 
-        {
-            border-color: black;
-        }
+    table tr {
+        border-color: black;
+    }
 
-        table td 
-        {
-            padding: 8px;
-            font-size: 15px;
-            border: solid black 1px;
-            text-align: center;
-        }
+    table td {
+        padding: 8px;
+        font-size: 15px;
+        border: solid black 1px;
+        text-align: center;
+    }
 
-        /*Dar zoom nos td das tabelas*/
-        table td {
-            max-width: 100%;
-            -moz-transition: all 0.5s;
-            -webkit-transition: all 0.5s;
-            transition: all 0.3s;
-        }
+    /*Dar zoom nos td das tabelas*/
+    table td {
+        max-width: 100%;
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        transition: all 0.3s;
+    }
 
         table td:hover {
             -moz-transform: scale(1.2);
             -webkit-transform: scale(1.2);
             transform: scale(1.2);
-            background-color:gray;
-            color:white;
+            background-color: gray;
+            color: white;
         }
 
 .total {
@@ -67,6 +65,14 @@ div.box {
 
 tfoot td {
     background-color: #4ab051;
+}
+
+.resultado tr th {
+    font-size: 18px;
+}
+
+.resultado tr td {
+    font-size: 15.5px;
 }
 
 /*Codificacao para pagina impressao*/

@@ -4,75 +4,78 @@
 
 @if (TempData["sucesso"] != null)
 {
-    <div class="alert alert-success">@TempData["sucesso"]</div>
+    <div class="alert alert-success" id="notfyHome">@TempData["sucesso"] <span class="fa fa-check fa-2x"></span></div>
 }
 @if (TempData["erro"] != null)
 {
-    <div class="alert alert-danger">@TempData["erro"]</div>
+    <div class="alert alert-danger" id="notfyHome">@TempData["erro"] <span class="fa fa-times fa-2x"></span></div>
 }
 
+<div class="body-background-Home"></div>
+
+<center>
+    <div id="tituloHome">
+        <h3 id="propostaHome">Proposta Orçamentária</h3>
+    </div>
+</center>
 
 <div id="tblHome" class="jumbotron">
-    <div class="row">
-        <div class="col-md-6">
-            <label for="data">Inserir Valores:</label>
-            <form action="/home/criar" method="post">
-                <select name="mes" id="selectMes" class="form-control">
-                    <option value=vazio>Selecione o mês</option>
-                    <option value="Janeiro">JANEIRO</option>
-                    <option value="Fevereiro">FEVEREIRO</option>
-                    <option value="Marco">MARÇO</option>
-                    <option value="Abril">ABRIL</option>
-                    <option value="Maio">MAIO</option>
-                    <option value="Junho">JUNHO</option>
-                    <option value="Julho">JULHO</option>
-                    <option value="Agosto">AGOSTO</option>
-                    <option value="Setembro">SETEMBRO</option>
-                    <option value="Outubro">OUTUBRO</option>
-                    <option value="Novembro">NOVEMBRO</option>
-                    <option value="Dezembro">DEZEMBRO</option>
-                </select>
-
-
-                <label style="margin-top:48px;" for="data">Escolha o Ano:</label>
-                <select name="ano" id="selectAno" class="form-control">
-                    <option value="0">Selecione o ano</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                    <option value="2027">2027</option>
-                    <option value="2028">2028</option>
-                </select>
-
-                <button type="submit" class="btn btn-default" id="btnInserirValores">Próximo</button>
-            </form>
+    <center>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="box">
+                    <a class="btnHome" data-toggle="modal" data-target=".valores"><h3 class="h3Home">Inserir valores</h3></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box">
+                    <a class="btnHome" data-toggle="modal" data-target=".criarTabela"><h3 class="h3Home">Criar planilha</h3></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box">
+                    <a class="btnHome" data-toggle="modal" data-target=".abrirTabela"><h3 class="h3Home">Abrir Planilha</h3></a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <label for="data">Criar uma Nova Tabela:</label>
-            <form action="home/criarplanilha" method="post">
-                <select name="ano" id="selectAno" class="form-control">
-                    <option value="0">Selecione o ano</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                    <option value="2027">2027</option>
-                    <option value="2028">2028</option>
-                </select>
-                <button type="submit" class="btn btn-default btnHome">Criar</button>
+    </center>
+</div>
+<br />
+<br />
+<br />
+<br />
 
-            </form>
 
-            <div style="margin-top:10px;">
-                <label for="data">Abrir Planilha:</label>
-                <form action="home/abrirplanilha" method="post">
-                    <select name="ano" id="selectAno" class="form-control">
-                        <option value="0">Selecione o ano</option>
+<!--POPUP INSERIR VALORES-->
+<div class="modal fade valores">
+    <div id="popupValores" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                <div class="modal-title tituloPopup"><h3><span class="fa fa-file-o"></span> Inserir Valores</h3></div>
+            </div>
+            <form action="/home/criar" method="post">
+                <div class="modal-body">
+                    <label for="data" class="selecionaAno">Selecione o Mês:</label>
+                    <select name="mes" id="selectMes" class="form-control selectsHome">
+                        <option value=vazio>Mês</option>
+                        <option value="Janeiro">JANEIRO</option>
+                        <option value="Fevereiro">FEVEREIRO</option>
+                        <option value="Marco">MARÇO</option>
+                        <option value="Abril">ABRIL</option>
+                        <option value="Maio">MAIO</option>
+                        <option value="Junho">JUNHO</option>
+                        <option value="Julho">JULHO</option>
+                        <option value="Agosto">AGOSTO</option>
+                        <option value="Setembro">SETEMBRO</option>
+                        <option value="Outubro">OUTUBRO</option>
+                        <option value="Novembro">NOVEMBRO</option>
+                        <option value="Dezembro">DEZEMBRO</option>
+                    </select>
+
+                    <label style="margin-top:48px;" for="data" class="selecionaAno">Selecione o Ano:</label>
+                    <select name="ano" id="selectAno" class="form-control selectsHome">
+                        <option value="0">Ano</option>
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
@@ -82,10 +85,83 @@
                         <option value="2027">2027</option>
                         <option value="2028">2028</option>
                     </select>
-                    <button type="submit" class="btn btn-default btnHome" formtarget="_blank">Abrir</button>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Voltar</button>
+                    <button type="submit" class="btn btn-primary">Abrir</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<!--FIM DO POPUP VALORES-->
+<!--INICIO DO POPUP CRIAR TABELA-->
+<div class="modal fade criarTabela">
+    <div id="popupCriarTabela" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                <div class="modal-title tituloPopup"><h3><span class="fa fa-calendar-plus-o"></span> Criar Tabela</h3></div>
+            </div>
+            <form action="home/criarplanilha" method="post">
+                <div class="modal-body">
+                    <label for="data" class="selecionaAno">Selecione o Ano:</label>
+
+                    <select name="ano" id="selectAno" class="form-control selectsHome">
+                        <option value="0">Ano</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Voltar</button>
+                    <button type="submit" class="btn btn-primary">Criar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--FIM DO POPUP CRIAR TABELA-->
+<!--INICIO DO POPUP ABRIR TABELA-->
+<div class="modal fade abrirTabela">
+    <div id="popupAbrirTabela" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                <div class="modal-title tituloPopup"><h3><span class="fa fa-folder-open-o"></span> Abrir Tabela</h3></div>
+            </div>
+            <form action="home/abrirplanilha" method="post">
+                <div class="modal-body">
+                    <label for="data" class="selecionaAno">Selecione o Ano:</label>
+
+                    <select name="ano" id="selectAno" class="form-control selectsHome">
+                        <option value="0">Ano</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Voltar</button>
+                    <button type="submit" class="btn btn-primary" formtarget="_blank">Abrir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
 

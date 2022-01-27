@@ -9,6 +9,7 @@ using System.Web.Security;
 
 namespace ControleEstoque.Web.Controllers
 {
+    [Authorize]
     public class ContaController : Controller
     {
         [AllowAnonymous]
@@ -27,12 +28,13 @@ namespace ControleEstoque.Web.Controllers
                 return View(login);
             }
 
-            var achou = new ValidaUsuario().ValidarUsuario(login.Email, login.Senha);
             var usuario = mdUsuario.ObterCodigo(login.Email);
             Session["Usuario"] = usuario.NomeUsuario;
             Session["Codigo"] = usuario.CodigoUsuario;
+            var situacao = mdUsuario.situacao(usuario.CodigoUsuario);
+            var achou = new ValidaUsuario().ValidarUsuario(login.Email, login.Senha);
 
-            if (achou)
+            if (achou & situacao.SituacaoUsuario == 1)
             {
                 if (usuario.NivelUsuario == 2)
                 {
@@ -45,6 +47,10 @@ namespace ControleEstoque.Web.Controllers
                     return Redirect("/cadastrar");
                 }
             }
+            else if (situacao.SituacaoUsuario == 0)
+            {
+                ModelState.AddModelError("", "Usuário Bloqueado!");
+            }
             else
             {
                 ModelState.AddModelError("", "Login inválido.");
@@ -54,21 +60,18 @@ namespace ControleEstoque.Web.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
-        [AllowAnonymous]
         public ActionResult Cadastrar()
         {
             ViewBag.Usuarios = new mdUsuario().ObterUsuarios();
             return View();
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public void Cadastro()
         {
@@ -112,7 +115,6 @@ namespace ControleEstoque.Web.Controllers
             }
         }
 
-        [AllowAnonymous]
         public ActionResult AlterarUsuario(int id)
         {
             ViewBag.Editar = mdUsuario.BuscarUsuId(id);
@@ -168,6 +170,30 @@ namespace ControleEstoque.Web.Controllers
                 Apagar.ApagarUsuario(id);
                 Response.Redirect("/conta/cadastrar");
             }
+        }
+        public void BloquearUsuario(int id)
+        {
+            var situacao = mdUsuario.situacao(id);
+            var blockUnlok = new mdUsuario();
+            ViewBag.situacao = situacao.SituacaoUsuario;
+            if (situacao.SituacaoUsuario == 1)
+            {
+                var Sit = 0;
+                blockUnlok.BloquearDesbloquear(id, Sit);
+                TempData["sucesso"] = "Usuario Bloqueado!";
+            }
+            else if (situacao.SituacaoUsuario == 0)
+            {
+                TempData["sucesso"] = "Usuario desbloqueado!";
+                var Sit = 1;
+                blockUnlok.BloquearDesbloquear(id, Sit);
+            }
+            else
+            {
+                TempData["erro"] = "Não foi possivel alterar!";
+            }
+            Response.Redirect("/conta/cadastrar");
+
         }
     }
 }

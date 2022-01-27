@@ -19,10 +19,10 @@ namespace Dal_Planilha
 
         public DataTable ObterCodigo(string Email)
         {
-                string queryString = "SELECT pl_codigo, pl_usuario, pl_nivel FROM tbl_usuario WHERE pl_email = @Email;";
+            string queryString = "SELECT pl_codigo, pl_usuario, pl_nivel FROM tbl_usuario WHERE pl_email = @Email;";
 
-                using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
-                {
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
                 MySqlCommand command = new MySqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@Email", Email);
                 command.Connection.Open();
@@ -41,7 +41,7 @@ namespace Dal_Planilha
 
         public DataTable ObterUsuarios()
         {
-            string queryString = "SELECT pl_codigo, pl_usuario, pl_email, pl_senha, pl_nivel FROM tbl_usuario;";
+            string queryString = "SELECT pl_codigo, pl_usuario, pl_email, pl_senha, pl_nivel, pl_situacao FROM tbl_usuario;";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
@@ -59,10 +59,10 @@ namespace Dal_Planilha
                 return table;
             }
         }
-        
+
         public void CadUsuario(string Nome, string Email, string Senha, int Nivel)
         {
-            MySqlCommand Usu = new MySqlCommand("INSERT INTO tbl_usuario(pl_usuario, pl_email, pl_senha, pl_nivel) VALUES(@Nome, @Email, @Senha, @Nivel);");
+            MySqlCommand Usu = new MySqlCommand("INSERT INTO tbl_usuario(pl_usuario, pl_email, pl_senha, pl_nivel, pl_situacao) VALUES(@Nome, @Email, @Senha, @Nivel, 1);");
 
             Usu.Parameters.Add("@Nome", MySqlDbType.VarChar).Value = Nome;
             Usu.Parameters.Add("@Email", MySqlDbType.VarChar).Value = Email;
@@ -136,6 +136,41 @@ namespace Dal_Planilha
         {
             MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_usuario WHERE pl_codigo = @Codigo");
             cmd.Parameters.Add("@Codigo", MySqlDbType.Int32).Value = Cod;
+            using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
+            {
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public DataTable Situacao(int Cod)
+        {
+            string queryString = "SELECT pl_situacao FROM tbl_usuario WHERE pl_codigo = @Cod;";
+
+            using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
+            {
+                MySqlCommand command = new MySqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Cod", MySqlDbType.Int32).Value = Cod;
+                command.Connection.Open();
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();
+                adapter.SelectCommand = command;
+
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                command.Connection.Close();
+
+                return table;
+            }
+        }
+        public void BloquearDesbloquear(int Cod, int Situacao)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE tbl_usuario SET pl_situacao = @Situacao WHERE pl_codigo = @Cod;");
+            cmd.Parameters.AddWithValue("@Cod", MySqlDbType.Int32).Value = Cod;
+            cmd.Parameters.AddWithValue("@Situacao", MySqlDbType.Int32).Value = Situacao;
             using (MySqlConnection conn = new MySqlConnection(MysqlConn()))
             {
                 cmd.Connection = conn;

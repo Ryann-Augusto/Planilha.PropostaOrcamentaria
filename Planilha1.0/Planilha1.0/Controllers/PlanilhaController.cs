@@ -8,10 +8,10 @@ using System.Web.Mvc;
 
 namespace Planilha1._0.Controllers
 {
+    [Authorize]
     public class PlanilhaController : Controller
     {
 
-        [Authorize]
         public ActionResult Index()
         {
             try
@@ -47,7 +47,6 @@ namespace Planilha1._0.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult Impressao()
         {
             try
@@ -85,7 +84,6 @@ namespace Planilha1._0.Controllers
             }
         }
 
-        [Authorize]
         public ActionResult Graficos()
         {
             ViewBag.usuario = Session["Usuario"];

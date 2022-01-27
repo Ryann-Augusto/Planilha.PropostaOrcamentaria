@@ -10,23 +10,21 @@ namespace md_Planilha
 {
     public class mdUsuario
     {
-        
+
 
         public static mdValores ObterCodigo(string Email)
         {
             var usuario = new mdValores();
             var codigoDb = new Dal_Planilha.UsuarioDal();
-            
+
             foreach (DataRow row in codigoDb.ObterCodigo(Email).Rows)
             {
-                usuario.CodigoUsuario= Convert.ToInt32(row["pl_codigo"]);
-                usuario.NomeUsuario= Convert.ToString(row["pl_usuario"]);
+                usuario.CodigoUsuario = Convert.ToInt32(row["pl_codigo"]);
+                usuario.NomeUsuario = Convert.ToString(row["pl_usuario"]);
                 usuario.NivelUsuario = Convert.ToInt32(row["pl_nivel"]);
             }
             return usuario;
         }
-
-        
 
         public List<mdValores> ObterUsuarios()
         {
@@ -40,6 +38,7 @@ namespace md_Planilha
                 usuario.EmailUsuario = Convert.ToString(row["pl_email"]);
                 usuario.SenhaUsuario = Convert.ToString(row["pl_senha"]);
                 usuario.NivelUsuario = Convert.ToInt32(row["pl_nivel"]);
+                usuario.SituacaoUsuario = Convert.ToInt32(row["pl_situacao"]);
 
                 lista.Add(usuario);
             }
@@ -76,6 +75,22 @@ namespace md_Planilha
                 planilha.NivelUsuario = Convert.ToInt32(row["pl_nivel"]);
             }
             return planilha;
+        }
+
+        public static mdValores situacao(int Cod)
+        {
+            var planilha = new mdValores();
+            var planilhaDB = new Dal_Planilha.UsuarioDal();
+            foreach (DataRow row in planilhaDB.Situacao(Cod).Rows)
+            {
+                planilha.SituacaoUsuario = Convert.ToInt32(row["pl_situacao"]);
+            }
+            return planilha;
+        }
+
+        public void BloquearDesbloquear(int Cod, int Situacao)
+        {
+            new Dal_Planilha.UsuarioDal().BloquearDesbloquear(Cod, Situacao);
         }
 
         public void ApagarTabelas(int Cod)
