@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace ControleEstoque.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class ContaController : Controller
     {
         [AllowAnonymous]
@@ -34,16 +34,22 @@ namespace ControleEstoque.Web.Controllers
             var situacao = mdUsuario.situacao(usuario.CodigoUsuario);
             var achou = new ValidaUsuario().ValidarUsuario(login.Email, login.Senha);
 
-            if (achou & situacao.SituacaoUsuario == 1)
+            if (achou && situacao.SituacaoUsuario == 1)
             {
                 if (usuario.NivelUsuario == 2)
                 {
-                    FormsAuthentication.SetAuthCookie(login.Email, false);
+                    var tiket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(
+                        1, login.Email, DateTime.Now, DateTime.Now.AddMinutes(30), false, "Funcionario"));
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, tiket);
+                    Response.Cookies.Add(cookie);
                     return Redirect("/home");
                 }
                 else if (usuario.NivelUsuario == 1)
                 {
-                    FormsAuthentication.SetAuthCookie(login.Email, false);
+                    var tiket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(
+                        1, login.Email, DateTime.Now, DateTime.Now.AddMinutes(30), false, "Administrador"));
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, tiket);
+                    Response.Cookies.Add(cookie);
                     return Redirect("/cadastrar");
                 }
             }

@@ -10,11 +10,11 @@
 <div class="jumbotron jumpAjustado">
     @if (TempData["sucesso"] != null)
     {
-        <div class="alert alert-success" id="notfyValores">@TempData["sucesso"]</div>
+        <div class="alert alert-success" id="notfyValores">@TempData["sucesso"] <span class="fa fa-check fa-2x"></span></div>
     }
     @if (TempData["erro"] != null)  
     {
-        <div class="alert alert-danger" id="notfyValores">@TempData["erro"]</div>
+        <div class="alert alert-danger" id="notfyValores">@TempData["erro"] <span class="fa fa-times fa-2x"></span></div>
     }
     <center>
         <div id="tituloValores">

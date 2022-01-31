@@ -166,10 +166,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ContaController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValoresController.cs" />
-    <Compile Include="Controllers\PlanilhaController.cs" />
+    <Compile Include="Controllers\PropostaOrcamentaria\ContaController.cs" />
+    <Compile Include="Controllers\PropostaOrcamentaria\HomeController.cs" />
+    <Compile Include="Controllers\PropostaOrcamentaria\ValoresController.cs" />
+    <Compile Include="Controllers\PropostaOrcamentaria\PlanilhaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -247,8 +247,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Valores\Index.cshtml" />
     <Content Include="Views\Planilha\Index.cshtml" />

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Planilha1._0.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Funcionario")]
     public class HomeController : Controller
     {
         public ActionResult Index()

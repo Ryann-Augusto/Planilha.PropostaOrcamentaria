@@ -7,11 +7,11 @@
 
 @if (TempData["sucesso"] != null)
 {
-    <div class="alert alert-success" id="notfyCadastrar">@TempData["sucesso"]</div>
+    <div class="alert alert-success" id="notfyCadastrar">@TempData["sucesso"] <span class="fa fa-check fa-2x"></span> </div>
 }
 @if (TempData["erro"] != null)
 {
-    <div class="alert alert-danger" id="notfyCadastrar">@TempData["erro"]</div>
+    <div class="alert alert-danger" id="notfyCadastrar">@TempData["erro"] <span class="fa fa-times fa-2x"></span></div>
 }
 
 <body id="cadastrar">
@@ -35,7 +35,6 @@
                     <th>Código</th>
                     <th>Usuario</th>
                     <th>Email</th>
-                    <th>Senha</th>
                     <th>Nível</th>
                     <th></th>
 
@@ -46,7 +45,6 @@
                         <td>@usu.CodigoUsuario</td>
                         <td>@usu.NomeUsuario</td>
                         <td>@usu.EmailUsuario</td>
-                        <td>@usu.SenhaUsuario</td>
                         @{if (usu.NivelUsuario == 1)
 
                             {

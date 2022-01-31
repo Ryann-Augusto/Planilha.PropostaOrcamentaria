@@ -9,7 +9,7 @@ using Planilha1._0.Models;
 
 namespace Planilha1._0.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Funcionario")]
     public class ValoresController : Controller
     {
         public ActionResult Index()
