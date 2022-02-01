@@ -3,6 +3,7 @@ using Planilha1._0.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -31,12 +32,16 @@ namespace ControleEstoque.Web.Controllers
             var usuario = mdUsuario.ObterCodigo(login.Email);
             Session["Usuario"] = usuario.NomeUsuario;
             Session["Codigo"] = usuario.CodigoUsuario;
-            var situacao = mdUsuario.situacao(usuario.CodigoUsuario);
-            var achou = new ValidaUsuario().ValidarUsuario(login.Email, login.Senha);
 
-            if (achou && situacao.SituacaoUsuario == 1)
+            Hash hash = new Hash(SHA256.Create());
+            var senhaEncrip = hash.CriptografarSenha(login.Senha);
+
+            var situacao = mdUsuario.situacao(usuario.CodigoUsuario);
+            var achou = new ValidaUsuario().ValidarUsuario(login.Email, senhaEncrip);
+
+            if (achou)
             {
-                if (usuario.NivelUsuario == 2)
+                if (usuario.NivelUsuario == 2 && situacao.SituacaoUsuario == 1)
                 {
                     var tiket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(
                         1, login.Email, DateTime.Now, DateTime.Now.AddMinutes(30), false, "Funcionario"));
@@ -44,7 +49,7 @@ namespace ControleEstoque.Web.Controllers
                     Response.Cookies.Add(cookie);
                     return Redirect("/home");
                 }
-                else if (usuario.NivelUsuario == 1)
+                else if (usuario.NivelUsuario == 1 && situacao.SituacaoUsuario == 1)
                 {
                     var tiket = FormsAuthentication.Encrypt(new FormsAuthenticationTicket(
                         1, login.Email, DateTime.Now, DateTime.Now.AddMinutes(30), false, "Administrador"));
@@ -52,10 +57,10 @@ namespace ControleEstoque.Web.Controllers
                     Response.Cookies.Add(cookie);
                     return Redirect("/cadastrar");
                 }
-            }
-            else if (situacao.SituacaoUsuario == 0)
-            {
-                ModelState.AddModelError("", "Usuário Bloqueado!");
+                else if (situacao.SituacaoUsuario == 0)
+                {
+                    ModelState.AddModelError("", "Usuário Bloqueado!");
+                }
             }
             else
             {
@@ -86,6 +91,8 @@ namespace ControleEstoque.Web.Controllers
             var Senha = Request["senha"];
             int Nivel = Convert.ToInt32(Request["cargo"]);
 
+            Hash hash = new Hash(SHA256.Create());
+            var senhaEncrip = hash.CriptografarSenha(Senha);
 
             if (Nivel == 0)
             {
@@ -105,13 +112,13 @@ namespace ControleEstoque.Web.Controllers
                     var Usuario = new mdUsuario();
                     if (Nivel == 1)
                     {
-                        Usuario.CadUsuario(Nome, Email, Senha, Nivel);
+                        Usuario.CadUsuario(Nome, Email, senhaEncrip, Nivel);
                         TempData["sucesso"] = "Usuário cadastrado com sucesso.";
                         Response.Redirect("/conta/cadastrar");
                     }
                     else
                     {
-                        Usuario.CadUsuario(Nome, Email, Senha, Nivel);
+                        Usuario.CadUsuario(Nome, Email, senhaEncrip, Nivel);
                         var Cod = mdUsuario.ObterCodigo(Email);
                         Usuario.CriarTabelas(Cod.CodigoUsuario);
                         TempData["sucesso"] = "Usuário cadastrado com sucesso.";
@@ -137,6 +144,9 @@ namespace ControleEstoque.Web.Controllers
             Usuario.SenhaUsuario = Request["senha"].ToString();
             Usuario.ConfirmSenhaUsuario = Request["confirmsenha"].ToString();
 
+            Hash hash = new Hash(SHA256.Create());
+            var senhaEncrip = hash.CriptografarSenha(Usuario.SenhaUsuario);
+
             if (Usuario.SenhaUsuario != Usuario.ConfirmSenhaUsuario)
             {
                 TempData["erro"] = "Atenção! As senhas não estão iguais.";
@@ -155,7 +165,7 @@ namespace ControleEstoque.Web.Controllers
             }
             else
             {
-                Alterar.AlterarTudo(id, Usuario.NomeUsuario, Usuario.EmailUsuario, Usuario.SenhaUsuario);
+                Alterar.AlterarTudo(id, Usuario.NomeUsuario, Usuario.EmailUsuario, senhaEncrip);
                 TempData["sucesso"] = "Nome e senha de usuário alterado com sucesso.";
                 Response.Redirect("/conta/cadastrar");
             }
@@ -168,12 +178,14 @@ namespace ControleEstoque.Web.Controllers
             if (Editar.NivelUsuario == 1)
             {
                 Apagar.ApagarUsuario(id);
+                TempData["sucesso"] = "Usuario Excluido!";
                 Response.Redirect("/conta/cadastrar");
             }
             else
             {
                 Apagar.ApagarTabelas(id);
                 Apagar.ApagarUsuario(id);
+                TempData["sucesso"] = "Usuario Excluido!";
                 Response.Redirect("/conta/cadastrar");
             }
         }

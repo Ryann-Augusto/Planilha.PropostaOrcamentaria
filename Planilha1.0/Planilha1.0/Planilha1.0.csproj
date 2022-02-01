@@ -166,13 +166,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\PropostaOrcamentaria\ContaController.cs" />
+    <Compile Include="Controllers\Geral\ContaController.cs" />
     <Compile Include="Controllers\PropostaOrcamentaria\HomeController.cs" />
     <Compile Include="Controllers\PropostaOrcamentaria\ValoresController.cs" />
     <Compile Include="Controllers\PropostaOrcamentaria\PlanilhaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Hash.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ValidaCategoria.cs" />
     <Compile Include="Models\ValidaUsuario.cs" />
@@ -200,7 +201,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\PropostaOrcamentaria.css" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
